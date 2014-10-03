@@ -55,9 +55,9 @@ namespace Litipk
 			{
 				Type t = typeof(T);
 
-				if (conversors.ContainsKey (t)) {
+				//if (conversors.ContainsKey (t)) {
 					return (T)conversors [t]();
-				}
+				//}
 			}
 		}
 	}
