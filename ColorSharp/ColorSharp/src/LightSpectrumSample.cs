@@ -1,64 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Litipk
+﻿namespace Litipk.ColorSharp
 {
-	namespace ColorSharp
+	public class LightSpectrumSample : AConvertibleColor
 	{
-		// TODO: Add optional parameter (ConversionStrategy)
-		delegate T Conversor<out T> () where T : IConvertibleColor;
+		#region private properties
 
-		public class LightSpectrumSample : IConvertibleColor
-		{
-			// Needed values to interpret the data points
-			double nmPerStep;
-			double minWaveLength;
-			double maxWaveLength;
+		// Needed values to interpret the data points
+		double nmPerStep;
+		double minWaveLength;
+		double maxWaveLength;
 
-			// Data points
-			double[] amplitudes;
+		// Data points
+		double[] amplitudes;
+		#endregion
 
-			// If this "color" comes from another data source, then we keep the original data.
-			IConvertibleColor dataSource = null;
+		#region constructors
 
-			// Conversors to other "color spaces".
-			Dictionary<Type, Conversor<IConvertibleColor>> conversors;
-
-			// Constructor
-			public LightSpectrumSample (double minWaveLength, double maxWaveLength, double[] amplitudes, IConvertibleColor dataSource=null)
-			{
-				this.minWaveLength = minWaveLength;
-				this.maxWaveLength = maxWaveLength;
-				nmPerStep = (maxWaveLength - minWaveLength) / (amplitudes.Length - 1);
-				this.amplitudes = amplitudes;
-
-				this.dataSource = dataSource;
-			}
-
-			// Constructor
-			public LightSpectrumSample (double minWaveLength, double[] amplitudes, double nmPerStep, IConvertibleColor dataSource=null)
-			{
-				this.nmPerStep = nmPerStep;
-				this.minWaveLength = minWaveLength;
-				maxWaveLength = minWaveLength + (nmPerStep) * (amplitudes.Length - 1);
-				this.amplitudes = amplitudes;
-
-				this.dataSource = dataSource;
-			}
-
-			public int conversionPathLength (Type[] visited = null)
-			{
-				throw new NotImplementedException ();
-			}
-
-			public T convertTo<T>() where T : IConvertibleColor
-			{
-				Type t = typeof(T);
-
-				//if (conversors.ContainsKey (t)) {
-					return (T)conversors [t]();
-				//}
-			}
+		/**
+		 * This constructor "installs" the conversor methods into the instance
+		 */
+		protected LightSpectrumSample(AConvertibleColor dataSource=null) : base(dataSource) {
+			// TODO: Add conversors
 		}
+
+		// Constructor
+		public LightSpectrumSample (double minWaveLength, double maxWaveLength, double[] amplitudes, AConvertibleColor dataSource=null) : this(dataSource)
+		{
+			this.minWaveLength = minWaveLength;
+			this.maxWaveLength = maxWaveLength;
+			nmPerStep = (maxWaveLength - minWaveLength) / (amplitudes.Length - 1);
+			this.amplitudes = amplitudes;
+		}
+
+		// Constructor
+		public LightSpectrumSample (double minWaveLength, double[] amplitudes, double nmPerStep, AConvertibleColor dataSource=null) : this(dataSource)
+		{
+			this.nmPerStep = nmPerStep;
+			this.minWaveLength = minWaveLength;
+			maxWaveLength = minWaveLength + (nmPerStep) * (amplitudes.Length - 1);
+			this.amplitudes = amplitudes;
+		}
+
+		#endregion
+
+		#region conversors
+
+
+
+		#endregion
 	}
 }

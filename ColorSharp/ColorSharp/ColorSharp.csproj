@@ -31,8 +31,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\IConvertibleColor.cs" />
     <Compile Include="src\LightSpectrumSample.cs" />
+    <Compile Include="src\AConvertibleColor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
