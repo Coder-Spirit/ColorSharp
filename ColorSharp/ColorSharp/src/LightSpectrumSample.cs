@@ -44,7 +44,11 @@
 
 		#region conversors
 
-
+		public CIEXYZ toCIEXYZ ()
+		{
+			// TODO
+			return null;
+		}
 
 		#endregion
 	}

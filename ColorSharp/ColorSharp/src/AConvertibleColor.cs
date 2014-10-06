@@ -35,7 +35,7 @@ namespace Litipk.ColorSharp
 
 		#endregion
 
-		#region methods
+		#region conversion skeleton
 
 		// Tells us the number of needed steps to convert the object to another color space.
 		int ConversionPathLength(Type target, List<Type> visited=null)
