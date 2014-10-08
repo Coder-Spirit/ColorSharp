@@ -27,6 +27,9 @@
  */
 
 
+using System;
+
+
 namespace Litipk.ColorSharp
 {
 	public class RegularMatchingFunction : IMatchingFunction
@@ -41,6 +44,7 @@ namespace Litipk.ColorSharp
 		// Data points
 		double[] amplitudes;
 		#endregion
+
 
 		#region constructors
 
@@ -64,11 +68,12 @@ namespace Litipk.ColorSharp
 
 		#endregion
 
+
 		#region IMatchingFunction implementation
 
 		public double DoConvolution (ALightSpectrum lss)
 		{
-			throw new System.NotImplementedException ();
+			throw new NotImplementedException ();
 		}
 
 		#endregion
