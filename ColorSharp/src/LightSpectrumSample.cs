@@ -33,7 +33,7 @@ using System.Collections.Generic;
 
 namespace Litipk.ColorSharp
 {
-	public class LightSpectrumSample : AConvertibleColor
+	public class LightSpectrum : AConvertibleColor
 	{
 		#region private properties
 
@@ -51,12 +51,12 @@ namespace Litipk.ColorSharp
 		/**
 		 * This constructor "installs" the conversor methods into the instance
 		 */
-		protected LightSpectrumSample(AConvertibleColor dataSource=null) : base(dataSource) {
+		protected LightSpectrum(AConvertibleColor dataSource=null) : base(dataSource) {
 			// TODO: Add conversors
 		}
 
 		// Constructor
-		public LightSpectrumSample (double minWaveLength, double maxWaveLength, double[] amplitudes, AConvertibleColor dataSource=null) : this(dataSource)
+		public LightSpectrum (double minWaveLength, double maxWaveLength, double[] amplitudes, AConvertibleColor dataSource=null) : this(dataSource)
 		{
 			this.minWaveLength = minWaveLength;
 			this.maxWaveLength = maxWaveLength;
@@ -65,7 +65,7 @@ namespace Litipk.ColorSharp
 		}
 
 		// Constructor
-		public LightSpectrumSample (double minWaveLength, double[] amplitudes, double nmPerStep, AConvertibleColor dataSource=null) : this(dataSource)
+		public LightSpectrum (double minWaveLength, double[] amplitudes, double nmPerStep, AConvertibleColor dataSource=null) : this(dataSource)
 		{
 			this.nmPerStep = nmPerStep;
 			this.minWaveLength = minWaveLength;
@@ -80,20 +80,28 @@ namespace Litipk.ColorSharp
 		/**
 		 * 
 		 */
-		public CIEXYZ ToCIEXYZ (List<Type> visited=null, params object[] strategies)
+		public CIEXYZ ToCIEXYZ (Dictionary<KeyValuePair<Type, Type>, object> strategies=null)
 		{
-			if (strategies == null || strategies.Length != 3) {
+			var strategyKey = new KeyValuePair<Type, Type> (
+				typeof(LightSpectrum), typeof(CIEXYZ)
+			);
+
+			if (strategies == null || !strategies.ContainsKey(strategyKey)) {
 				throw new ArgumentException (
-					"To convert a light spectrum to an XYZ color space sample we need the X, Y and Z matching functions."
+					"Unable top find the proper strategy"
 				);
 			}
 
-			IMatchingFunction XMF = (IMatchingFunction)strategies [0];
-			IMatchingFunction YMF = (IMatchingFunction)strategies [1];
-			IMatchingFunction ZMF = (IMatchingFunction)strategies [2];
+			var MFs = (IMatchingFunction[])strategies [strategyKey];
+
+			if (MFs == null || MFs.Length != 3) {
+				throw new ArgumentException (
+					"Unable top find the matching functions"
+				);
+			}
 
 			return new CIEXYZ (
-				XMF.DoConvolution (this), YMF.DoConvolution (this), ZMF.DoConvolution (this), this
+				MFs[0].DoConvolution (this), MFs[1].DoConvolution (this), MFs[2].DoConvolution (this), this
 			);
 		}
 

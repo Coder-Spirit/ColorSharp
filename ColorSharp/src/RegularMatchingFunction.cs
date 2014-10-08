@@ -66,7 +66,7 @@ namespace Litipk.ColorSharp
 
 		#region IMatchingFunction implementation
 
-		public double DoConvolution (LightSpectrumSample lss)
+		public double DoConvolution (LightSpectrum lss)
 		{
 			throw new System.NotImplementedException ();
 		}

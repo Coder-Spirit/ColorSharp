@@ -58,11 +58,7 @@ namespace Litipk.ColorSharp
 
 		#region conversors
 
-		public LightSpectrumSample toLightSpectrumSample ()
-		{
-			// TODO
-			return null;
-		}
+
 
 		#endregion
 	}

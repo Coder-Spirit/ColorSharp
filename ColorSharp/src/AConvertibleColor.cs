@@ -34,7 +34,7 @@ using System.Collections.Generic;
 namespace Litipk.ColorSharp
 {
 	// TODO: Add optional parameter (ConversionStrategy)
-	public delegate T Conversor<out T> (List<Type> visited=null, params object[] strategies) where T : AConvertibleColor;
+	public delegate T Conversor<out T> (Dictionary<KeyValuePair<Type, Type>, object> strategies=null) where T : AConvertibleColor;
 
 	public abstract class AConvertibleColor
 	{
@@ -171,7 +171,7 @@ namespace Litipk.ColorSharp
 			}
 
 			visited.Add (ist);
-			return Conversors [ist] (visited).ConvertTo<T>(visited);
+			return Conversors [ist] ().ConvertTo<T>(visited);
 		}
 
 		#endregion
