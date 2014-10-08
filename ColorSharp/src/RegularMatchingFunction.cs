@@ -27,13 +27,9 @@
  */
 
 
-using System;
-using System.Collections.Generic;
-
-
 namespace Litipk.ColorSharp
 {
-	public class LightSpectrumSample : AConvertibleColor
+	public class RegularMatchingFunction : IMatchingFunction
 	{
 		#region private properties
 
@@ -48,15 +44,8 @@ namespace Litipk.ColorSharp
 
 		#region constructors
 
-		/**
-		 * This constructor "installs" the conversor methods into the instance
-		 */
-		protected LightSpectrumSample(AConvertibleColor dataSource=null) : base(dataSource) {
-			// TODO: Add conversors
-		}
-
 		// Constructor
-		public LightSpectrumSample (double minWaveLength, double maxWaveLength, double[] amplitudes, AConvertibleColor dataSource=null) : this(dataSource)
+		public RegularMatchingFunction (double minWaveLength, double maxWaveLength, double[] amplitudes)
 		{
 			this.minWaveLength = minWaveLength;
 			this.maxWaveLength = maxWaveLength;
@@ -65,7 +54,7 @@ namespace Litipk.ColorSharp
 		}
 
 		// Constructor
-		public LightSpectrumSample (double minWaveLength, double[] amplitudes, double nmPerStep, AConvertibleColor dataSource=null) : this(dataSource)
+		public RegularMatchingFunction (double minWaveLength, double[] amplitudes, double nmPerStep)
 		{
 			this.nmPerStep = nmPerStep;
 			this.minWaveLength = minWaveLength;
@@ -75,26 +64,11 @@ namespace Litipk.ColorSharp
 
 		#endregion
 
-		#region conversors
+		#region IMatchingFunction implementation
 
-		/**
-		 * 
-		 */
-		public CIEXYZ ToCIEXYZ (List<Type> visited=null, params object[] strategies)
+		public double DoConvolution (LightSpectrumSample lss)
 		{
-			if (strategies == null || strategies.Length != 3) {
-				throw new ArgumentException (
-					"To convert a light spectrum to an XYZ color space sample we need the X, Y and Z matching functions."
-				);
-			}
-
-			IMatchingFunction XMF = (IMatchingFunction)strategies [0];
-			IMatchingFunction YMF = (IMatchingFunction)strategies [1];
-			IMatchingFunction ZMF = (IMatchingFunction)strategies [2];
-
-			return new CIEXYZ (
-				XMF.DoConvolution (this), YMF.DoConvolution (this), ZMF.DoConvolution (this), this
-			);
+			throw new System.NotImplementedException ();
 		}
 
 		#endregion

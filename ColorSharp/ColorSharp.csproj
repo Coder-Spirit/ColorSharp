@@ -34,7 +34,9 @@
     <Compile Include="src\AConvertibleColor.cs" />
     <Compile Include="src\CIEXYZ.cs" />
     <Compile Include="src\LightSpectrumSample.cs" />
-    <Compile Include="src\MatchingFunction.cs" />
+    <Compile Include="src\IMatchingFunction.cs" />
+    <Compile Include="src\RegularMatchingFunction.cs" />
+    <Compile Include="src\TabularMatchingFunction.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

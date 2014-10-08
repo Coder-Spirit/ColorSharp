@@ -27,10 +27,14 @@
  */
 
 
+using System;
+
+
 namespace Litipk.ColorSharp
 {
-	public class MatchingFunction
+	public interface IMatchingFunction
 	{
-
+		double DoConvolution (LightSpectrumSample lss);
 	}
 }
+
