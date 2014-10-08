@@ -76,18 +76,19 @@ namespace Litipk.ColorSharp
 			if (waveLength >= minWaveLength && waveLength <= maxWaveLength) {
 				double dblIndex = (waveLength - minWaveLength) / nmPerStep;
 				double floorIndex = Math.Floor (dblIndex);
+				uint uIndex = (uint)floorIndex;
 
 				if (dblIndex - floorIndex < double.Epsilon) {
-					return amplitudes [(uint)dblIndex];
+					return amplitudes [uIndex];
 				}
 
-				uint uIndex = (uint)Math.Floor (dblIndex);
 				double alpha = (dblIndex - floorIndex) / nmPerStep;
 
 				return (1.0-alpha)*amplitudes[uIndex] + alpha*amplitudes[uIndex+1];
 			}
 
-			throw new NotImplementedException ();
+			// TODO: add extrapolation
+			throw new ArgumentOutOfRangeException ();
 		}
 
 		public override double GetNextAmplitudeSample (double waveLength)
