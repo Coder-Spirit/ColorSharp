@@ -22,41 +22,34 @@
  */
 
 /**
- * Contributors:
- *  - Andrés Correa Casablanca <castarco@gmail.com , castarco@litipk.com>
- */
+* Contributors:
+*  - Andrés Correa Casablanca <castarco@gmail.com , castarco@litipk.com>
+*/
 
 
 using System;
-using System.Collections.Generic;
 
 
 namespace Litipk.ColorSharp
 {
-	public class LightSpectrum : AConvertibleColor
+	public class RegularLightSpectrum : ALightSpectrum
 	{
 		#region private properties
 
 		// Needed values to interpret the data points
-		double nmPerStep;
-		double minWaveLength;
-		double maxWaveLength;
+		readonly double nmPerStep;
+		readonly double minWaveLength;
+		readonly double maxWaveLength;
 
 		// Data points
-		double[] amplitudes;
+		readonly double[] amplitudes;
 		#endregion
+
 
 		#region constructors
 
-		/**
-		 * This constructor "installs" the conversor methods into the instance
-		 */
-		protected LightSpectrum(AConvertibleColor dataSource=null) : base(dataSource) {
-			// TODO: Add conversors
-		}
-
 		// Constructor
-		public LightSpectrum (double minWaveLength, double maxWaveLength, double[] amplitudes, AConvertibleColor dataSource=null) : this(dataSource)
+		public RegularLightSpectrum (double minWaveLength, double maxWaveLength, double[] amplitudes, AConvertibleColor dataSource=null) : base(dataSource)
 		{
 			this.minWaveLength = minWaveLength;
 			this.maxWaveLength = maxWaveLength;
@@ -65,7 +58,7 @@ namespace Litipk.ColorSharp
 		}
 
 		// Constructor
-		public LightSpectrum (double minWaveLength, double[] amplitudes, double nmPerStep, AConvertibleColor dataSource=null) : this(dataSource)
+		public RegularLightSpectrum (double minWaveLength, double[] amplitudes, double nmPerStep, AConvertibleColor dataSource=null) : base(dataSource)
 		{
 			this.nmPerStep = nmPerStep;
 			this.minWaveLength = minWaveLength;
@@ -75,36 +68,39 @@ namespace Litipk.ColorSharp
 
 		#endregion
 
-		#region conversors
 
-		/**
-		 * 
-		 */
-		public CIEXYZ ToCIEXYZ (Dictionary<KeyValuePair<Type, Type>, object> strategies=null)
+		#region inherited methods
+
+		public override double GetAmplitudeAt(double waveLength)
 		{
-			var strategyKey = new KeyValuePair<Type, Type> (
-				typeof(LightSpectrum), typeof(CIEXYZ)
-			);
+			if (waveLength >= minWaveLength && waveLength <= maxWaveLength) {
+				double dblIndex = (waveLength - minWaveLength) / nmPerStep;
+				double floorIndex = Math.Floor (dblIndex);
 
-			if (strategies == null || !strategies.ContainsKey(strategyKey)) {
-				throw new ArgumentException (
-					"Unable top find the proper strategy"
-				);
+				if (dblIndex - floorIndex < double.Epsilon) {
+					return amplitudes [(uint)dblIndex];
+				}
+
+				uint uIndex = (uint)Math.Floor (dblIndex);
+				double alpha = (dblIndex - floorIndex) / nmPerStep;
+
+				return (1.0-alpha)*amplitudes[uIndex] + alpha*amplitudes[uIndex+1];
 			}
 
-			var MFs = (IMatchingFunction[])strategies [strategyKey];
+			throw new NotImplementedException ();
+		}
 
-			if (MFs == null || MFs.Length != 3) {
-				throw new ArgumentException (
-					"Unable top find the matching functions"
-				);
+		public override double GetNextAmplitudeSample (double waveLength)
+		{
+			if (waveLength < minWaveLength && waveLength >= maxWaveLength) {
+				throw new ArgumentOutOfRangeException ();
 			}
 
-			return new CIEXYZ (
-				MFs[0].DoConvolution (this), MFs[1].DoConvolution (this), MFs[2].DoConvolution (this), this
-			);
+			return minWaveLength + ((uint)Math.Floor ((waveLength - minWaveLength) / nmPerStep) + 1) * nmPerStep;
 		}
 
 		#endregion
 	}
 }
+
+

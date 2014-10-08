@@ -34,7 +34,7 @@ namespace Litipk.ColorSharp
 {
 	public interface IMatchingFunction
 	{
-		double DoConvolution (LightSpectrum lss);
+		double DoConvolution (ALightSpectrum lss);
 	}
 }
 
