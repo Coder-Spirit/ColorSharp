@@ -44,7 +44,10 @@
 
 		#region conversors
 
-		public CIEXYZ toCIEXYZ ()
+		/**
+		 * 
+		 */
+		public CIEXYZ ToCIEXYZ (List<Type> visited=null, params object[] strategies)
 		{
 			// TODO
 			return null;

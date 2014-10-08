@@ -1,9 +1,9 @@
-ColorSharp/ColorSharp/obj/*
-ColorSharp\ColorSharp\obj\*
-ColorSharp/ColorSharp/bin/*
-ColorSharp\ColorSharp\bin\*
-ColorSharp/packages/*
-ColorSharp\packages\*
-ColorSharp/ColorSharp.userprefs
-ColorSharp\ColorSharp.userprefs
+ColorSharp/obj/*
+ColorSharp\obj\*
+ColorSharp/bin/*
+ColorSharp\bin\*
+packages/*
+packages\*
+ColorSharp.userprefs
+ColorSharp.userprefs
 

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Litipk.ColorSharp
 {
 	// TODO: Add optional parameter (ConversionStrategy)
-	public delegate T Conversor<out T> (List<Type> visited=null) where T : AConvertibleColor;
+	public delegate T Conversor<out T> (List<Type> visited=null, params object[] strategies) where T : AConvertibleColor;
 
 	public abstract class AConvertibleColor
 	{
