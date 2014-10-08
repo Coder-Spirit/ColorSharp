@@ -31,15 +31,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\Litipk\ColorSharp\AConvertibleColor.cs" />
-    <Compile Include="src\Litipk\ColorSharp\CIEXYZ.cs" />
-    <Compile Include="src\Litipk\ColorSharp\LightSpectrumSample.cs" />
-    <Compile Include="src\Litipk\ColorSharp\MatchingFunction.cs" />
+    <Compile Include="src\AConvertibleColor.cs" />
+    <Compile Include="src\CIEXYZ.cs" />
+    <Compile Include="src\LightSpectrumSample.cs" />
+    <Compile Include="src\MatchingFunction.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="src\" />
-    <Folder Include="src\Litipk\" />
-    <Folder Include="src\Litipk\ColorSharp\" />
   </ItemGroup>
 </Project>

@@ -22,35 +22,49 @@
  */
 
 /**
-* Contributors:
-*  - Andrés Correa Casablanca <castarco@gmail.com , castarco@litipk.com>
-*/
+ * Contributors:
+ *  - Andrés Correa Casablanca <castarco@gmail.com , castarco@litipk.com>
+ */
 
 
-using System.Reflection;
-using System.Runtime.CompilerServices;
+namespace Litipk.ColorSharp
+{
+	public class CIEXYZ : AConvertibleColor
+	{
+		#region private properties
 
-// Information about this assembly is defined by the following attributes.
-// Change them to the values specific to your project.
+		double X, Y, Z;
 
-[assembly: AssemblyTitle ("ColorSharp")]
-[assembly: AssemblyDescription ("")]
-[assembly: AssemblyConfiguration ("")]
-[assembly: AssemblyCompany ("Litipk")]
-[assembly: AssemblyProduct ("ColorSharp")]
-[assembly: AssemblyCopyright ("Andrés Correa Casablanca")]
-[assembly: AssemblyTrademark ("Litipk")]
-[assembly: AssemblyCulture ("")]
+		#endregion
 
-// The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".
-// The form "{Major}.{Minor}.*" will automatically update the build and revision,
-// and "{Major}.{Minor}.{Build}.*" will update just the revision.
+		#region constructors
 
-[assembly: AssemblyVersion ("0.1.*")]
+		/**
+		 * This constructor "installs" the conversor methods into the instance
+		 */
+		protected CIEXYZ(AConvertibleColor dataSource=null) : base(dataSource) {
+			// TODO: Add conversors
+		}
 
-// The following attributes are used to specify the signing key for the assembly,
-// if desired. See the Mono documentation for more information about signing.
+		// Constructor
+		public CIEXYZ (double X, double Y, double Z, AConvertibleColor dataSource=null) : this(dataSource)
+		{
+			this.X = X;
+			this.Y = Y;
+			this.Z = Z;
+		}
 
-//[assembly: AssemblyDelaySign(false)]
-//[assembly: AssemblyKeyFile("")]
+		#endregion
+
+		#region conversors
+
+		public LightSpectrumSample toLightSpectrumSample ()
+		{
+			// TODO
+			return null;
+		}
+
+		#endregion
+	}
+}
 
