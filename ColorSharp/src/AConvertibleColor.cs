@@ -44,6 +44,7 @@ namespace Litipk.ColorSharp
 
 		#endregion
 
+
 		#region properties
 
 		// If this "color" comes from another data source, then we keep the original data.
@@ -54,6 +55,7 @@ namespace Litipk.ColorSharp
 
 		#endregion
 
+
 		#region constructors
 
 		// TODO: Check if this should be public in order to work as expected with reflection.
@@ -63,6 +65,7 @@ namespace Litipk.ColorSharp
 		}
 
 		#endregion
+
 
 		#region conversion skeleton
 
@@ -173,6 +176,13 @@ namespace Litipk.ColorSharp
 			visited.Add (ist);
 			return Conversors [ist] ().ConvertTo<T>(visited);
 		}
+
+		#endregion
+
+
+		#region abstract methods
+
+		public abstract bool IsInsideColorSpace ();
 
 		#endregion
 	}

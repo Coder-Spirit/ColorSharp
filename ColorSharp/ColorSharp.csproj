@@ -44,10 +44,12 @@
     <Compile Include="src\AMatchingFunction.cs" />
     <Compile Include="src\IRealFunctionWithFiniteSupport.cs" />
     <Compile Include="src\KayValuePairComparer.cs" />
+    <Compile Include="src\SRGB.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="src\" />
+    <Folder Include="tests\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

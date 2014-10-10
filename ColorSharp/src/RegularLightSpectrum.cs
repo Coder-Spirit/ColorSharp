@@ -115,6 +115,19 @@ namespace Litipk.ColorSharp
 			return minWaveLength + ((uint)Math.Floor ((waveLength - minWaveLength) / nmPerStep) + 1) * nmPerStep;
 		}
 
+		public override bool IsInsideColorSpace()
+		{
+			if (minWaveLength <= double.Epsilon)
+				return false;
+
+			foreach (double amplitude in amplitudes) {
+				if (amplitude < 0.0)
+					return false;
+			}
+
+			return true;
+		}
+
 		#endregion
 	}
 }

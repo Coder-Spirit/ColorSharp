@@ -22,9 +22,9 @@
  */
 
 /**
- * Contributors:
- *  - Andrés Correa Casablanca <castarco@gmail.com , castarco@litipk.com>
- */
+* Contributors:
+*  - Andrés Correa Casablanca <castarco@gmail.com , castarco@litipk.com>
+*/
 
 
 using System;
@@ -33,11 +33,11 @@ using System.Collections.Generic;
 
 namespace Litipk.ColorSharp
 {
-	public class CIEXYZ : AConvertibleColor
+	public class SRGB : AConvertibleColor
 	{
 		#region private properties
 
-		double X, Y, Z;
+		double R, G, B;
 
 		#endregion
 
@@ -47,16 +47,16 @@ namespace Litipk.ColorSharp
 		/**
 		 * This constructor "installs" the conversor methods into the instance
 		 */
-		protected CIEXYZ(AConvertibleColor dataSource=null) : base(dataSource) {
-			Conversors.Add (typeof(SRGB), ToSRGB);
+		protected SRGB(AConvertibleColor dataSource=null) : base(dataSource) {
+			Conversors.Add (typeof(CIEXYZ), ToCIEXYZ);
 		}
 
 		// Constructor
-		public CIEXYZ (double X, double Y, double Z, AConvertibleColor dataSource=null) : this(dataSource)
+		public SRGB (double R, double G, double B, AConvertibleColor dataSource=null) : this(dataSource)
 		{
-			this.X = X;
-			this.Y = Y;
-			this.Z = Z;
+			this.R = R;
+			this.G = G;
+			this.B = B;
 		}
 
 		#endregion
@@ -64,7 +64,7 @@ namespace Litipk.ColorSharp
 
 		#region conversors
 
-		public SRGB ToSRGB (Dictionary<KeyValuePair<Type, Type>, object> strategies=null)
+		public CIEXYZ ToCIEXYZ (Dictionary<KeyValuePair<Type, Type>, object> strategies=null)
 		{
 			throw new NotImplementedException ();
 		}
@@ -76,10 +76,15 @@ namespace Litipk.ColorSharp
 
 		public override bool IsInsideColorSpace()
 		{
-			return true; // TODO : Find criteria!
+			return (
+				0.0 <= R && R <= 1.0 &&
+				0.0 <= G && B <= 1.0 &&
+				0.0 <= B && B <= 1.0
+			);
 		}
 
 		#endregion
 	}
 }
+
 

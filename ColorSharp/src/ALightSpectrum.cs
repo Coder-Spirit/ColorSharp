@@ -38,7 +38,7 @@ namespace Litipk.ColorSharp
 		#region constructors
 
 		protected ALightSpectrum(AConvertibleColor dataSource=null) : base(dataSource) {
-			// TODO: Add conversors
+			Conversors.Add (typeof(CIEXYZ), ToCIEXYZ);
 		}
 
 		#endregion

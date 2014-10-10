@@ -74,6 +74,19 @@ namespace Litipk.ColorSharp
 			return RawAmplitudes.Count;
 		}
 
+		public override bool IsInsideColorSpace()
+		{
+			if (RawAmplitudes[0].Key <= double.Epsilon)
+				return false;
+
+			foreach (KeyValuePair<double, double> entry in RawAmplitudes) {
+				if (entry.Value < 0.0)
+					return false;
+			}
+
+			return true;
+		}
+
 		#endregion
 
 		public override double EvaluateAt(double waveLength)
