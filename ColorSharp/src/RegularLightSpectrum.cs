@@ -93,17 +93,17 @@ namespace Litipk.ColorSharp
 
 		public override double GetSupportMinValue()
 		{
-			throw new NotImplementedException ();
+			return minWaveLength;
 		}
 
 		public override double GetSupportMaxValue()
 		{
-			throw new NotImplementedException ();
+			return maxWaveLength;
 		}
 
 		public override int GetNumberOfDataPoints()
 		{
-			throw new NotImplementedException ();
+			return amplitudes.Length;
 		}
 
 		public override double GetNextAmplitudeSample (double waveLength)

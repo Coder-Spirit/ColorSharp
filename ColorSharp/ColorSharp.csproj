@@ -43,6 +43,7 @@
     <Compile Include="src\TabularLightSpectrum.cs" />
     <Compile Include="src\AMatchingFunction.cs" />
     <Compile Include="src\IRealFunctionWithFiniteSupport.cs" />
+    <Compile Include="src\KayValuePairComparer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

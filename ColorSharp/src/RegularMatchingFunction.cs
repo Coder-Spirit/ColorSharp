@@ -73,22 +73,37 @@ namespace Litipk.ColorSharp
 
 		public override double EvaluateAt (double waveLength)
 		{
-			throw new NotImplementedException ();
+			if (waveLength >= minWaveLength && waveLength <= maxWaveLength) {
+				double dblIndex = (waveLength - minWaveLength) / nmPerStep;
+				double floorIndex = Math.Floor (dblIndex);
+				uint uIndex = (uint)floorIndex;
+
+				if (dblIndex - floorIndex < double.Epsilon) {
+					return amplitudes [uIndex];
+				}
+
+				double alpha = (dblIndex - floorIndex) / nmPerStep;
+
+				return (1.0-alpha)*amplitudes[uIndex] + alpha*amplitudes[uIndex+1];
+			}
+
+			// TODO: add extrapolation
+			throw new ArgumentOutOfRangeException ();
 		}
 
 		public override double GetSupportMinValue ()
 		{
-			throw new NotImplementedException ();
+			return minWaveLength;
 		}
 
 		public override double GetSupportMaxValue ()
 		{
-			throw new NotImplementedException ();
+			return maxWaveLength;
 		}
 
 		public override int GetNumberOfDataPoints()
 		{
-			throw new NotImplementedException ();
+			return amplitudes.Length;
 		}
 
 		#endregion

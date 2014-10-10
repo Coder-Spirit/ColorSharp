@@ -84,7 +84,7 @@ namespace Litipk.ColorSharp
 			}
 
 			int index = RawAmplitudes.BinarySearch(
-				new KeyValuePair<double, double>(waveLength, 0), new AmplitudesComparer()
+				new KeyValuePair<double, double>(waveLength, 0), new KeyValuePairComparer()
 			);
 
 			if (index > 0)
@@ -108,25 +108,13 @@ namespace Litipk.ColorSharp
 			}
 
 			int index = RawAmplitudes.BinarySearch(
-				new KeyValuePair<double, double>(waveLength, 0), new AmplitudesComparer()
+				new KeyValuePair<double, double>(waveLength, 0), new KeyValuePairComparer()
 			);
 
 			if (index < 0)
 				index = ~index;
 
 			return RawAmplitudes [index + 1].Key;
-		}
-
-		#endregion
-
-
-		#region private methods & other private stuff
-
-		class AmplitudesComparer : IComparer<KeyValuePair<double, double>> {
-			public int Compare(KeyValuePair<double, double> a, KeyValuePair<double, double> b) 
-			{
-				return Math.Abs (a.Key - b.Key) < double.Epsilon ? 0 : a.Key.CompareTo (b.Key);
-			}
 		}
 
 		#endregion
