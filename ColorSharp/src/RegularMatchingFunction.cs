@@ -32,7 +32,7 @@ using System;
 
 namespace Litipk.ColorSharp
 {
-	public class RegularMatchingFunction : IMatchingFunction
+	public class RegularMatchingFunction : AMatchingFunction
 	{
 		#region private properties
 
@@ -69,9 +69,24 @@ namespace Litipk.ColorSharp
 		#endregion
 
 
-		#region IMatchingFunction implementation
+		#region AMatchingFunction implementation
 
-		public double DoConvolution (ALightSpectrum lss)
+		public override double EvaluateAt (double waveLength)
+		{
+			throw new NotImplementedException ();
+		}
+
+		public override double GetSupportMinValue ()
+		{
+			throw new NotImplementedException ();
+		}
+
+		public override double GetSupportMaxValue ()
+		{
+			throw new NotImplementedException ();
+		}
+
+		public override int GetNumberOfDataPoints()
 		{
 			throw new NotImplementedException ();
 		}

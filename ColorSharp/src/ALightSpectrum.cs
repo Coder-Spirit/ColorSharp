@@ -33,7 +33,7 @@ using System.Collections.Generic;
 
 namespace Litipk.ColorSharp
 {
-	public abstract class ALightSpectrum : AConvertibleColor
+	public abstract class ALightSpectrum : AConvertibleColor, IRealFunctionWithFiniteSupport
 	{
 		#region constructors
 
@@ -46,10 +46,23 @@ namespace Litipk.ColorSharp
 
 		#region inheritable methods
 
+		#region IRealFunctionWithFiniteSupport methods
+
 		/**
 		 * This gives us the wave amplitude at a given wave length, if it's necessary the method will do interpolation.
 		 */
-		public abstract double GetAmplitudeAt(double waveLength);
+		public abstract double EvaluateAt(double waveLength);
+
+		// Analytic aproximations also have their confidence intervals, so
+		// there aren't exceptional cases here.
+		public abstract double GetSupportMinValue ();
+		public abstract double GetSupportMaxValue ();
+
+		// We need to know how many data points we have to make computations using all the information we have.
+		// If the concrete implementation is "analytical", then must return -1.
+		public abstract int GetNumberOfDataPoints();
+
+		#endregion
 
 		/**
 		 * Supposing the light spectrum we have is a discrete sample, this gives us the next data point.
@@ -74,7 +87,7 @@ namespace Litipk.ColorSharp
 				);
 			}
 
-			var MFs = (IMatchingFunction[])strategies [strategyKey];
+			var MFs = (AMatchingFunction[])strategies [strategyKey];
 
 			if (MFs == null || MFs.Length != 3) {
 				throw new ArgumentException (

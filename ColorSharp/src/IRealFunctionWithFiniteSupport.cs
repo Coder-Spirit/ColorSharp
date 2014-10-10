@@ -22,19 +22,30 @@
  */
 
 /**
- * Contributors:
- *  - Andrés Correa Casablanca <castarco@gmail.com , castarco@litipk.com>
- */
-
-
-using System;
+* Contributors:
+*  - Andrés Correa Casablanca <castarco@gmail.com , castarco@litipk.com>
+*/
 
 
 namespace Litipk.ColorSharp
 {
-	public interface IMatchingFunction
+	interface IRealFunctionWithFiniteSupport
 	{
-		double DoConvolution (ALightSpectrum lss);
+		/**
+		 * This gives us the wave amplitude at a given wave length, if it's necessary the method will do interpolation.
+		 */
+		double EvaluateAt(double val);
+
+		/**
+		 * Analytic aproximations also have their confidence intervals, so there aren't exceptional cases here.
+		 */
+		double GetSupportMinValue ();
+		double GetSupportMaxValue ();
+
+		/**
+		 * We need to know how many data points we have to make computations using all the information we have.
+		 * If the concrete implementation is "analytical", then must return -1.
+		 */
+		int GetNumberOfDataPoints();
 	}
 }
-

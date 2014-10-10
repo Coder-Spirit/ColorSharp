@@ -71,7 +71,7 @@ namespace Litipk.ColorSharp
 
 		#region inherited methods
 
-		public override double GetAmplitudeAt(double waveLength)
+		public override double EvaluateAt(double waveLength)
 		{
 			if (waveLength >= minWaveLength && waveLength <= maxWaveLength) {
 				double dblIndex = (waveLength - minWaveLength) / nmPerStep;
@@ -89,6 +89,21 @@ namespace Litipk.ColorSharp
 
 			// TODO: add extrapolation
 			throw new ArgumentOutOfRangeException ();
+		}
+
+		public override double GetSupportMinValue()
+		{
+			throw new NotImplementedException ();
+		}
+
+		public override double GetSupportMaxValue()
+		{
+			throw new NotImplementedException ();
+		}
+
+		public override int GetNumberOfDataPoints()
+		{
+			throw new NotImplementedException ();
 		}
 
 		public override double GetNextAmplitudeSample (double waveLength)

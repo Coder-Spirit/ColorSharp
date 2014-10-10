@@ -27,12 +27,13 @@
  */
 
 
+using System;
 using System.Collections.Generic;
 
 
 namespace Litipk.ColorSharp
 {
-	public class TabularMatchingFunction : IMatchingFunction
+	public class TabularMatchingFunction : AMatchingFunction
 	{
 		#region private properties
 
@@ -50,11 +51,26 @@ namespace Litipk.ColorSharp
 
 		#endregion
 
-		#region IMatchingFunction implementation
+		#region AMatchingFunction implementation
 
-		public double DoConvolution (ALightSpectrum lss)
+		public override double EvaluateAt(double wavelength)
 		{
-			throw new System.NotImplementedException ();
+			throw new NotImplementedException ();
+		}
+
+		public override double GetSupportMinValue ()
+		{
+			throw new NotImplementedException ();
+		}
+
+		public override double GetSupportMaxValue ()
+		{
+			throw new NotImplementedException ();
+		}
+
+		public override int GetNumberOfDataPoints()
+		{
+			throw new NotImplementedException ();
 		}
 
 		#endregion

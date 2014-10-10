@@ -36,12 +36,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\AConvertibleColor.cs" />
     <Compile Include="src\CIEXYZ.cs" />
-    <Compile Include="src\IMatchingFunction.cs" />
     <Compile Include="src\RegularMatchingFunction.cs" />
     <Compile Include="src\TabularMatchingFunction.cs" />
     <Compile Include="src\ALightSpectrum.cs" />
     <Compile Include="src\RegularLightSpectrum.cs" />
     <Compile Include="src\TabularLightSpectrum.cs" />
+    <Compile Include="src\AMatchingFunction.cs" />
+    <Compile Include="src\IRealFunctionWithFiniteSupport.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

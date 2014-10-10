@@ -57,7 +57,26 @@ namespace Litipk.ColorSharp
 
 		#region inherited methods
 
-		public override double GetAmplitudeAt(double waveLength)
+		#region implemented abstract members of ALightSpectrum
+
+		public override double GetSupportMinValue ()
+		{
+			return RawAmplitudes[0].Key;
+		}
+
+		public override double GetSupportMaxValue ()
+		{
+			return RawAmplitudes[RawAmplitudes.Count-1].Key;
+		}
+
+		public override int GetNumberOfDataPoints ()
+		{
+			return RawAmplitudes.Count;
+		}
+
+		#endregion
+
+		public override double EvaluateAt(double waveLength)
 		{
 			if (waveLength < RawAmplitudes[0].Key || waveLength > RawAmplitudes[RawAmplitudes.Count-1].Key) {
 				// TODO: Add extrapolation?
