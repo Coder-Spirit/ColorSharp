@@ -33,6 +33,9 @@ using System.Collections.Generic;
 
 namespace Litipk.ColorSharp
 {
+	/**
+	 * CIE 1931 XYZ Color Space.
+	 */
 	public class CIEXYZ : AConvertibleColor
 	{
 		#region private properties

@@ -33,6 +33,9 @@ using System.Collections.Generic;
 
 namespace Litipk.ColorSharp
 {
+	/**
+	 * HP's & Microsoft's 1996 sRGB Color Space.
+	 */
 	public class SRGB : AConvertibleColor
 	{
 		#region private properties
