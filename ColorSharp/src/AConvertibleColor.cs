@@ -169,8 +169,12 @@ namespace Litipk.ColorSharp
 				throw new InvalidCastException ("Unable to find a conversion path to this color space.");
 			}
 
-			if (dataSourcePathLength <= basePathLength + 1) {
+			if (DataSource != null && dataSourcePathLength <= basePathLength + 1) {
 				return DataSource.ConvertTo<T> ();
+			}
+
+			if (basePathLength == 1) {
+				return (T)Conversors [ist] ();
 			}
 
 			visited.Add (ist);
