@@ -40,7 +40,7 @@ namespace Litipk.ColorSharp
 	{
 		#region private properties
 
-		double R, G, B;
+		public readonly double R, G, B;
 
 		#endregion
 

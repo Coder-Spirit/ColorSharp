@@ -38,9 +38,9 @@ namespace Litipk.ColorSharp
 	 */
 	public class CIEXYZ : AConvertibleColor
 	{
-		#region private properties
+		#region readonly properties
 
-		double X, Y, Z;
+		public readonly double X, Y, Z;
 
 		#endregion
 
