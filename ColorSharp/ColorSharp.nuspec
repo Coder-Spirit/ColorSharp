@@ -10,8 +10,8 @@
     <projectUrl>https://github.com/Litipk/ColorSharp</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>First Alpha Version.</releaseNotes>
+    <releaseNotes>Third Alpha Version.</releaseNotes>
     <copyright>Copyright 2014</copyright>
-    <tags>Color Light</tags>
+    <tags>Color Light CIEXYZ SRGB</tags>
   </metadata>
 </package>
