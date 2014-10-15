@@ -34,7 +34,7 @@ using System.Collections.Generic;
 namespace Litipk.ColorSharp
 {
 	/**
-	 * CIE 1931 XYZ Color Space.
+	 * CIE 1931 (2º) XYZ Color Space.
 	 */
 	public class CIEXYZ : AConvertibleColor
 	{
@@ -68,7 +68,7 @@ namespace Litipk.ColorSharp
 		#region conversors
 
 		/**
-		 * Assumes CIE 1931 (2º) XYZ 
+		 * Converts the CIE 1931 XYZ sample to a HP's & Microsoft's 1996 sRGB sample
 		 */
 		public SRGB ToSRGB (Dictionary<KeyValuePair<Type, Type>, object> strategies=null)
 		{
@@ -95,7 +95,7 @@ namespace Litipk.ColorSharp
 				b = b / maxChannelValue;
 			}
 
-			return new SRGB(r, g, b);
+			return new SRGB(r, g, b, DataSource ?? this);
 		}
 
 		#endregion

@@ -67,9 +67,22 @@ namespace Litipk.ColorSharp
 
 		#region conversors
 
+		/**
+		 * Converts the HP's & Microsoft's 1996 sRGB sample to a CIE 1931 XYZ sample
+		 */
 		public CIEXYZ ToCIEXYZ (Dictionary<KeyValuePair<Type, Type>, object> strategies=null)
 		{
-			throw new NotImplementedException ();
+			// Linear transformation
+			double X = R * 0.412424 + G * 0.357579 + B * 0.180464;
+			double Y = R * 0.212656 + G * 0.715158 + B * 0.072186;
+			double Z = R * 0.019332 + G * 0.119193 + B * 0.950444;
+
+			// Gamma correction
+			X = X > 0.04045 ? Math.Pow((X+0.055)/1.055, 2.4) : X/12.92 ;
+			Y = Y > 0.04045 ? Math.Pow((Y+0.055)/1.055, 2.4) : Y/12.92 ;
+			Z = Z > 0.04045 ? Math.Pow((Z+0.055)/1.055, 2.4) : Z/12.92 ;
+
+			return new CIEXYZ(X, Y, Z, DataSource ?? this);
 		}
 
 		#endregion
