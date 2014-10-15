@@ -67,9 +67,35 @@ namespace Litipk.ColorSharp
 
 		#region conversors
 
+		/**
+		 * Assumes CIE 1931 (2º) XYZ 
+		 */
 		public SRGB ToSRGB (Dictionary<KeyValuePair<Type, Type>, object> strategies=null)
 		{
-			throw new NotImplementedException ();
+			double tx = X / 100.0;
+			double ty = Y / 100.0;
+			double tz = Z / 100.0;
+
+			// Linear transformation
+			double r = tx * 3.2406 + ty * -1.5372 + tz * -0.4986;
+			double g = tx * -0.9689 + ty * 1.8758 + tz * 0.0415;
+			double b = tx * 0.0557 + ty * -0.2040 + tz * 1.0570;
+
+			// Gamma correction
+			r = r > 0.0031308 ? 1.055 * Math.Pow(r, 1 / 2.4) - 0.055 : 12.92 * r;
+			g = g > 0.0031308 ? 1.055 * Math.Pow(g, 1 / 2.4) - 0.055 : 12.92 * g;
+			b = b > 0.0031308 ? 1.055 * Math.Pow(b, 1 / 2.4) - 0.055 : 12.92 * b;
+
+			double maxChannelValue = Math.Max (r, Math.Max (g, b));
+
+			// Another correction
+			if (maxChannelValue > 1.0) {
+				r = r / maxChannelValue;
+				g = g / maxChannelValue;
+				b = b / maxChannelValue;
+			}
+
+			return new SRGB(r, g, b);
 		}
 
 		#endregion
