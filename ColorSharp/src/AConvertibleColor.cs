@@ -174,7 +174,7 @@ namespace Litipk.ColorSharp
 			}
 
 			if (basePathLength == 1) {
-				return (T)Conversors [ist] ();
+				return (T)Conversors [t] ();
 			}
 
 			visited.Add (ist);
