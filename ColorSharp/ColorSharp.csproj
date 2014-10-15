@@ -9,8 +9,8 @@
     <AssemblyName>ColorSharp</AssemblyName>
     <Description>A .Net library to handle color spaces (and light spectrums!)</Description>
     <SignAssembly>true</SignAssembly>
-    <DelaySign>true</DelaySign>
-    <AssemblyOriginatorKeyFile>colorsharp.pub</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
+    <AssemblyOriginatorKeyFile>colorsharp.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -58,5 +58,6 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="ColorSharp.nuspec" />
+    <None Include="build_nuget_pkg.sh" />
   </ItemGroup>
 </Project>
