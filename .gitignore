@@ -2,6 +2,8 @@ ColorSharp/obj/*
 ColorSharp\obj\*
 ColorSharp/bin/*
 ColorSharp\bin\*
+ColorSharp/colorsharp.snk
+ColorSharp\colorsharp.snk
 packages/*
 packages\*
 ColorSharp.userprefs
