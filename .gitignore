@@ -6,4 +6,4 @@ packages/*
 packages\*
 ColorSharp.userprefs
 ColorSharp.userprefs
-
+ColorSharp*.nupkg
