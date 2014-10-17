@@ -27,19 +27,28 @@
 */
 
 
-using System;
-using System.Collections.Generic;
-
-
 namespace Litipk.ColorSharp
 {
-	/**
-	 * Internal Class 
-	 */
-	class KeyValuePairComparer : IComparer<KeyValuePair<double, double>> {
-		public int Compare(KeyValuePair<double, double> a, KeyValuePair<double, double> b)
+	namespace InternalUtils
+	{
+		interface IRealFunctionWithFiniteSupport
 		{
-			return Math.Abs (a.Key - b.Key) <= double.Epsilon ? 0 : a.Key.CompareTo (b.Key);
+			/**
+			 * This gives us the wave amplitude at a given wave length, if it's necessary the method will do interpolation.
+			 */
+			double EvaluateAt(double val);
+
+			/**
+			 * Analytic aproximations also have their confidence intervals, so there aren't exceptional cases here.
+			 */
+			double GetSupportMinValue ();
+			double GetSupportMaxValue ();
+
+			/**
+			 * We need to know how many data points we have to make computations using all the information we have.
+			 * If the concrete implementation is "analytical", then must return -1.
+			 */
+			int GetNumberOfDataPoints();
 		}
 	}
 }

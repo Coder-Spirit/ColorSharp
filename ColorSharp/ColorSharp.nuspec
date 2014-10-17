@@ -12,6 +12,6 @@
     <description>$description$</description>
     <releaseNotes>Third Alpha Version.</releaseNotes>
     <copyright>Copyright 2014</copyright>
-    <tags>Color Light CIEXYZ SRGB</tags>
+    <tags>Light Color Colour CIEXYZ sRGB</tags>
   </metadata>
 </package>

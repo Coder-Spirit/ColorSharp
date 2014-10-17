@@ -38,22 +38,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\AConvertibleColor.cs" />
-    <Compile Include="src\CIEXYZ.cs" />
-    <Compile Include="src\RegularMatchingFunction.cs" />
-    <Compile Include="src\TabularMatchingFunction.cs" />
-    <Compile Include="src\ALightSpectrum.cs" />
-    <Compile Include="src\RegularLightSpectrum.cs" />
-    <Compile Include="src\TabularLightSpectrum.cs" />
-    <Compile Include="src\AMatchingFunction.cs" />
-    <Compile Include="src\IRealFunctionWithFiniteSupport.cs" />
-    <Compile Include="src\KayValuePairComparer.cs" />
-    <Compile Include="src\SRGB.cs" />
+    <Compile Include="src\MatchingFunctions\AMatchingFunction.cs" />
+    <Compile Include="src\MatchingFunctions\RegularMatchingFunction.cs" />
+    <Compile Include="src\MatchingFunctions\TabularMatchingFunction.cs" />
+    <Compile Include="src\LightSpectrums\ALightSpectrum.cs" />
+    <Compile Include="src\LightSpectrums\RegularLightSpectrum.cs" />
+    <Compile Include="src\LightSpectrums\TabularLightSpectrum.cs" />
+    <Compile Include="src\ColorSpaces\AConvertibleColor.cs" />
+    <Compile Include="src\ColorSpaces\CIEXYZ.cs" />
+    <Compile Include="src\ColorSpaces\SRGB.cs" />
+    <Compile Include="src\InternalUtils\KayValuePairComparer.cs" />
+    <Compile Include="src\InternalUtils\IRealFunctionWithFiniteSupport.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="src\" />
     <Folder Include="tests\" />
+    <Folder Include="src\ColorSpaces\" />
+    <Folder Include="src\LightSpectrums\" />
+    <Folder Include="src\MatchingFunctions\" />
+    <Folder Include="src\InternalUtils\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
