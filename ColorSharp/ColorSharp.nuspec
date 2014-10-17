@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/Litipk/ColorSharp</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Third Alpha Version.</releaseNotes>
+    <releaseNotes>Added Matching CIE 1931 XYZ matching functions</releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>Light Color Colour CIEXYZ sRGB</tags>
   </metadata>
