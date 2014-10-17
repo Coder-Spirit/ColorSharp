@@ -41,7 +41,7 @@ namespace Litipk.ColorSharp
 		{
 			#region private properties
 
-			List<KeyValuePair<double, double>> TabularData;
+			readonly List<KeyValuePair<double, double>> TabularData;
 
 			#endregion
 

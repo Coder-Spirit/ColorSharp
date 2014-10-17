@@ -36,15 +36,15 @@ namespace Litipk.ColorSharp
 	{
 		public class RegularMatchingFunction : AMatchingFunction
 		{
-			#region private properties
+			#region readonly properties
 
 			// Needed values to interpret the data points
-			double nmPerStep;
-			double minWaveLength;
-			double maxWaveLength;
+			public readonly double NmPerStep;
+			public readonly double MinWaveLength;
+			public readonly double MaxWaveLength;
 
 			// Data points
-			double[] amplitudes;
+			public readonly double[] Amplitudes;
 			#endregion
 
 
@@ -53,19 +53,19 @@ namespace Litipk.ColorSharp
 			// Constructor
 			public RegularMatchingFunction (double minWaveLength, double maxWaveLength, double[] amplitudes)
 			{
-				this.minWaveLength = minWaveLength;
-				this.maxWaveLength = maxWaveLength;
-				nmPerStep = (maxWaveLength - minWaveLength) / (amplitudes.Length - 1);
-				this.amplitudes = amplitudes;
+				MinWaveLength = minWaveLength;
+				MaxWaveLength = maxWaveLength;
+				NmPerStep     = (maxWaveLength - minWaveLength) / (amplitudes.Length - 1);
+				Amplitudes    = amplitudes;
 			}
 
 			// Constructor
 			public RegularMatchingFunction (double minWaveLength, double[] amplitudes, double nmPerStep)
 			{
-				this.nmPerStep = nmPerStep;
-				this.minWaveLength = minWaveLength;
-				maxWaveLength = minWaveLength + (nmPerStep) * (amplitudes.Length - 1);
-				this.amplitudes = amplitudes;
+				NmPerStep     = nmPerStep;
+				MinWaveLength = minWaveLength;
+				MaxWaveLength = minWaveLength + (nmPerStep) * (amplitudes.Length - 1);
+				Amplitudes    = amplitudes;
 			}
 
 			#endregion
@@ -75,18 +75,18 @@ namespace Litipk.ColorSharp
 
 			public override double EvaluateAt (double waveLength)
 			{
-				if (waveLength >= minWaveLength && waveLength <= maxWaveLength) {
-					double dblIndex = (waveLength - minWaveLength) / nmPerStep;
+				if (waveLength >= MinWaveLength && waveLength <= MaxWaveLength) {
+					double dblIndex = (waveLength - MinWaveLength) / NmPerStep;
 					double floorIndex = Math.Floor (dblIndex);
 					uint uIndex = (uint)floorIndex;
 
 					if (dblIndex - floorIndex < double.Epsilon) {
-						return amplitudes [uIndex];
+						return Amplitudes [uIndex];
 					}
 
-					double alpha = (dblIndex - floorIndex) / nmPerStep;
+					double alpha = (dblIndex - floorIndex) / NmPerStep;
 
-					return (1.0-alpha)*amplitudes[uIndex] + alpha*amplitudes[uIndex+1];
+					return (1.0-alpha)*Amplitudes[uIndex] + alpha*Amplitudes[uIndex+1];
 				}
 
 				// TODO: add extrapolation
@@ -95,17 +95,17 @@ namespace Litipk.ColorSharp
 
 			public override double GetSupportMinValue ()
 			{
-				return minWaveLength;
+				return MinWaveLength;
 			}
 
 			public override double GetSupportMaxValue ()
 			{
-				return maxWaveLength;
+				return MaxWaveLength;
 			}
 
 			public override int GetNumberOfDataPoints()
 			{
-				return amplitudes.Length;
+				return Amplitudes.Length;
 			}
 
 			#endregion
