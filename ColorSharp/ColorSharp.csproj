@@ -49,6 +49,9 @@
     <Compile Include="src\ColorSpaces\SRGB.cs" />
     <Compile Include="src\InternalUtils\KayValuePairComparer.cs" />
     <Compile Include="src\InternalUtils\IRealFunctionWithFiniteSupport.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1931XYZ5NmMatchingFunctionY.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1931XYZ5NmMatchingFunctionX.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1931XYZ5NmMatchingFunctionZ.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -83,22 +83,27 @@ namespace Litipk.ColorSharp
 
 			public CIEXYZ ToCIEXYZ (Dictionary<KeyValuePair<Type, Type>, object> strategies=null)
 			{
+				AMatchingFunction[] MFs;
+
 				var strategyKey = new KeyValuePair<Type, Type> (
 					typeof(ALightSpectrum), typeof(CIEXYZ)
 				);
 
-				if (strategies == null || !strategies.ContainsKey(strategyKey)) {
-					throw new ArgumentException (
-						"Unable top find the proper strategy"
-					);
-				}
+				if (strategies == null || !strategies.ContainsKey (strategyKey) || strategies [strategyKey] == null) {
+					// Default behavior
+					MFs = new AMatchingFunction [] {
+						CIE1931XYZ5NmMatchingFunctionX.Instance,
+						CIE1931XYZ5NmMatchingFunctionY.Instance,
+						CIE1931XYZ5NmMatchingFunctionZ.Instance
+					};
+				} else {
+					MFs = (AMatchingFunction[])strategies [strategyKey];
 
-				var MFs = (AMatchingFunction[])strategies [strategyKey];
-
-				if (MFs == null || MFs.Length != 3) {
-					throw new ArgumentException (
-						"Unable top find the matching functions"
-					);
+					if (MFs == null || MFs.Length != 3) {
+						throw new ArgumentException (
+							"Unable top find the matching functions"
+						);
+					}
 				}
 
 				return new CIEXYZ (
