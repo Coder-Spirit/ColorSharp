@@ -12,6 +12,6 @@
     <description>$description$</description>
     <releaseNotes>Added Matching CIE 1931 XYZ matching functions</releaseNotes>
     <copyright>Copyright 2014</copyright>
-    <tags>Light Color Colour CIEXYZ sRGB</tags>
+    <tags>Light Color Colour CIEXYZ CIExyY sRGB</tags>
   </metadata>
 </package>

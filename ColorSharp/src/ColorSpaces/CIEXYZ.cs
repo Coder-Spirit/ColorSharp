@@ -54,6 +54,7 @@ namespace Litipk.ColorSharp
 			 */
 			protected CIEXYZ(AConvertibleColor dataSource=null) : base(dataSource) {
 				Conversors.Add (typeof(SRGB), ToSRGB);
+				Conversors.Add (typeof(CIExyY), ToxyY);
 			}
 
 			// Constructor
@@ -68,6 +69,12 @@ namespace Litipk.ColorSharp
 
 
 			#region conversors
+
+			public CIExyY ToxyY (Dictionary<KeyValuePair<Type, Type>, object> strategies=null)
+			{
+				double XYZ = X + Y + Z;
+				return new CIExyY (X / XYZ, Y / XYZ, Y, DataSource ?? this);
+			}
 
 			/**
 			 * Converts the CIE 1931 XYZ sample to a HP's & Microsoft's 1996 sRGB sample
@@ -107,7 +114,7 @@ namespace Litipk.ColorSharp
 
 			public override bool IsInsideColorSpace()
 			{
-				return true; // TODO : Find criteria!
+				return ConvertTo<CIExyY> ().IsInsideColorSpace ();
 			}
 
 			#endregion
