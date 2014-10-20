@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Litipk.ColorSharp</RootNamespace>
     <AssemblyName>ColorSharp</AssemblyName>
-    <Description>A .Net library to handle color spaces (and light spectrums!)</Description>
+    <Description>A .NET/Mono library to handle color spaces (and light spectrums!)</Description>
     <SignAssembly>true</SignAssembly>
     <DelaySign>false</DelaySign>
     <AssemblyOriginatorKeyFile>colorsharp.snk</AssemblyOriginatorKeyFile>
@@ -36,6 +36,9 @@
       <HintPath>..\packages\MathNet.Numerics.Signed.3.2.3\lib\net40\MathNet.Numerics.dll</HintPath>
     </Reference>
     <Reference Include="System.Numerics" />
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -54,6 +57,7 @@
     <Compile Include="src\MatchingFunctions\CIE1931XYZ5NmMatchingFunctionX.cs" />
     <Compile Include="src\MatchingFunctions\CIE1931XYZ5NmMatchingFunctionZ.cs" />
     <Compile Include="src\ColorSpaces\CIExyY.cs" />
+    <Compile Include="tests\CIEXYZTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

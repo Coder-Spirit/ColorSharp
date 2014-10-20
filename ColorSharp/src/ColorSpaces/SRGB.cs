@@ -101,6 +101,30 @@ namespace Litipk.ColorSharp
 				);
 			}
 
+			public override bool Equals(Object obj)
+			{
+				SRGB srgbObj = obj as SRGB; 
+
+				if (srgbObj == null || GetHashCode () != obj.GetHashCode ())
+					return false;
+
+				return (
+					Math.Abs (R - srgbObj.R) <= double.Epsilon &&
+					Math.Abs (G - srgbObj.G) <= double.Epsilon &&
+					Math.Abs (B - srgbObj.B) <= double.Epsilon
+				);
+			}
+			public override int GetHashCode ()
+			{
+				int hash = 17;
+
+				hash = hash * 19 + R.GetHashCode ();
+				hash = hash * 19 + G.GetHashCode ();
+				hash = hash * 19 + B.GetHashCode ();
+
+				return hash;
+			}
+
 			#endregion
 		}
 	}

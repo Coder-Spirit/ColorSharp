@@ -49,6 +49,8 @@ namespace Litipk.ColorSharp
 
 			#region constructors
 
+			public CIEXYZ() {}
+
 			/**
 			 * This constructor "installs" the conversor methods into the instance
 			 */
@@ -116,6 +118,31 @@ namespace Litipk.ColorSharp
 			{
 				return ConvertTo<CIExyY> ().IsInsideColorSpace ();
 			}
+
+			public override bool Equals(Object obj)
+			{
+				CIEXYZ xyzObj = obj as CIEXYZ; 
+
+				if (xyzObj == null || GetHashCode () != obj.GetHashCode ())
+					return false;
+
+				return (
+					Math.Abs (X - xyzObj.X) <= double.Epsilon &&
+					Math.Abs (Y - xyzObj.Y) <= double.Epsilon &&
+					Math.Abs (Z - xyzObj.Z) <= double.Epsilon
+				);
+			}
+			public override int GetHashCode ()
+			{
+				int hash = 23;
+
+				hash = hash * 57 + X.GetHashCode ();
+				hash = hash * 57 + Y.GetHashCode ();
+				hash = hash * 57 + Z.GetHashCode ();
+
+				return hash;
+			}
+
 
 			#endregion
 		}
