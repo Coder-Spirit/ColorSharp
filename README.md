@@ -10,11 +10,16 @@ A .NET/Mono library to handle color spaces (and light spectrums!)
 
 This library is inspired by the following projects and information sources.
 
-### Previous colour libraries
+### Code Libraries
 
 * [ColorMine](https://github.com/THEjoezack/ColorMine/)
 * [ColorPy](https://github.com/fish2000/ColorPy)
 
+### Books
+
+* *1998* - *Color Space Conversions* - Adrian Ford, Alan Roberts
+* *2005* - *Colorimetry: Fundamentals and Applications* - Noboru Ohta, Alan R. Robertson
+* *2007* - *Colorimetry: Understanding the CIE system* - János Schanda
 
 ## License
 
