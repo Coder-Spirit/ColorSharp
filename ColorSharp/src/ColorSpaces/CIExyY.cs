@@ -110,27 +110,18 @@ namespace Litipk.ColorSharp
 			public override bool IsInsideColorSpace()
 			{
 				var n = SharkfinX.Length;
-				var ai = (SharkfinX [1] - x) * (SharkfinY [0] - y) - (SharkfinX [0] - x) * (SharkfinY [1] - y);
 
-				if (Math.Abs (ai) <= double.Epsilon) {
-					return true;
-				}
+				bool isInside = false;
 
-				int aiSign = ai > 0 ? 1 : -1;
-
-				for (int i = 1; i < n; i++) {
-					ai = (SharkfinX [(i+1)%n] - x) * (SharkfinY [i] - y) - (SharkfinX [i] - x) * (SharkfinY [(i+1)%n] - y);
-
-					if (Math.Abs (ai) <= double.Epsilon) {
-						return true;
-					}
-
-					if (ai > 0 && aiSign == -1 || ai < 0 && aiSign == 1) {
-						return false;
+				// Raytracing algorithm
+				for (int i = 0, j = n - 1; i < n; j = i++) {
+					if (((SharkfinY [i] > y) != (SharkfinY [j] > y)) &&
+						(x < (SharkfinX [j] - SharkfinX [i]) * (y - SharkfinY [i]) / (SharkfinY [j] - SharkfinY [i]) + SharkfinX [i])) {
+						isInside = !isInside;
 					}
 				}
 
-				return true;
+				return isInside;
 			}
 
 			public override bool Equals(Object obj)
