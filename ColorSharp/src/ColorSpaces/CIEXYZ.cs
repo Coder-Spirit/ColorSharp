@@ -49,7 +49,10 @@ namespace Litipk.ColorSharp
 
 			#region constructors
 
-			public CIEXYZ() {}
+			public CIEXYZ() {
+				Conversors.Add (typeof(SRGB), ToSRGB);
+				Conversors.Add (typeof(CIExyY), ToxyY);
+			}
 
 			/**
 			 * This constructor "installs" the conversor methods into the instance

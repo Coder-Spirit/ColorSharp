@@ -77,6 +77,10 @@ namespace Litipk.ColorSharp
 				}
 			}
 
+			public CIExyY() {
+				Conversors.Add (typeof(CIEXYZ), ToXYZ);
+			}
+
 			protected CIExyY(AConvertibleColor dataSource=null) : base(dataSource) {
 				Conversors.Add (typeof(CIEXYZ), ToXYZ);
 			}

@@ -58,6 +58,7 @@
     <Compile Include="src\MatchingFunctions\CIE1931XYZ5NmMatchingFunctionZ.cs" />
     <Compile Include="src\ColorSpaces\CIExyY.cs" />
     <Compile Include="tests\CIEXYZTest.cs" />
+    <Compile Include="tests\CIExyYTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -35,7 +35,8 @@ namespace Litipk.ColorSharp
 {
 	namespace ColorSpaces
 	{
-		public delegate T Conversor<out T> (Dictionary<KeyValuePair<Type, Type>, object> strategies=null) where T : AConvertibleColor;
+		// TODO : Refactor to allow static conversors
+		public delegate T ColorConversor<out T> (Dictionary<KeyValuePair<Type, Type>, object> strategies=null) where T : AConvertibleColor;
 
 		public abstract class AConvertibleColor
 		{
@@ -51,8 +52,9 @@ namespace Litipk.ColorSharp
 			// If this "color" comes from another data source, then we keep the original data.
 			protected AConvertibleColor DataSource = null;
 
-			// Conversor delegates
-			protected readonly Dictionary<Type, Conversor<AConvertibleColor>> Conversors = new Dictionary<Type, Conversor<AConvertibleColor>>();
+			// TODO : Make it private static... (and add accessors)
+			//  delegates
+			protected readonly Dictionary<Type, ColorConversor<AConvertibleColor>> Conversors = new Dictionary<Type, ColorConversor<AConvertibleColor>>();
 
 			#endregion
 
@@ -112,7 +114,7 @@ namespace Litipk.ColorSharp
 				int basePathLength, dataSourcePathLength;
 
 				Type t = typeof(T);
-				Type tt = this.GetType ();
+				Type tt = GetType ();
 				Type ist = null; // Intermediate color space type
 
 				if (t == tt) {
