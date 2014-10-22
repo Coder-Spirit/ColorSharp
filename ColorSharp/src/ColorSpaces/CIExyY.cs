@@ -52,6 +52,7 @@ namespace Litipk.ColorSharp
 			#region static properties
 
 			static xyYPoint[] Sharkfin;
+			static xyYPoint[] SortedSharkfin;
 
 			#endregion
 
@@ -72,6 +73,10 @@ namespace Litipk.ColorSharp
 					var XYZ = mfX [i] + mfY [i] + mfZ [i];
 					Sharkfin [i] = new xyYPoint { x = mfX [i] / XYZ, y = mfY [i] / XYZ };
 				}
+
+				// Used to speedup the convex hull algorithm
+				SortedSharkfin = (xyYPoint[])Sharkfin.Clone();
+				Array.Sort (SortedSharkfin, new xyYPointComparer());
 			}
 
 			public CIExyY() {
@@ -107,10 +112,11 @@ namespace Litipk.ColorSharp
 			public override bool IsInsideColorSpace()
 			{
 				// Fast checks
-				if (x >= 0.75 || y >= 0.85 || y > 1.0 - x || y < (x-0.25)*0.5) return false;
+				if (y > 1.0 - x || y < (x-0.25)*0.5 || y < 0.4 - x*4 || y >= 0.85) return false;
 
-				List<xyYPoint> points = new List<xyYPoint> (Sharkfin);
-				points.Add (new xyYPoint{x=x, y=y});
+				xyYPoint[] points = new xyYPoint[SortedSharkfin.Length + 1];
+				Array.Copy (SortedSharkfin, 0, points, 0, SortedSharkfin.Length);
+				points[SortedSharkfin.Length] = new xyYPoint{x=x, y=y};
 
 				xyYPoint[] convexHull = findConvexHull (points);
 
@@ -125,12 +131,12 @@ namespace Litipk.ColorSharp
 			/**
 			 * Monotone Chain algorithm
 			 */
-			static xyYPoint[] findConvexHull(List<xyYPoint> points)
+			static xyYPoint[] findConvexHull(xyYPoint[] points)
 			{
-				int n = points.Count, k = 0;
+				int n = points.Length, k = 0;
 				xyYPoint[] tmpHull = new xyYPoint[2 * n];
 
-				points.Sort(new xyYPointComparer());
+				Array.Sort (points, new xyYPointComparer ());
 
 				// Build lower hull
 				for (int i = 0; i < n; i++) {
