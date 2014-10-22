@@ -11,7 +11,7 @@
     <SignAssembly>true</SignAssembly>
     <DelaySign>false</DelaySign>
     <AssemblyOriginatorKeyFile>colorsharp.snk</AssemblyOriginatorKeyFile>
-    <ReleaseVersion>0.3.5</ReleaseVersion>
+    <ReleaseVersion>0.3.6</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

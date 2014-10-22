@@ -106,18 +106,26 @@ namespace Litipk.ColorSharp
 
 			public override bool IsInsideColorSpace()
 			{
-				List<xyYPoint> convexHull = new List<xyYPoint> (Sharkfin);
-				convexHull.Add (new xyYPoint{x=x, y=y});
+				// Fast checks
+				if (x >= 0.75 || y >= 0.85 || y > 1.0 - x || y < (x-0.25)*0.5) return false;
 
-				convexHull = findConvexHull (convexHull);
+				List<xyYPoint> points = new List<xyYPoint> (Sharkfin);
+				points.Add (new xyYPoint{x=x, y=y});
 
-				return (!convexHull.Contains (new xyYPoint{x=x, y=y}));
+				xyYPoint[] convexHull = findConvexHull (points);
+
+				for (int i = 0; i < convexHull.Length; i++) {
+					if (convexHull [i].x == x && convexHull [i].y == y)
+						return false;
+				}
+
+				return true;
 			}
 
 			/**
 			 * Monotone Chain algorithm
 			 */
-			static List<xyYPoint> findConvexHull(List<xyYPoint> points)
+			static xyYPoint[] findConvexHull(List<xyYPoint> points)
 			{
 				int n = points.Count, k = 0;
 				xyYPoint[] tmpHull = new xyYPoint[2 * n];
@@ -140,14 +148,7 @@ namespace Litipk.ColorSharp
 
 				tmpHull [k - 1].x = -1000.0; // remove repetition
 
-				List<xyYPoint> finalHull = new List<xyYPoint> (n);
-				for (int i = 0; i < 2 * n; i++) {
-					if (tmpHull [i].x != -1000.0 && !finalHull.Contains (tmpHull [i])) {
-						finalHull.Add (tmpHull [i]);
-					}
-				}
-
-				return finalHull;
+				return tmpHull;
 			}
 
 			static double cross(xyYPoint O, xyYPoint A, xyYPoint B) {
