@@ -11,7 +11,7 @@
     <SignAssembly>true</SignAssembly>
     <DelaySign>false</DelaySign>
     <AssemblyOriginatorKeyFile>colorsharp.snk</AssemblyOriginatorKeyFile>
-    <ReleaseVersion>0.3.4</ReleaseVersion>
+    <ReleaseVersion>0.3.5</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -51,7 +51,6 @@
     <Compile Include="src\ColorSpaces\AConvertibleColor.cs" />
     <Compile Include="src\ColorSpaces\CIEXYZ.cs" />
     <Compile Include="src\ColorSpaces\SRGB.cs" />
-    <Compile Include="src\InternalUtils\KayValuePairComparer.cs" />
     <Compile Include="src\InternalUtils\IRealFunctionWithFiniteSupport.cs" />
     <Compile Include="src\MatchingFunctions\CIE1931XYZ5NmMatchingFunctionY.cs" />
     <Compile Include="src\MatchingFunctions\CIE1931XYZ5NmMatchingFunctionX.cs" />
@@ -59,6 +58,8 @@
     <Compile Include="src\ColorSpaces\CIExyY.cs" />
     <Compile Include="tests\CIEXYZTest.cs" />
     <Compile Include="tests\CIExyYTest.cs" />
+    <Compile Include="src\InternalUtils\Comparers.cs" />
+    <Compile Include="src\InternalUtils\Structs.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

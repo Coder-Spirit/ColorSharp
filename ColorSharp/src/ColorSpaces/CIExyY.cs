@@ -30,6 +30,7 @@
 using System;
 using System.Collections.Generic;
 using Litipk.ColorSharp.MatchingFunctions;
+using Litipk.ColorSharp.InternalUtils;
 
 
 namespace Litipk.ColorSharp
@@ -50,8 +51,7 @@ namespace Litipk.ColorSharp
 
 			#region static properties
 
-			static double[] SharkfinX;
-			static double[] SharkfinY;
+			static xyYPoint[] Sharkfin;
 
 			#endregion
 
@@ -66,14 +66,11 @@ namespace Litipk.ColorSharp
 
 				var n = mfX.Length;
 
-				SharkfinX = new double[n];
-				SharkfinY = new double[n];
+				Sharkfin = new xyYPoint[n];
 
 				for (int i = 0; i < n; i++) {
 					var XYZ = mfX [i] + mfY [i] + mfZ [i];
-
-					SharkfinX [i] = mfX [i] / XYZ;
-					SharkfinY [i] = mfY [i] / XYZ;
+					Sharkfin [i] = new xyYPoint { x = mfX [i] / XYZ, y = mfY [i] / XYZ };
 				}
 			}
 
@@ -109,19 +106,52 @@ namespace Litipk.ColorSharp
 
 			public override bool IsInsideColorSpace()
 			{
-				var n = SharkfinX.Length;
+				List<xyYPoint> convexHull = new List<xyYPoint> (Sharkfin);
+				convexHull.Add (new xyYPoint{x=x, y=y});
 
-				bool isInside = false;
+				convexHull = findConvexHull (convexHull);
 
-				// Raytracing algorithm
-				for (int i = 0, j = n - 1; i < n; j = i++) {
-					if (((SharkfinY [i] > y) != (SharkfinY [j] > y)) &&
-						(x < (SharkfinX [j] - SharkfinX [i]) * (y - SharkfinY [i]) / (SharkfinY [j] - SharkfinY [i]) + SharkfinX [i])) {
-						isInside = !isInside;
+				return (!convexHull.Contains (new xyYPoint{x=x, y=y}));
+			}
+
+			/**
+			 * Monotone Chain algorithm
+			 */
+			static List<xyYPoint> findConvexHull(List<xyYPoint> points)
+			{
+				int n = points.Count, k = 0;
+				xyYPoint[] tmpHull = new xyYPoint[2 * n];
+
+				points.Sort(new xyYPointComparer());
+
+				// Build lower hull
+				for (int i = 0; i < n; i++) {
+					while (k >= 2 && cross(tmpHull[k - 2], tmpHull[k - 1], points[i]) <= 0)
+						k--;
+					tmpHull[k++] = points[i];
+				}
+
+				// Build upper hull
+				for (int i = n - 2, t = k + 1; i >= 0; i--) {
+					while (k >= t && cross(tmpHull[k - 2], tmpHull[k - 1], points[i]) <= 0)
+						k--;
+					tmpHull[k++] = points[i];
+				}
+
+				tmpHull [k - 1].x = -1000.0; // remove repetition
+
+				List<xyYPoint> finalHull = new List<xyYPoint> (n);
+				for (int i = 0; i < 2 * n; i++) {
+					if (tmpHull [i].x != -1000.0 && !finalHull.Contains (tmpHull [i])) {
+						finalHull.Add (tmpHull [i]);
 					}
 				}
 
-				return isInside;
+				return finalHull;
+			}
+
+			static double cross(xyYPoint O, xyYPoint A, xyYPoint B) {
+				return (A.x - O.x) * (B.y - O.y) - (A.y - O.y) * (B.x - O.x);
 			}
 
 			public override bool Equals(Object obj)

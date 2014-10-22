@@ -27,30 +27,31 @@
 */
 
 
-using System.Reflection;
-using System.Runtime.CompilerServices;
+using System;
+using System.Collections.Generic;
 
-// Information about this assembly is defined by the following attributes.
-// Change them to the values specific to your project.
 
-[assembly: AssemblyTitle ("ColorSharp")]
-[assembly: AssemblyDescription ("A .Net/Mono library to handle color spaces (and light spectrums!)")]
-[assembly: AssemblyConfiguration ("")]
-[assembly: AssemblyCompany ("Litipk")]
-[assembly: AssemblyProduct ("ColorSharp")]
-[assembly: AssemblyCopyright ("Andrés Correa Casablanca")]
-[assembly: AssemblyTrademark ("Litipk")]
-[assembly: AssemblyCulture ("")]
+namespace Litipk.ColorSharp
+{
+	namespace InternalUtils
+	{
+		/**
+		 * Internal Class 
+		 */
+		class KeyValuePairComparer : IComparer<KeyValuePair<double, double>> {
+			public int Compare(KeyValuePair<double, double> a, KeyValuePair<double, double> b)
+			{
+				return Math.Abs (a.Key - b.Key) <= double.Epsilon ? 0 : a.Key.CompareTo (b.Key);
+			}
+		}
 
-// The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".
-// The form "{Major}.{Minor}.*" will automatically update the build and revision,
-// and "{Major}.{Minor}.{Build}.*" will update just the revision.
-
-[assembly: AssemblyVersion ("0.3.5.*")]
-
-// The following attributes are used to specify the signing key for the assembly,
-// if desired. See the Mono documentation for more information about signing.
-
-//[assembly: AssemblyDelaySign(false)]
-//[assembly: AssemblyKeyFile("")]
-
+		class xyYPointComparer : IComparer<xyYPoint> {
+			public int Compare(xyYPoint a, xyYPoint b)
+			{
+				return (a.x == b.x) ? 
+					((a.y > b.y) ? 1 : ((a.y < b.y) ? -1 : 0)) :
+					((a.x > b.x) ? 1 : -1);
+			}
+		}
+	}
+}

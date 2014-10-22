@@ -49,7 +49,7 @@ namespace Litipk.ColorSharp
 			[Test]
 			public void CheckIsInsideColorSpace()
 			{
-				//Assert.IsFalse (new CIExyY (0.05, 0.25, 100.0).IsInsideColorSpace ()); // Problematic Case
+				Assert.IsFalse (new CIExyY (0.05, 0.25, 100.0).IsInsideColorSpace ());
 				Assert.IsFalse (new CIExyY (0.25, 0.75, 100.0).IsInsideColorSpace ());
 				Assert.IsFalse (new CIExyY (0.30, 0.05, 100.0).IsInsideColorSpace ());
 				Assert.IsFalse (new CIExyY (0.40, 0.10, 100.0).IsInsideColorSpace ());
@@ -59,9 +59,9 @@ namespace Litipk.ColorSharp
 
 				Assert.IsTrue (new CIExyY (0.05, 0.30, 100.0).IsInsideColorSpace ());
 				Assert.IsTrue (new CIExyY (0.10, 0.65, 100.0).IsInsideColorSpace ());
-				//Assert.IsTrue (new CIExyY (0.20, 0.10, 100.0).IsInsideColorSpace ());  // Problematic Case
-				//Assert.IsTrue (new CIExyY (0.65, 0.25, 100.0).IsInsideColorSpace ()); // Problematic Case
-				//Assert.IsTrue (new CIExyY (0.70, 0.25, 100.0).IsInsideColorSpace ()); // Problematic Case
+				Assert.IsTrue (new CIExyY (0.20, 0.10, 100.0).IsInsideColorSpace ());
+				Assert.IsTrue (new CIExyY (0.65, 0.25, 100.0).IsInsideColorSpace ());
+				Assert.IsTrue (new CIExyY (0.70, 0.25, 100.0).IsInsideColorSpace ());
 			}
 		}
 	}
