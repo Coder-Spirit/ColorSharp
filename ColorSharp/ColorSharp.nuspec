@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/Litipk/ColorSharp</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Added Matching CIE 1931 XYZ matching functions</releaseNotes>
+    <releaseNotes>Added GetClosestSRGPoint method to CIExyY class</releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>Light Color Colour CIEXYZ CIExyY sRGB</tags>
   </metadata>
