@@ -11,7 +11,7 @@
     <SignAssembly>true</SignAssembly>
     <DelaySign>false</DelaySign>
     <AssemblyOriginatorKeyFile>colorsharp.snk</AssemblyOriginatorKeyFile>
-    <ReleaseVersion>0.4.0</ReleaseVersion>
+    <ReleaseVersion>0.4.1</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -60,6 +60,7 @@
     <Compile Include="tests\CIExyYTest.cs" />
     <Compile Include="src\InternalUtils\Comparers.cs" />
     <Compile Include="src\InternalUtils\Structs.cs" />
+    <Compile Include="src\ColorSpaces\ColorConversionStrategy.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

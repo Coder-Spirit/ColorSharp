@@ -81,30 +81,15 @@ namespace Litipk.ColorSharp
 
 			#region conversors
 
-			public CIEXYZ ToCIEXYZ (Dictionary<KeyValuePair<Type, Type>, object> strategies=null)
+			public CIEXYZ ToCIEXYZ (ConversionStrategy strategy=ConversionStrategy.Default)
 			{
-				AMatchingFunction[] MFs;
+				// TODO : Check ConversionStrategy
 
-				var strategyKey = new KeyValuePair<Type, Type> (
-					typeof(ALightSpectrum), typeof(CIEXYZ)
-				);
-
-				if (strategies == null || !strategies.ContainsKey (strategyKey) || strategies [strategyKey] == null) {
-					// Default behavior
-					MFs = new AMatchingFunction [] {
-						CIE1931XYZ5NmMatchingFunctionX.Instance,
-						CIE1931XYZ5NmMatchingFunctionY.Instance,
-						CIE1931XYZ5NmMatchingFunctionZ.Instance
-					};
-				} else {
-					MFs = (AMatchingFunction[])strategies [strategyKey];
-
-					if (MFs == null || MFs.Length != 3) {
-						throw new ArgumentException (
-							"Unable top find the matching functions"
-						);
-					}
-				}
+				AMatchingFunction[] MFs = {
+					CIE1931XYZ5NmMatchingFunctionX.Instance,
+					CIE1931XYZ5NmMatchingFunctionY.Instance,
+					CIE1931XYZ5NmMatchingFunctionZ.Instance
+				};
 
 				return new CIEXYZ (
 					MFs [0].DoConvolution (this), MFs [1].DoConvolution (this), MFs [2].DoConvolution (this), DataSource ?? this

@@ -75,7 +75,7 @@ namespace Litipk.ColorSharp
 
 			#region conversors
 
-			public CIExyY ToxyY (Dictionary<KeyValuePair<Type, Type>, object> strategies=null)
+			public CIExyY ToxyY (ConversionStrategy strategy=ConversionStrategy.Default)
 			{
 				double XYZ = X + Y + Z;
 				return new CIExyY (X / XYZ, Y / XYZ, Y, DataSource ?? this);
@@ -84,7 +84,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * Converts the CIE 1931 XYZ sample to a HP's & Microsoft's 1996 sRGB sample
 			 */
-			public SRGB ToSRGB (Dictionary<KeyValuePair<Type, Type>, object> strategies=null)
+			public SRGB ToSRGB (ConversionStrategy strategy=ConversionStrategy.Default)
 			{
 				double tx = X / 100.0;
 				double ty = Y / 100.0;
@@ -100,9 +100,22 @@ namespace Litipk.ColorSharp
 				g = g > 0.0031308 ? 1.055 * Math.Pow(g, 1 / 2.4) - 0.055 : 12.92 * g;
 				b = b > 0.0031308 ? 1.055 * Math.Pow(b, 1 / 2.4) - 0.055 : 12.92 * b;
 
+				if ((strategy & ConversionStrategy.ForceWithStreching) != 0) {
+					double minChannelValue = Math.Min (r, Math.Min (g, b));
+
+					if (minChannelValue < 0.0) {
+						r -= minChannelValue;
+						g -= minChannelValue;
+						b -= minChannelValue;
+					}
+				} else if ((strategy & ConversionStrategy.ForceWithTruncate) != 0) {
+					r = Math.Max (0.0, r);
+					g = Math.Max (0.0, g);
+					b = Math.Max (0.0, b);
+				}
+
 				double maxChannelValue = Math.Max (r, Math.Max (g, b));
 
-				// Another correction
 				if (maxChannelValue > 1.0) {
 					r = r / maxChannelValue;
 					g = g / maxChannelValue;

@@ -104,7 +104,7 @@ namespace Litipk.ColorSharp
 
 			#region conversors
 
-			public CIEXYZ ToXYZ (Dictionary<KeyValuePair<Type, Type>, object> strategies=null)
+			public CIEXYZ ToXYZ (ConversionStrategy strategy=ConversionStrategy.Default)
 			{
 				return new CIEXYZ (x*Y/y, Y, Y*(1.0 - x - y)/y, DataSource ?? this);
 			}
@@ -188,84 +188,6 @@ namespace Litipk.ColorSharp
 				hash = hash * 31 + Y.GetHashCode ();
 
 				return hash;
-			}
-
-			#endregion
-
-
-			#region exclusive methods
-
-			/**
-			 * Preconditions:
-			 *   - It's a valid CIExyY value.
-			 *   - It's not in the SRGB space.
-			 */
-			public CIExyY GetClosestSRGBPoint()
-			{
-				xyYPoint closerPoint = RsRGB;
-				double closerDistance = Math.Pow (x - RsRGB.x, 2.0) + Math.Pow (y - RsRGB.y, 2.0);
-
-				var tmpDistance = Math.Pow (x - GsRGB.x, 2.0) + Math.Pow (y - GsRGB.y, 2.0);
-				if (tmpDistance < closerDistance) {
-					closerPoint = GsRGB;
-					closerDistance = tmpDistance;
-				}
-
-				tmpDistance = Math.Pow (x - BsRGB.x, 2.0) + Math.Pow (y - BsRGB.y, 2.0);
-				if (tmpDistance < closerDistance) {
-					closerPoint = BsRGB;
-					closerDistance = tmpDistance;
-				}
-
-				xyYPoint cPoint = new xyYPoint { x = x, y = y };
-
-				xyYPoint tmpPoint = PointProjection (RsRGB, GsRGB, cPoint);
-				if (!tmpPoint.Equals(nullP)) {
-					tmpDistance = Math.Pow (x - tmpPoint.x, 2) + Math.Pow (y - tmpPoint.y, 2);
-					if (tmpDistance < closerDistance) {
-						closerPoint = tmpPoint;
-						closerDistance = tmpDistance;
-					}
-				}
-
-				tmpPoint = PointProjection (GsRGB, BsRGB, cPoint);
-				if (!tmpPoint.Equals(nullP)) {
-					tmpDistance = Math.Pow (x - tmpPoint.x, 2) + Math.Pow (y - tmpPoint.y, 2);
-					if (tmpDistance < closerDistance) {
-						closerPoint = tmpPoint;
-						closerDistance = tmpDistance;
-					}
-				}
-
-				tmpPoint = PointProjection (BsRGB, RsRGB, cPoint);
-				if (!tmpPoint.Equals(nullP)) {
-					tmpDistance = Math.Pow (x - tmpPoint.x, 2) + Math.Pow (y - tmpPoint.y, 2);
-					if (tmpDistance < closerDistance) {
-						closerPoint = tmpPoint;
-					}
-				}
-
-				return new CIExyY (closerPoint.x, closerPoint.y, Y);
-			}
-
-			xyYPoint PointProjection(xyYPoint pt1, xyYPoint pt2, xyYPoint pt)
-			{
-				var U = (
-					((pt.y - pt1.y) * (pt2.y - pt1.y)) + ((pt.x - pt1.x) * (pt2.x - pt1.x)) /
-					(Math.Pow(pt2.y - pt1.y, 2) + Math.Pow(pt2.x - pt1.x, 2))
-				);
-
-				var r = new xyYPoint {
-					x = pt1.x + (U * (pt2.x - pt1.x)),
-					y = pt1.y + (U * (pt2.y - pt1.y))
-				};
-
-				var isValid = (
-					r.y >= Math.Min(pt1.y, pt2.y) && r.y <= Math.Max(pt1.y, pt2.y) &&
-					r.x >= Math.Min(pt1.x, pt2.x) && r.x <= Math.Max(pt1.x, pt2.x)
-				);
-
-				return isValid ? r : nullP;
 			}
 
 			#endregion

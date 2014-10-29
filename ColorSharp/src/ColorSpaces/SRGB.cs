@@ -72,7 +72,7 @@ namespace Litipk.ColorSharp
 			/**
 		 * Converts the HP's & Microsoft's 1996 sRGB sample to a CIE 1931 XYZ sample
 		 */
-			public CIEXYZ ToCIEXYZ (Dictionary<KeyValuePair<Type, Type>, object> strategies=null)
+			public CIEXYZ ToCIEXYZ (ConversionStrategy strategy=ConversionStrategy.Default)
 			{
 				// Linear transformation
 				double X = R * 0.412424 + G * 0.357579 + B * 0.180464;

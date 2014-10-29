@@ -63,27 +63,6 @@ namespace Litipk.ColorSharp
 				Assert.IsTrue (new CIExyY (0.65, 0.25, 100.0).IsInsideColorSpace ());
 				Assert.IsTrue (new CIExyY (0.70, 0.25, 100.0).IsInsideColorSpace ());
 			}
-
-			[Test]
-			public void CheckGetClosestSRGBPoint()
-			{
-				CIExyY red = new CIExyY (0.640074499456775, 0.329970510631693, 100.0);
-				CIExyY green = new CIExyY (0.3, 0.6, 100.0);
-				CIExyY blue = new CIExyY (0.150016622340426, 0.0600066489361702, 100.0);
-
-				CIExyY closestR = new CIExyY (0.7, 0.3, 100.0).GetClosestSRGBPoint ();
-				CIExyY closestG = new CIExyY (0.2, 0.7, 100.0).GetClosestSRGBPoint ();
-				CIExyY closestB = new CIExyY (0.1, 0.05, 100.0).GetClosestSRGBPoint ();
-
-				Assert.AreEqual (red.x, closestR.x, 0.001);
-				Assert.AreEqual (red.y, closestR.y, 0.001);
-
-				Assert.AreEqual (green.x, closestG.x, 0.001);
-				Assert.AreEqual (green.y, closestG.y, 0.001);
-
-				Assert.AreEqual (blue.x, closestB.x, 0.001);
-				Assert.AreEqual (blue.y, closestB.y, 0.001);
-			}
 		}
 	}
 }

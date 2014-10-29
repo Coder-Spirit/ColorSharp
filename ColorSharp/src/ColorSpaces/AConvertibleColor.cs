@@ -36,7 +36,7 @@ namespace Litipk.ColorSharp
 	namespace ColorSpaces
 	{
 		// TODO : Refactor to allow static conversors
-		public delegate T ColorConversor<out T> (Dictionary<KeyValuePair<Type, Type>, object> strategies=null) where T : AConvertibleColor;
+		public delegate T ColorConversor<out T> (ConversionStrategy strategy=ConversionStrategy.Default) where T : AConvertibleColor;
 
 		public abstract class AConvertibleColor
 		{
