@@ -100,7 +100,7 @@ namespace Litipk.ColorSharp
 				g = g > 0.0031308 ? 1.055 * Math.Pow(g, 1 / 2.4) - 0.055 : 12.92 * g;
 				b = b > 0.0031308 ? 1.055 * Math.Pow(b, 1 / 2.4) - 0.055 : 12.92 * b;
 
-				if ((strategy & ConversionStrategy.ForceWithStreching) != 0) {
+				if ((strategy & ConversionStrategy.ForceStretching) != 0) {
 					double minChannelValue = Math.Min (r, Math.Min (g, b));
 
 					if (minChannelValue < 0.0) {
@@ -108,7 +108,7 @@ namespace Litipk.ColorSharp
 						g -= minChannelValue;
 						b -= minChannelValue;
 					}
-				} else if ((strategy & ConversionStrategy.ForceWithTruncate) != 0) {
+				} else if ((strategy & ConversionStrategy.ForceTruncating) != 0) {
 					r = Math.Max (0.0, r);
 					g = Math.Max (0.0, g);
 					b = Math.Max (0.0, b);

@@ -74,6 +74,19 @@ namespace Litipk.ColorSharp
 				return RawAmplitudes[RawAmplitudes.Count-1].Key;
 			}
 
+			public override double GetMaxValueOnSupport ()
+			{
+				double max = 0;
+
+				foreach (KeyValuePair<double, double> element in RawAmplitudes) {
+					if (element.Value > max) {
+						max = element.Value;
+					}
+				}
+
+				return max;
+			}
+
 			public override int GetNumberOfDataPoints ()
 			{
 				return RawAmplitudes.Count;

@@ -41,10 +41,10 @@ namespace Litipk.ColorSharp
 			WaveLength5NmStep = 0,
 			WaveLength1NmStep = 1,
 
-			NoForce            = 0,
-			ForceWithTruncate  = 2,
-			ForceWithStreching = 4,
-			Force              = ForceWithTruncate | ForceWithStreching,
+			NoForce          = 0,
+			ForceTruncating  = 2,
+			ForceStretching  = 4,
+			Force            = ForceTruncating | ForceStretching,
 
 			Default = WaveLength5NmStep | NoForce
 		}

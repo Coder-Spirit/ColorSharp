@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/Litipk/ColorSharp</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Added ColorSpaces.ConversionStrategy class</releaseNotes>
+    <releaseNotes>More clean API</releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>Light Color Colour CIEXYZ CIExyY sRGB</tags>
   </metadata>

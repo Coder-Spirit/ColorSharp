@@ -64,6 +64,9 @@ namespace Litipk.ColorSharp
 			public abstract double GetSupportMinValue ();
 			public abstract double GetSupportMaxValue ();
 
+			// 
+			public abstract double GetMaxValueOnSupport ();
+
 			// We need to know how many data points we have to make computations using all the information we have.
 			// If the concrete implementation is "analytical", then must return -1.
 			public abstract int GetNumberOfDataPoints();

@@ -105,6 +105,19 @@ namespace Litipk.ColorSharp
 				return maxWaveLength;
 			}
 
+			public override double GetMaxValueOnSupport ()
+			{
+				double max = 0;
+
+				for (int i = 0; i < amplitudes.Length; i++) {
+					if (amplitudes [i] > max) {
+						max = amplitudes [i];
+					}
+				}
+
+				return max;
+			}
+
 			public override int GetNumberOfDataPoints()
 			{
 				return amplitudes.Length;
