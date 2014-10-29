@@ -109,7 +109,7 @@ namespace Litipk.ColorSharp
 				return pathLength;
 			}
 
-			public T ConvertTo<T> (List<Type> visited = null) where T : AConvertibleColor
+			public T ConvertTo<T> (List<Type> visited = null, ConversionStrategy strategy=ConversionStrategy.Default) where T : AConvertibleColor
 			{
 				int basePathLength, dataSourcePathLength;
 
@@ -173,15 +173,15 @@ namespace Litipk.ColorSharp
 				}
 
 				if (DataSource != null && dataSourcePathLength <= basePathLength + 1) {
-					return DataSource.ConvertTo<T> ();
+					return DataSource.ConvertTo<T> (null, strategy);
 				}
 
 				if (basePathLength == 1) {
-					return (T)Conversors [t] ();
+					return (T)Conversors [t] (strategy);
 				}
 
 				visited.Add (ist);
-				return Conversors [ist] ().ConvertTo<T>(visited);
+				return Conversors [ist] ().ConvertTo<T>(visited, strategy);
 			}
 
 			#endregion
