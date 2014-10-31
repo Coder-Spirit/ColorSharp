@@ -7,10 +7,13 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		Release_x86_64|Any CPU = Release_x86_64|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{960524F3-F375-4CDE-A82A-609CC32048E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{960524F3-F375-4CDE-A82A-609CC32048E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{960524F3-F375-4CDE-A82A-609CC32048E4}.Release_x86_64|Any CPU.ActiveCfg = Release_x86_64|Any CPU
+		{960524F3-F375-4CDE-A82A-609CC32048E4}.Release_x86_64|Any CPU.Build.0 = Release_x86_64|Any CPU
 		{960524F3-F375-4CDE-A82A-609CC32048E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{960524F3-F375-4CDE-A82A-609CC32048E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
@@ -20,6 +23,9 @@ Global
 		$0.DotNetNamingPolicy = $1
 		$1.DirectoryNamespaceAssociation = None
 		$1.ResourceNamePolicy = FileFormatDefault
-		version = 0.5.1
+		$0.VersionControlPolicy = $2
+		$2.inheritsSet = Mono
+		description = A .Net/Mono library to handle color spaces (and light spectrums!)
+		version = 0.5.2
 	EndGlobalSection
 EndGlobal

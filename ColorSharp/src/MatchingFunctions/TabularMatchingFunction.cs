@@ -73,8 +73,15 @@ namespace Litipk.ColorSharp
 
 				index = ~index;
 
-				double alpha = (waveLength-TabularData [index].Key)/(TabularData [index+1].Key-TabularData [index].Key);
-				return (1.0-alpha)*TabularData [index].Value + alpha*TabularData [index+1].Value;
+				double alpha = (
+				   waveLength - TabularData [index].Key
+				) / (
+				   TabularData [index + 1].Key - TabularData [index].Key
+				);
+
+				return TabularData [index].Value + alpha * (
+				    TabularData [index + 1].Value - TabularData [index].Value
+				);
 			}
 
 			public override double GetSupportMinValue ()

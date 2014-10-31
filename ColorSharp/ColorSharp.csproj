@@ -11,7 +11,7 @@
     <SignAssembly>true</SignAssembly>
     <DelaySign>false</DelaySign>
     <AssemblyOriginatorKeyFile>colorsharp.snk</AssemblyOriginatorKeyFile>
-    <ReleaseVersion>0.5.1</ReleaseVersion>
+    <ReleaseVersion>0.5.2</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -28,6 +28,16 @@
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <DocumentationFile>bin\Release\ColorSharp.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release_x86_64|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release_x86_64</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\ColorSharp.xml</DocumentationFile>
+    <PlatformTarget>x64</PlatformTarget>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
@@ -56,11 +66,12 @@
     <Compile Include="src\MatchingFunctions\CIE1931XYZ5NmMatchingFunctionX.cs" />
     <Compile Include="src\MatchingFunctions\CIE1931XYZ5NmMatchingFunctionZ.cs" />
     <Compile Include="src\ColorSpaces\CIExyY.cs" />
-    <Compile Include="tests\CIEXYZTest.cs" />
-    <Compile Include="tests\CIExyYTest.cs" />
     <Compile Include="src\InternalUtils\Comparers.cs" />
     <Compile Include="src\InternalUtils\Structs.cs" />
     <Compile Include="src\ColorSpaces\ColorConversionStrategy.cs" />
+    <Compile Include="tests\ColorSpaces\CIExyYTest.cs" />
+    <Compile Include="tests\ColorSpaces\CIEXYZTest.cs" />
+    <Compile Include="tests\LightSpectrums\RegularLightSpectrumTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -70,11 +81,15 @@
     <Folder Include="src\LightSpectrums\" />
     <Folder Include="src\MatchingFunctions\" />
     <Folder Include="src\InternalUtils\" />
+    <Folder Include="tests\ColorSpaces\" />
+    <Folder Include="tests\MatchingFunctions\" />
+    <Folder Include="tests\LightSpectrums\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="ColorSharp.nuspec" />
     <None Include="build_nuget_pkg.sh" />
     <None Include="colorsharp.pub" />
+    <None Include="tests\MatchingFunctions\EMPTY" />
   </ItemGroup>
 </Project>

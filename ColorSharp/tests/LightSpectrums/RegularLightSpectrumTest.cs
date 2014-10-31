@@ -32,23 +32,21 @@ using NUnit.Framework;
 
 namespace Litipk.ColorSharp
 {
-	namespace ColorSpaces
+	namespace LightSpectrums
 	{
 		[TestFixture]
-		public class CIEXYZTest
+		public class RegularLightSpectrumTest
 		{
 			[Test]
-			public void Conversions()
+			public void TestEvaluateAt()
 			{
-				Assert.AreEqual (
-					new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<CIExyY> (),
-					new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<SRGB> ().ConvertTo<CIExyY> ()
-				);
+				var ls = new RegularLightSpectrum (100.0, 200.0, new [] { 20.0, 50.0, 20.0 });
 
-				Assert.AreEqual (
-					new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<SRGB> (),
-					new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<CIExyY> ().ConvertTo<SRGB> ()
-				);
+				Assert.AreEqual (20.0, ls.EvaluateAt (100.0), 0.00001);
+				Assert.AreEqual (35.0, ls.EvaluateAt (125.0), 0.00001);
+				Assert.AreEqual (50.0, ls.EvaluateAt (150.0), 0.00001);
+				Assert.AreEqual (35.0, ls.EvaluateAt (175.0), 0.00001);
+				Assert.AreEqual (20.0, ls.EvaluateAt (200.0), 0.00001);
 			}
 		}
 	}

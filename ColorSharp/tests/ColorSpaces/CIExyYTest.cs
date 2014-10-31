@@ -38,7 +38,7 @@ namespace Litipk.ColorSharp
 		public class CIExyYTest
 		{
 			[Test]
-			public void Conversions()
+			public void TestConversions()
 			{
 				Assert.AreEqual (
 					new CIExyY (0.5, 0.5, 100.0).ConvertTo<SRGB>(),
@@ -47,7 +47,7 @@ namespace Litipk.ColorSharp
 			}
 
 			[Test]
-			public void CheckIsInsideColorSpace()
+			public void TestIsInsideColorSpace()
 			{
 				Assert.IsFalse (new CIExyY (0.05, 0.25, 100.0).IsInsideColorSpace ());
 				Assert.IsFalse (new CIExyY (0.25, 0.75, 100.0).IsInsideColorSpace ());

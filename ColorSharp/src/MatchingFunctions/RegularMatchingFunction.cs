@@ -64,7 +64,7 @@ namespace Litipk.ColorSharp
 			{
 				NmPerStep     = nmPerStep;
 				MinWaveLength = minWaveLength;
-				MaxWaveLength = minWaveLength + (nmPerStep) * (amplitudes.Length - 1);
+				MaxWaveLength = minWaveLength + nmPerStep * (amplitudes.Length - 1);
 				Amplitudes    = amplitudes;
 			}
 
@@ -80,13 +80,13 @@ namespace Litipk.ColorSharp
 					double floorIndex = Math.Floor (dblIndex);
 					uint uIndex = (uint)floorIndex;
 
-					if (dblIndex - floorIndex < double.Epsilon) {
+					if (dblIndex - floorIndex <= 2*double.Epsilon) {
 						return Amplitudes [uIndex];
 					}
 
-					double alpha = (dblIndex - floorIndex) / NmPerStep;
+					double alpha = (dblIndex - floorIndex);
 
-					return (1.0-alpha)*Amplitudes[uIndex] + alpha*Amplitudes[uIndex+1];
+					return Amplitudes [uIndex] + alpha * (Amplitudes [uIndex + 1] - Amplitudes [uIndex]);
 				}
 
 				// TODO: add extrapolation

@@ -41,12 +41,12 @@ namespace Litipk.ColorSharp
 			#region private properties
 
 			// Needed values to interpret the data points
-			readonly double nmPerStep;
-			readonly double minWaveLength;
-			readonly double maxWaveLength;
+			readonly double NmPerStep;
+			readonly double MinWaveLength;
+			readonly double MaxWaveLength;
 
 			// Data points
-			readonly double[] amplitudes;
+			readonly double[] Amplitudes;
 			#endregion
 
 
@@ -55,19 +55,19 @@ namespace Litipk.ColorSharp
 			// Constructor
 			public RegularLightSpectrum (double minWaveLength, double maxWaveLength, double[] amplitudes, AConvertibleColor dataSource=null) : base(dataSource)
 			{
-				this.minWaveLength = minWaveLength;
-				this.maxWaveLength = maxWaveLength;
-				nmPerStep = (maxWaveLength - minWaveLength) / amplitudes.Length;
-				this.amplitudes = amplitudes;
+				MinWaveLength = minWaveLength;
+				MaxWaveLength = maxWaveLength;
+				NmPerStep = (maxWaveLength - minWaveLength) / (amplitudes.Length - 1);
+				Amplitudes = amplitudes;
 			}
 
 			// Constructor
 			public RegularLightSpectrum (double minWaveLength, double[] amplitudes, double nmPerStep, AConvertibleColor dataSource=null) : base(dataSource)
 			{
-				this.nmPerStep = nmPerStep;
-				this.minWaveLength = minWaveLength;
-				maxWaveLength = minWaveLength + (nmPerStep) * (amplitudes.Length - 1);
-				this.amplitudes = amplitudes;
+				NmPerStep = nmPerStep;
+				MinWaveLength = minWaveLength;
+				MaxWaveLength = minWaveLength + nmPerStep * (amplitudes.Length - 1);
+				Amplitudes = amplitudes;
 			}
 
 			#endregion
@@ -75,20 +75,20 @@ namespace Litipk.ColorSharp
 
 			#region inherited methods
 
-			public override double EvaluateAt(double waveLength)
+			public override double EvaluateAt (double waveLength)
 			{
-				if (waveLength >= minWaveLength && waveLength <= maxWaveLength) {
-					double dblIndex = (waveLength - minWaveLength) / nmPerStep;
+				if (waveLength >= MinWaveLength && waveLength <= MaxWaveLength) {
+					double dblIndex = (waveLength - MinWaveLength) / NmPerStep;
 					double floorIndex = Math.Floor (dblIndex);
 					uint uIndex = (uint)floorIndex;
 
 					if (dblIndex - floorIndex <= 2*double.Epsilon) {
-						return amplitudes [uIndex];
+						return Amplitudes [uIndex];
 					}
 
-					double alpha = (dblIndex - floorIndex) / nmPerStep;
+					double alpha = (dblIndex - floorIndex);
 
-					return (1.0-alpha)*amplitudes[uIndex] + alpha*amplitudes[uIndex+1];
+					return Amplitudes [uIndex] + alpha * (Amplitudes [uIndex + 1] - Amplitudes [uIndex]);
 				}
 
 				// TODO: add extrapolation
@@ -97,21 +97,21 @@ namespace Litipk.ColorSharp
 
 			public override double GetSupportMinValue()
 			{
-				return minWaveLength;
+				return MinWaveLength;
 			}
 
 			public override double GetSupportMaxValue()
 			{
-				return maxWaveLength;
+				return MaxWaveLength;
 			}
 
 			public override double GetMaxValueOnSupport ()
 			{
 				double max = 0;
 
-				for (int i = 0; i < amplitudes.Length; i++) {
-					if (amplitudes [i] > max) {
-						max = amplitudes [i];
+				for (int i = 0; i < Amplitudes.Length; i++) {
+					if (Amplitudes [i] > max) {
+						max = Amplitudes [i];
 					}
 				}
 
@@ -120,24 +120,24 @@ namespace Litipk.ColorSharp
 
 			public override int GetNumberOfDataPoints()
 			{
-				return amplitudes.Length;
+				return Amplitudes.Length;
 			}
 
 			public override double GetNextAmplitudeSample (double waveLength)
 			{
-				if (waveLength < minWaveLength && waveLength >= maxWaveLength) {
+				if (waveLength < MinWaveLength && waveLength >= MaxWaveLength) {
 					throw new ArgumentOutOfRangeException ();
 				}
 
-				return minWaveLength + ((uint)Math.Floor ((waveLength - minWaveLength) / nmPerStep) + 1) * nmPerStep;
+				return MinWaveLength + ((uint)Math.Floor ((waveLength - MinWaveLength) / NmPerStep) + 1) * NmPerStep;
 			}
 
 			public override bool IsInsideColorSpace()
 			{
-				if (minWaveLength <= double.Epsilon)
+				if (MinWaveLength <= double.Epsilon)
 					return false;
 
-				foreach (double amplitude in amplitudes) {
+				foreach (double amplitude in Amplitudes) {
 					if (amplitude < 0.0)
 						return false;
 				}
