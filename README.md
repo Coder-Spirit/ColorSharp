@@ -12,6 +12,7 @@ ColorSharp is available as a [nuget package](https://www.nuget.org/packages/Colo
 ## More Info
 
  * [Documentation](https://github.com/Litipk/ColorSharp/wiki)
+ * [TODO list](https://github.com/Litipk/ColorSharp/blob/master/TODO.md)
  * [Blog](https://colorsharp.wordpress.com/)
 
 ## Inspiration
