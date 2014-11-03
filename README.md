@@ -5,9 +5,14 @@ A .NET/Mono library to handle color spaces (and light spectrums!)
 
 ## Getting Started
 
-ColorSharp is available as a [nuget package](https://www.nuget.org/packages/ColorSharp/) so you can install by searching for "ColorSharp" in the "Manage Nuget Packages" menu, or run the following command in the Package Manager Console:
+ColorSharp is available as a [nuget package](https://www.nuget.org/packages/ColorSharp/) so you can install by searching for "ColorSharp" in the "Manage Nuget Packages" menu, or run the following command in the integrated Monodevelo's Package Manager Console:
 
 `PM> Install-Package ColorSharp`
+
+## More Info
+
+ * [Documentation](https://github.com/Litipk/ColorSharp/wiki)
+ * [Blog](https://colorsharp.wordpress.com/)
 
 ## Inspiration
 
