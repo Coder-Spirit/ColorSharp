@@ -189,6 +189,9 @@ namespace Litipk.ColorSharp
 
 			#region abstract methods
 
+			/**
+			 * <summary>Tells us if the object represents a valid color sample in current color space.</summary>
+			 */
 			public abstract bool IsInsideColorSpace ();
 
 			#endregion

@@ -1,4 +1,4 @@
-﻿/**
+﻿/*
  * The MIT License (MIT)
  * Copyright (c) 2014 Andrés Correa Casablanca
  * 
@@ -21,10 +21,10 @@
  * SOFTWARE.
  */
 
-/**
-* Contributors:
-*  - Andrés Correa Casablanca <castarco@gmail.com , castarco@litipk.com>
-*/
+/*
+ * Contributors:
+ *  - Andrés Correa Casablanca <castarco@gmail.com , castarco@litipk.com>
+ */
 
 
 using System;
@@ -38,32 +38,46 @@ namespace Litipk.ColorSharp
 	namespace ColorSpaces
 	{
 		/**
-		 * CIE 1931 (2º) xyY Color Space.
+		 * <summary>CIE's 1931 (2º) xyY Color Space.</summary>
 		 */
-		public class CIExyY : AConvertibleColor
+		public sealed class CIExyY : AConvertibleColor
 		{
-			#region readonly properties
 
-			public readonly double x, y, Y;
-
-			static readonly xyYPoint nullP = new xyYPoint { x = -1.0, y = -1.0 };
-			static readonly xyYPoint RsRGB = new xyYPoint { x = 0.640074499456775, y = 0.329970510631693 };
-			static readonly xyYPoint GsRGB = new xyYPoint { x = 0.3, y = 0.6 };
-			static readonly xyYPoint BsRGB = new xyYPoint { x = 0.150016622340426, y = 0.0600066489361702 };
-
-			#endregion
-
+			#region properties
 
 			#region static properties
-
+			// Light wavelengths coordinates in the CIE's 1931 xyY color sapce.
 			static xyYPoint[] Sharkfin;
+
+			// Sharkfin transformation with performance purposes.
 			static xyYPoint[] SortedSharkfin;
+			#endregion
+
+			#region readonly properties
+			/**
+			 * <value>x component of the CIE's 1931 color space : X/(X+Y+Z) .</value>
+			 */
+			public readonly double x;
+
+			/**
+			 * <value>y component of the CIE's 1931 color space : Y/(X+Y+Z) .</value>
+			 */
+			public readonly double y;
+
+			/**
+			 * <value>Y component of the CIE's 1931 color space. The same Y from CIE's 1931 XYZ color space.</value>
+			 */
+			public readonly double Y;
+			#endregion
 
 			#endregion
 
 
 			#region constructors
 
+			/**
+			 * Static members initialization
+			 */
 			static CIExyY()
 			{
 				var mfX = CIE1931XYZ5NmMatchingFunctionX.Instance.Amplitudes;
@@ -84,19 +98,27 @@ namespace Litipk.ColorSharp
 				Array.Sort (SortedSharkfin, new xyYPointComparer());
 			}
 
+			/**
+			 * <summary>HACK: DONT' USE this constructor.</summary>
+			 */
 			public CIExyY() {
 				Conversors.Add (typeof(CIEXYZ), ToXYZ);
 			}
 
-			protected CIExyY(AConvertibleColor dataSource=null) : base(dataSource) {
-				Conversors.Add (typeof(CIEXYZ), ToXYZ);
-			}
-
-			public CIExyY (double x, double y, double Y, AConvertibleColor dataSource=null) : this(dataSource)
+			/**
+			 * <summary>Creates a new color sample in the CIE's 1931 xyY color space</summary>
+			 * <param name="x">CIE's 1931 xyY x coordinate</param>
+			 * <param name="y">CIE's 1931 xyY y coordinate</param>
+			 * <param name="Y">Lightness parameter</param>
+			 * <param name="dataSource">If you aren't working with ColorSharp internals, don't use this parameter</param>
+			 */
+			public CIExyY (double x, double y, double Y, AConvertibleColor dataSource=null) : base(dataSource)
 			{
 				this.x = x;
 				this.y = y;
 				this.Y = Y;
+
+				Conversors.Add (typeof(CIEXYZ), ToXYZ);
 			}
 
 			#endregion
@@ -114,6 +136,9 @@ namespace Litipk.ColorSharp
 
 			#region inherited methods
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override bool IsInsideColorSpace()
 			{
 				// Fast checks
@@ -134,7 +159,43 @@ namespace Litipk.ColorSharp
 			}
 
 			/**
-			 * Monotone Chain algorithm
+			 *  <inheritdoc />
+			 */
+			public override bool Equals(Object obj)
+			{
+				CIExyY xyYObj = obj as CIExyY; 
+
+				if (xyYObj == null || GetHashCode () != obj.GetHashCode ())
+					return false;
+
+				return (
+					Math.Abs (x - xyYObj.x) <= double.Epsilon &&
+					Math.Abs (y - xyYObj.y) <= double.Epsilon &&
+					Math.Abs (Y - xyYObj.Y) <= double.Epsilon
+				);
+			}
+
+			/**
+			 *  <inheritdoc />
+			 */
+			public override int GetHashCode ()
+			{
+				int hash = 19;
+
+				hash = hash * 31 + x.GetHashCode ();
+				hash = hash * 31 + y.GetHashCode ();
+				hash = hash * 31 + Y.GetHashCode ();
+
+				return hash;
+			}
+
+			#endregion
+
+			#region internal utilities
+
+			/**
+			 * Monotone Chain algorithm. See
+			 * http://en.wikibooks.org/wiki/Algorithm_Implementation/Geometry/Convex_hull/Monotone_chain
 			 */
 			static xyYPoint[] findConvexHull(xyYPoint[] points)
 			{
@@ -162,32 +223,11 @@ namespace Litipk.ColorSharp
 				return tmpHull;
 			}
 
+			/**
+			 * Used inside findConvexHull method.
+			 */
 			static double cross(xyYPoint O, xyYPoint A, xyYPoint B) {
 				return (A.x - O.x) * (B.y - O.y) - (A.y - O.y) * (B.x - O.x);
-			}
-
-			public override bool Equals(Object obj)
-			{
-				CIExyY xyYObj = obj as CIExyY; 
-
-				if (xyYObj == null || GetHashCode () != obj.GetHashCode ())
-					return false;
-
-				return (
-					Math.Abs (x - xyYObj.x) <= double.Epsilon &&
-					Math.Abs (y - xyYObj.y) <= double.Epsilon &&
-					Math.Abs (Y - xyYObj.Y) <= double.Epsilon
-				);
-			}
-			public override int GetHashCode ()
-			{
-				int hash = 19;
-
-				hash = hash * 31 + x.GetHashCode ();
-				hash = hash * 31 + y.GetHashCode ();
-				hash = hash * 31 + Y.GetHashCode ();
-
-				return hash;
 			}
 
 			#endregion
