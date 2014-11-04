@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1EC57B2E-C96F-411B-A238-B8E490634009}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Litipk.ColorSharpTests</RootNamespace>
+    <AssemblyName>ColorSharpTests</AssemblyName>
+    <ReleaseVersion>0.5.2</ReleaseVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="tests\ColorSpaces\CIExyYTest.cs" />
+    <Compile Include="tests\ColorSpaces\CIEXYZTest.cs" />
+    <Compile Include="tests\LightSpectrums\RegularLightSpectrumTest.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="tests\MatchingFunctions\EMPTY" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ColorSharp\ColorSharp.csproj">
+      <Project>{960524F3-F375-4CDE-A82A-609CC32048E4}</Project>
+      <Name>ColorSharp</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

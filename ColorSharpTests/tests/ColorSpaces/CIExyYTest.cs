@@ -28,41 +28,38 @@
 
 
 using NUnit.Framework;
+using Litipk.ColorSharp.ColorSpaces;
 
-
-namespace Litipk.ColorSharp
+namespace Litipk.ColorSharpTests
 {
-	namespace ColorSpaces
+	[TestFixture]
+	public class CIExyYTest
 	{
-		[TestFixture]
-		public class CIExyYTest
+		[Test]
+		public void TestConversions()
 		{
-			[Test]
-			public void TestConversions()
-			{
-				Assert.AreEqual (
-					new CIExyY (0.5, 0.5, 100.0).ConvertTo<SRGB>(),
-					new CIExyY (0.5, 0.5, 100.0).ConvertTo<CIEXYZ>().ConvertTo<SRGB>()
-				);
-			}
+			Assert.AreEqual (
+				new CIExyY (0.5, 0.5, 100.0).ConvertTo<SRGB>(),
+				new CIExyY (0.5, 0.5, 100.0).ConvertTo<CIEXYZ>().ConvertTo<SRGB>()
+			);
+		}
 
-			[Test]
-			public void TestIsInsideColorSpace()
-			{
-				Assert.IsFalse (new CIExyY (0.05, 0.25, 100.0).IsInsideColorSpace ());
-				Assert.IsFalse (new CIExyY (0.25, 0.75, 100.0).IsInsideColorSpace ());
-				Assert.IsFalse (new CIExyY (0.30, 0.05, 100.0).IsInsideColorSpace ());
-				Assert.IsFalse (new CIExyY (0.40, 0.10, 100.0).IsInsideColorSpace ());
-				Assert.IsFalse (new CIExyY (0.50, 0.15, 100.0).IsInsideColorSpace ());
-				Assert.IsFalse (new CIExyY (0.65, 0.20, 100.0).IsInsideColorSpace ());
-				Assert.IsFalse (new CIExyY (0.80, 0.80, 100.0).IsInsideColorSpace ());
+		[Test]
+		public void TestIsInsideColorSpace()
+		{
+			Assert.IsFalse (new CIExyY (0.05, 0.25, 100.0).IsInsideColorSpace ());
+			Assert.IsFalse (new CIExyY (0.25, 0.75, 100.0).IsInsideColorSpace ());
+			Assert.IsFalse (new CIExyY (0.30, 0.05, 100.0).IsInsideColorSpace ());
+			Assert.IsFalse (new CIExyY (0.40, 0.10, 100.0).IsInsideColorSpace ());
+			Assert.IsFalse (new CIExyY (0.50, 0.15, 100.0).IsInsideColorSpace ());
+			Assert.IsFalse (new CIExyY (0.65, 0.20, 100.0).IsInsideColorSpace ());
+			Assert.IsFalse (new CIExyY (0.80, 0.80, 100.0).IsInsideColorSpace ());
 
-				Assert.IsTrue (new CIExyY (0.05, 0.30, 100.0).IsInsideColorSpace ());
-				Assert.IsTrue (new CIExyY (0.10, 0.65, 100.0).IsInsideColorSpace ());
-				Assert.IsTrue (new CIExyY (0.20, 0.10, 100.0).IsInsideColorSpace ());
-				Assert.IsTrue (new CIExyY (0.65, 0.25, 100.0).IsInsideColorSpace ());
-				Assert.IsTrue (new CIExyY (0.70, 0.25, 100.0).IsInsideColorSpace ());
-			}
+			Assert.IsTrue (new CIExyY (0.05, 0.30, 100.0).IsInsideColorSpace ());
+			Assert.IsTrue (new CIExyY (0.10, 0.65, 100.0).IsInsideColorSpace ());
+			Assert.IsTrue (new CIExyY (0.20, 0.10, 100.0).IsInsideColorSpace ());
+			Assert.IsTrue (new CIExyY (0.65, 0.25, 100.0).IsInsideColorSpace ());
+			Assert.IsTrue (new CIExyY (0.70, 0.25, 100.0).IsInsideColorSpace ());
 		}
 	}
 }

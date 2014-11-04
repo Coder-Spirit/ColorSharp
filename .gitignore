@@ -2,10 +2,13 @@ ColorSharp/obj/*
 ColorSharp\obj\*
 ColorSharp/bin/*
 ColorSharp\bin\*
+ColorSharpTests/obj/*
+ColorSharpTests\obj\*
+ColorSharpTests/bin/*
+ColorSharpTests\bin\*
 ColorSharp/colorsharp.snk
 ColorSharp\colorsharp.snk
 packages/*
 packages\*
-ColorSharp.userprefs
 ColorSharp.userprefs
 ColorSharp*.nupkg
