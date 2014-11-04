@@ -38,7 +38,7 @@ namespace Litipk.ColorSharp
 		/**
 	 * HP's & Microsoft's 1996 sRGB Color Space.
 	 */
-		public class SRGB : AConvertibleColor
+		public sealed class SRGB : AConvertibleColor
 		{
 			#region private properties
 
@@ -52,7 +52,7 @@ namespace Litipk.ColorSharp
 			/**
 		 * This constructor "installs" the conversor methods into the instance
 		 */
-			protected SRGB(AConvertibleColor dataSource=null) : base(dataSource) {
+			private SRGB(AConvertibleColor dataSource=null) : base(dataSource) {
 				Conversors.Add (typeof(CIEXYZ), ToCIEXYZ);
 			}
 

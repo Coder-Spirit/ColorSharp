@@ -191,6 +191,7 @@ namespace Litipk.ColorSharp
 
 			#endregion
 
+
 			#region internal utilities
 
 			/**

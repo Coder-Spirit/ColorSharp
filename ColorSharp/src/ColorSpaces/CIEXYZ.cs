@@ -38,7 +38,7 @@ namespace Litipk.ColorSharp
 		/**
 		 * CIE 1931 (2º) XYZ Color Space.
 		 */
-		public class CIEXYZ : AConvertibleColor
+		public sealed class CIEXYZ : AConvertibleColor
 		{
 			#region readonly properties
 
@@ -57,7 +57,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * This constructor "installs" the conversor methods into the instance
 			 */
-			protected CIEXYZ(AConvertibleColor dataSource=null) : base(dataSource) {
+			private CIEXYZ(AConvertibleColor dataSource=null) : base(dataSource) {
 				Conversors.Add (typeof(SRGB), ToSRGB);
 				Conversors.Add (typeof(CIExyY), ToxyY);
 			}
