@@ -11,6 +11,8 @@ ColorSharp's Changelog
  * Removed many build warnings (related with XML documentation)
  * Sealed many classes.
  * Removed unused properties from CIExyY class.
+ * Split project into ColorSharp and ColorSharpTests.
+ * Removed NUnit dependency.
 
 ### Bugfixes
  * Bugfix in sRGB->CIE's 1931 XYZ conversion (the gamma correction was done after the lineal transformation)
