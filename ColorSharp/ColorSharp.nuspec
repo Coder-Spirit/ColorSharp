@@ -10,7 +10,11 @@
     <projectUrl>https://github.com/Litipk/ColorSharp</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Bugfixes in RegularLightSpectrum</releaseNotes>
+    <releaseNotes>
+      - Improved documentation
+      - Minor cleanups
+      - Bugfix in sRGB -> CIE's 1931 XYZ conversion
+    </releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>Light Color Colour CIEXYZ CIExyY sRGB</tags>
   </metadata>
