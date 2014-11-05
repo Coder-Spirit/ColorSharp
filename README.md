@@ -9,7 +9,7 @@ ColorSharp is available as a [nuget package](https://www.nuget.org/packages/Colo
 
 `PM> Install-Package ColorSharp`
 
-## Interesting Links
+## Project Links
 
  * [Documentation](https://github.com/Litipk/ColorSharp/wiki)
  * [TODO list](https://github.com/Litipk/ColorSharp/blob/master/TODO.md)
@@ -22,8 +22,12 @@ This library is inspired by the following projects and information sources.
 
 ### Code Libraries
 
-* [ColorMine](https://github.com/THEjoezack/ColorMine/)
-* [ColorPy](https://github.com/fish2000/ColorPy)
+* .NET/Mono:
+  * [THEjoezack/ColorMine](https://github.com/THEjoezack/ColorMine/)
+  * [tompazourek/Colourful](https://github.com/tompazourek/Colourful)
+* Python:
+  * [Colour Science for Python](http://colour-science.org/index.php): This is an incredible project that has many repositories in Github, not only with Python code, but also with Matlab source code and other resources.
+  * [fish2000/ColorPy](https://github.com/fish2000/ColorPy)
 
 ### Books
 
