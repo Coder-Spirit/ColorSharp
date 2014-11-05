@@ -35,26 +35,12 @@ namespace Litipk.ColorSharp
 {
 	namespace ColorSpaces
 	{
-		// TODO : Refactor to allow static conversors
-		public delegate T ColorConversor<out T> (ConversionStrategy strategy=ConversionStrategy.Default) where T : AConvertibleColor;
-
 		public abstract class AConvertibleColor
 		{
-			#region constants
-
-			const int MAX_ACCEPTABLE_PATH_LENGH = 32;
-
-			#endregion
-
-
 			#region properties
 
 			// If this "color" comes from another data source, then we keep the original data.
 			protected AConvertibleColor DataSource = null;
-
-			// TODO : Make it private static... (and add accessors)
-			//  delegates
-			protected readonly Dictionary<Type, ColorConversor<AConvertibleColor>> Conversors = new Dictionary<Type, ColorConversor<AConvertibleColor>>();
 
 			#endregion
 
@@ -72,116 +58,39 @@ namespace Litipk.ColorSharp
 
 			#region conversion skeleton
 
-			// Tells us the number of needed steps to convert the object to another color space.
-			int ConversionPathLength(Type target, List<Type> visited=null)
+			public T ConvertTo<T> (ConversionStrategy strategy=ConversionStrategy.Default) where T : AConvertibleColor
 			{
-				if (Conversors.ContainsKey (target)) {
-					// TODO: This should depend on the inclusion relations between color spaces
-					return 1;
-				}
-
-				int pathLength = MAX_ACCEPTABLE_PATH_LENGH + 1;
-
-				Type tt = this.GetType ();
-
-				if (visited == null) {
-					visited = new List<Type> { tt };
-				} else {
-					// We make a copy to avoid problems
-					visited = new List<Type> (visited);
-					if (!visited.Contains (tt)) {
-						visited.Add (tt);
-					}
-				}
-
-				foreach (Type k in Conversors.Keys) {
-					if (visited.Contains (k)) {
-						continue;
-					}
-
-					int tmpCpl = 1 + ((AConvertibleColor)Activator.CreateInstance(k)).ConversionPathLength (
-						target, visited
-					);
-
-					pathLength = Math.Min (pathLength, tmpCpl);
-				}
-
-				return pathLength;
-			}
-
-			public T ConvertTo<T> (ConversionStrategy strategy=ConversionStrategy.Default, List<Type> visited = null) where T : AConvertibleColor
-			{
-				int basePathLength, dataSourcePathLength;
-
 				Type t = typeof(T);
 				Type tt = GetType ();
-				Type ist = null; // Intermediate color space type
 
 				if (t == tt) {
 					// Dumb conversion
 					return (T)(AConvertibleColor)this;
 				}
 
-				// We are going to compare the conversion path lengths in order to chose the best option
-				// (with least precission loss).
 				if (DataSource != null) {
 					if (DataSource.GetType () == t) {
-						// Recovering original data
 						return (T)DataSource;
 					}
 
-					dataSourcePathLength = DataSource.ConversionPathLength (t, new List<Type> {tt});
-				} else {
-					dataSourcePathLength = MAX_ACCEPTABLE_PATH_LENGH;
-				}
-
-				if (visited == null) {
-					visited = new List<Type> { tt };
-				} else {
-					// We make a copy to avoid problems
-					visited = new List<Type> (visited);
-					if (!visited.Contains (tt)) {
-						visited.Add (tt);
-					}
-				}
-
-				if (Conversors.ContainsKey (t)) {
-					// We don't use the direct conversor because maybe we can use the dataSource direct conversor
-					basePathLength = 1;
-				} else {
-					basePathLength = MAX_ACCEPTABLE_PATH_LENGH + 1;
-
-					foreach(Type k in Conversors.Keys)
-					{
-						if (visited.Contains (k)) {
-							continue;
-						}
-
-						int tmpCpl = 1 + ((AConvertibleColor)Activator.CreateInstance(k)).ConversionPathLength (
-							t, visited
-						);
-
-						if (tmpCpl < basePathLength) {
-							ist = k;
-							basePathLength = tmpCpl;
-						}
-					}
-				}
-
-				if (dataSourcePathLength > MAX_ACCEPTABLE_PATH_LENGH && basePathLength > MAX_ACCEPTABLE_PATH_LENGH) {
-					throw new InvalidCastException ("Unable to find a conversion path to this color space.");
-				}
-
-				if (DataSource != null && dataSourcePathLength <= basePathLength + 1) {
 					return DataSource.ConvertTo<T> (strategy);
 				}
 
-				if (basePathLength == 1) {
-					return (T)Conversors [t] (strategy);
-				}
+				return InnerConvertTo<T> (strategy);
+			}
 
-				visited.Add (ist);
-				return Conversors [ist] ().ConvertTo<T>(strategy, visited);
+			protected T InnerConvertTo<T> (ConversionStrategy strategy = ConversionStrategy.Default) where T : AConvertibleColor
+			{
+				Type t = typeof(T);
+
+				if (t == typeof(CIEXYZ))
+					return (T)(AConvertibleColor)ToCIEXYZ (strategy);
+				if (t == typeof(CIExyY))
+					return (T)(AConvertibleColor)ToCIExyY(strategy);
+				if (t == typeof(SRGB))
+					return (T)(AConvertibleColor)ToSRGB (strategy);
+
+				throw new NotImplementedException ("This conversion isn't implemented.");
 			}
 
 			#endregion
@@ -193,6 +102,21 @@ namespace Litipk.ColorSharp
 			 * <summary>Tells us if the object represents a valid color sample in current color space.</summary>
 			 */
 			public abstract bool IsInsideColorSpace ();
+
+			/**
+			 * <summary>Converts the color sample to a CIE's 1931 XYZ color sample.</summary>
+			 */
+			public abstract CIEXYZ ToCIEXYZ(ConversionStrategy strategy = ConversionStrategy.Default);
+
+			/**
+			 * <summary>Converts the color sample to a CIE's 1931 xyY color sample.</summary>
+			 */
+			public abstract CIExyY ToCIExyY (ConversionStrategy strategy = ConversionStrategy.Default);
+
+			/**
+			 * <summary>Converts the color sample to an HP's & Microsoft's 1996 sRGB sample.</summary>
+			 */
+			public abstract SRGB ToSRGB(ConversionStrategy strategy = ConversionStrategy.Default);
 
 			#endregion
 		}

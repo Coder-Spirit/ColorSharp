@@ -38,7 +38,7 @@ namespace Litipk.ColorSharp
 	{
 		public class RegularLightSpectrum : ALightSpectrum
 		{
-			#region private properties
+			#region properties
 
 			// Needed values to interpret the data points
 			readonly double NmPerStep;
@@ -73,7 +73,7 @@ namespace Litipk.ColorSharp
 			#endregion
 
 
-			#region inherited methods
+			#region ALightSpectrum methods
 
 			public override double EvaluateAt (double waveLength)
 			{
@@ -131,6 +131,11 @@ namespace Litipk.ColorSharp
 
 				return MinWaveLength + ((uint)Math.Floor ((waveLength - MinWaveLength) / NmPerStep) + 1) * NmPerStep;
 			}
+
+			#endregion
+
+
+			#region AConvertibleColor methods
 
 			public override bool IsInsideColorSpace()
 			{

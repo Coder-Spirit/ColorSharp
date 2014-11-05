@@ -55,17 +55,17 @@ namespace Litipk.ColorSharp
 
 			#region readonly properties
 			/**
-			 * <value>x component of the CIE's 1931 color space : X/(X+Y+Z) .</value>
+			 * <value>x component of the CIE's 1931 xyY color space : X/(X+Y+Z) .</value>
 			 */
 			public readonly double x;
 
 			/**
-			 * <value>y component of the CIE's 1931 color space : Y/(X+Y+Z) .</value>
+			 * <value>y component of the CIE's 1931 xyY color space : Y/(X+Y+Z) .</value>
 			 */
 			public readonly double y;
 
 			/**
-			 * <value>Y component of the CIE's 1931 color space. The same Y from CIE's 1931 XYZ color space.</value>
+			 * <value>Y component of the CIE's 1931 xyY color space. The same Y from CIE's 1931 XYZ color space.</value>
 			 */
 			public readonly double Y;
 			#endregion
@@ -99,13 +99,6 @@ namespace Litipk.ColorSharp
 			}
 
 			/**
-			 * <summary>HACK: DONT' USE this constructor.</summary>
-			 */
-			public CIExyY() {
-				Conversors.Add (typeof(CIEXYZ), ToXYZ);
-			}
-
-			/**
 			 * <summary>Creates a new color sample in the CIE's 1931 xyY color space</summary>
 			 * <param name="x">CIE's 1931 xyY x coordinate</param>
 			 * <param name="y">CIE's 1931 xyY y coordinate</param>
@@ -117,24 +110,12 @@ namespace Litipk.ColorSharp
 				this.x = x;
 				this.y = y;
 				this.Y = Y;
-
-				Conversors.Add (typeof(CIEXYZ), ToXYZ);
 			}
 
 			#endregion
 
 
-			#region conversors
-
-			public CIEXYZ ToXYZ (ConversionStrategy strategy=ConversionStrategy.Default)
-			{
-				return new CIEXYZ (x*Y/y, Y, Y*(1.0 - x - y)/y, DataSource ?? this);
-			}
-
-			#endregion
-
-
-			#region inherited methods
+			#region AConvertibleColor methods
 
 			/**
 			 * <inheritdoc />
@@ -142,7 +123,8 @@ namespace Litipk.ColorSharp
 			public override bool IsInsideColorSpace()
 			{
 				// Fast checks
-				if (y > 1.0 - x || y < (x-0.25)*0.5 || y < 0.4 - x*4 || y >= 0.85) return false;
+				if (y > 1.0 - x || y < (x - 0.25) * 0.5 || y < 0.4 - x * 4 || y >= 0.85)
+					return false;
 
 				xyYPoint[] points = new xyYPoint[SortedSharkfin.Length + 1];
 				Array.Copy (SortedSharkfin, 0, points, 0, SortedSharkfin.Length);
@@ -157,6 +139,35 @@ namespace Litipk.ColorSharp
 
 				return true;
 			}
+
+			/**
+			 * <inheritdoc />
+			 */
+			public override CIEXYZ ToCIEXYZ (ConversionStrategy strategy=ConversionStrategy.Default)
+			{
+				return new CIEXYZ (x*Y/y, Y, Y*(1.0 - x - y)/y, DataSource ?? this);
+			}
+
+			/**
+			 * <inheritdoc />
+			 */
+			public override CIExyY ToCIExyY (ConversionStrategy strategy = ConversionStrategy.Default)
+			{
+				return this;
+			}
+
+			/**
+			 * <inheritdoc />
+			 */
+			public override SRGB ToSRGB (ConversionStrategy strategy = ConversionStrategy.Default)
+			{
+				return ToCIEXYZ ().ToSRGB (strategy);
+			}
+
+			#endregion
+
+
+			#region Object methods
 
 			/**
 			 *  <inheritdoc />

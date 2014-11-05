@@ -1,4 +1,4 @@
-﻿/**
+﻿/*
  * The MIT License (MIT)
  * Copyright (c) 2014 Andrés Correa Casablanca
  * 
@@ -21,10 +21,10 @@
  * SOFTWARE.
  */
 
-/**
-* Contributors:
-*  - Andrés Correa Casablanca <castarco@gmail.com , castarco@litipk.com>
-*/
+/*
+ * Contributors:
+ *  - Andrés Correa Casablanca <castarco@gmail.com , castarco@litipk.com>
+ */
 
 
 using System.Reflection;

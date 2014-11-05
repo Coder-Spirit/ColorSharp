@@ -36,34 +36,40 @@ namespace Litipk.ColorSharp
 	namespace ColorSpaces
 	{
 		/**
-		 * CIE 1931 (2º) XYZ Color Space.
+		 * <summary>CIE's 1931 (2º) XYZ Color Space.</summary>
 		 */
 		public sealed class CIEXYZ : AConvertibleColor
 		{
-			#region readonly properties
+			#region properties
 
-			public readonly double X, Y, Z;
+			/**
+			 * <value>X component of the CIE's 1931 XYZ color space.</value>
+			 */
+			public readonly double X;
+
+			/**
+			 * <value>Y component of the CIE's 1931 XYZ color space.</value>
+			 */
+			public readonly double Y;
+
+			/**
+			 * <value>Z component of the CIE's 1931 XYZ color space.</value>
+			 */
+			public readonly double Z;
 
 			#endregion
 
 
 			#region constructors
 
-			public CIEXYZ() {
-				Conversors.Add (typeof(SRGB), ToSRGB);
-				Conversors.Add (typeof(CIExyY), ToxyY);
-			}
-
 			/**
-			 * This constructor "installs" the conversor methods into the instance
+			 * <summary>Creates a new color sample in the CIE's 1931 xyY color space</summary>
+			 * <param name="X">CIE's 1931 XYZ X coordinate</param>
+			 * <param name="Y">CIE's 1931 XYZ Y coordinate</param>
+			 * <param name="Z">CIE's 1931 XYZ Z coordinate</param>
+			 * <param name="dataSource">If you aren't working with ColorSharp internals, don't use this parameter</param>
 			 */
-			private CIEXYZ(AConvertibleColor dataSource=null) : base(dataSource) {
-				Conversors.Add (typeof(SRGB), ToSRGB);
-				Conversors.Add (typeof(CIExyY), ToxyY);
-			}
-
-			// Constructor
-			public CIEXYZ (double X, double Y, double Z, AConvertibleColor dataSource=null) : this(dataSource)
+			public CIEXYZ (double X, double Y, double Z, AConvertibleColor dataSource=null) : base(dataSource)
 			{
 				this.X = X;
 				this.Y = Y;
@@ -73,34 +79,49 @@ namespace Litipk.ColorSharp
 			#endregion
 
 
-			#region conversors
+			#region AConvertibleColor methods
 
-			public CIExyY ToxyY (ConversionStrategy strategy=ConversionStrategy.Default)
+			/**
+			 * <inheritdoc />
+			 */
+			public override bool IsInsideColorSpace()
+			{
+				return ToCIExyY ().IsInsideColorSpace ();
+			}
+
+			/**
+			 * <inheritdoc />
+			 */
+			public override CIEXYZ ToCIEXYZ (ConversionStrategy strategy=ConversionStrategy.Default)
+			{
+				return this;
+			}
+
+			/**
+			 * <inheritdoc />
+			 */
+			public override CIExyY ToCIExyY (ConversionStrategy strategy=ConversionStrategy.Default)
 			{
 				double XYZ = X + Y + Z;
 				return new CIExyY (X / XYZ, Y / XYZ, Y, DataSource ?? this);
 			}
 
 			/**
-			 * Converts the CIE 1931 XYZ sample to a HP's & Microsoft's 1996 sRGB sample
-			 */
-			public SRGB ToSRGB (ConversionStrategy strategy=ConversionStrategy.Default)
+			* <inheritdoc />
+			*/
+			public override SRGB ToSRGB (ConversionStrategy strategy=ConversionStrategy.Default)
 			{
-				double tx = X / 100.0;
-				double ty = Y / 100.0;
-				double tz = Z / 100.0;
-
 				// Linear transformation
-				double r = tx * 3.2406 + ty * -1.5372 + tz * -0.4986;
-				double g = tx * -0.9689 + ty * 1.8758 + tz * 0.0415;
-				double b = tx * 0.0557 + ty * -0.2040 + tz * 1.0570;
+				double r = X * 3.2406 + Y * -1.5372 + Z * -0.4986;
+				double g = X * -0.9689 + Y * 1.8758 + Z * 0.0415;
+				double b = X * 0.0557 + Y * -0.2040 + Z * 1.0570;
 
 				// Gamma correction
 				r = r > 0.0031308 ? 1.055 * Math.Pow(r, 1 / 2.4) - 0.055 : 12.92 * r;
 				g = g > 0.0031308 ? 1.055 * Math.Pow(g, 1 / 2.4) - 0.055 : 12.92 * g;
 				b = b > 0.0031308 ? 1.055 * Math.Pow(b, 1 / 2.4) - 0.055 : 12.92 * b;
 
-				if ((strategy & ConversionStrategy.ForceStretching) != 0) {
+				if ((strategy & ConversionStrategy.ForceLowStretch) != 0) {
 					double minChannelValue = Math.Min (r, Math.Min (g, b));
 
 					if (minChannelValue < 0.0) {
@@ -108,18 +129,24 @@ namespace Litipk.ColorSharp
 						g -= minChannelValue;
 						b -= minChannelValue;
 					}
-				} else if ((strategy & ConversionStrategy.ForceTruncating) != 0) {
+				} else if ((strategy & ConversionStrategy.ForceLowTruncate) != 0) {
 					r = Math.Max (0.0, r);
 					g = Math.Max (0.0, g);
 					b = Math.Max (0.0, b);
 				}
 
-				double maxChannelValue = Math.Max (r, Math.Max (g, b));
+				if ((strategy & ConversionStrategy.ForceHighStretch) != 0) {
+					double maxChannelValue = Math.Max (r, Math.Max (g, b));
 
-				if (maxChannelValue > 1.0) {
-					r = r / maxChannelValue;
-					g = g / maxChannelValue;
-					b = b / maxChannelValue;
+					if (maxChannelValue > 1.0) {
+						r = r / maxChannelValue;
+						g = g / maxChannelValue;
+						b = b / maxChannelValue;
+					}
+				} else if ((strategy & ConversionStrategy.ForceHighTruncate) != 0) {
+					r = Math.Min (1.0, r);
+					g = Math.Min (1.0, g);
+					b = Math.Min (1.0, b);
 				}
 
 				return new SRGB(r, g, b, DataSource ?? this);
@@ -128,13 +155,11 @@ namespace Litipk.ColorSharp
 			#endregion
 
 
-			#region inherited methods
+			#region Object methods
 
-			public override bool IsInsideColorSpace()
-			{
-				return ConvertTo<CIExyY> ().IsInsideColorSpace ();
-			}
-
+			/**
+			 * <inheritdoc />
+			 */
 			public override bool Equals(Object obj)
 			{
 				CIEXYZ xyzObj = obj as CIEXYZ; 
@@ -148,6 +173,10 @@ namespace Litipk.ColorSharp
 					Math.Abs (Z - xyzObj.Z) <= double.Epsilon
 				);
 			}
+
+			/**
+			 * <inheritdoc />
+			 */
 			public override int GetHashCode ()
 			{
 				int hash = 23;
@@ -158,7 +187,6 @@ namespace Litipk.ColorSharp
 
 				return hash;
 			}
-
 
 			#endregion
 		}

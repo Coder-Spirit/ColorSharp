@@ -36,8 +36,8 @@ namespace Litipk.ColorSharp
 	namespace ColorSpaces
 	{
 		/**
-	 * HP's & Microsoft's 1996 sRGB Color Space.
-	 */
+		 * <summary>HP's & Microsoft's 1996 sRGB Color Space.</summary>
+		 */
 		public sealed class SRGB : AConvertibleColor
 		{
 			#region private properties
@@ -49,15 +49,7 @@ namespace Litipk.ColorSharp
 
 			#region constructors
 
-			/**
-		 * This constructor "installs" the conversor methods into the instance
-		 */
-			private SRGB(AConvertibleColor dataSource=null) : base(dataSource) {
-				Conversors.Add (typeof(CIEXYZ), ToCIEXYZ);
-			}
-
-			// Constructor
-			public SRGB (double R, double G, double B, AConvertibleColor dataSource=null) : this(dataSource)
+			public SRGB (double R, double G, double B, AConvertibleColor dataSource=null) : base(dataSource)
 			{
 				this.R = R;
 				this.G = G;
@@ -67,12 +59,21 @@ namespace Litipk.ColorSharp
 			#endregion
 
 
-			#region conversors
+			#region AConvertibleColor methods
+
+			public override bool IsInsideColorSpace()
+			{
+				return (
+					0.0 <= R && R <= 1.0 &&
+					0.0 <= G && B <= 1.0 &&
+					0.0 <= B && B <= 1.0
+				);
+			}
 
 			/**
 		 * Converts the HP's & Microsoft's 1996 sRGB sample to a CIE 1931 XYZ sample
 		 */
-			public CIEXYZ ToCIEXYZ (ConversionStrategy strategy=ConversionStrategy.Default)
+			public override CIEXYZ ToCIEXYZ (ConversionStrategy strategy=ConversionStrategy.Default)
 			{
 				// Gamma correction
 				double r = R > 0.04045 ? Math.Pow((R+0.055)/1.055, 2.4) : R/12.92 ;
@@ -88,19 +89,20 @@ namespace Litipk.ColorSharp
 				);
 			}
 
+			public override CIExyY ToCIExyY (ConversionStrategy strategy = ConversionStrategy.Default)
+			{
+				return ToCIEXYZ ().ToCIExyY ();
+			}
+
+			public override SRGB ToSRGB (ConversionStrategy strategy = ConversionStrategy.WaveLength5NmStep)
+			{
+				return this;
+			}
+
 			#endregion
 
 
-			#region inherited methods
-
-			public override bool IsInsideColorSpace()
-			{
-				return (
-					0.0 <= R && R <= 1.0 &&
-					0.0 <= G && B <= 1.0 &&
-					0.0 <= B && B <= 1.0
-				);
-			}
+			#region Object methods
 
 			public override bool Equals(Object obj)
 			{

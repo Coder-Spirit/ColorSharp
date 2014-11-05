@@ -41,14 +41,7 @@ namespace Litipk.ColorSharp
 	{
 		public abstract class ALightSpectrum : AConvertibleColor, IRealFunctionWithFiniteSupport
 		{
-			#region constructors
-
-			protected ALightSpectrum(AConvertibleColor dataSource=null) : base(dataSource) {
-				Conversors.Add (typeof(CIEXYZ), ToCIEXYZ);
-			}
-
-			#endregion
-
+			protected ALightSpectrum(AConvertibleColor dataSource=null) : base(dataSource) { }
 
 			#region inheritable methods
 
@@ -82,9 +75,9 @@ namespace Litipk.ColorSharp
 			#endregion
 
 
-			#region conversors
+			#region AConvertibleColor methods
 
-			public CIEXYZ ToCIEXYZ (ConversionStrategy strategy=ConversionStrategy.Default)
+			public override CIEXYZ ToCIEXYZ (ConversionStrategy strategy=ConversionStrategy.Default)
 			{
 				// TODO : Check ConversionStrategy
 
@@ -97,6 +90,16 @@ namespace Litipk.ColorSharp
 				return new CIEXYZ (
 					MFs [0].DoConvolution (this), MFs [1].DoConvolution (this), MFs [2].DoConvolution (this), DataSource ?? this
 				);
+			}
+
+			public override CIExyY ToCIExyY (ConversionStrategy strategy = ConversionStrategy.Default)
+			{
+				return ToCIEXYZ ().ToCIExyY (strategy);
+			}
+
+			public override SRGB ToSRGB(ConversionStrategy strategy = ConversionStrategy.Default)
+			{
+				return ToCIEXYZ ().ToSRGB (strategy);
 			}
 
 			#endregion

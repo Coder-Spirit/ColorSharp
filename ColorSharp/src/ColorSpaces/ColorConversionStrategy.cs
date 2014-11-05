@@ -34,17 +34,26 @@ namespace Litipk.ColorSharp
 {
 	namespace ColorSpaces
 	{
+		/**
+		 * <summary>Enum type used to specify alternative strategies in color conversion.</summary>
+		 */
 		[Flags]
 		public enum ConversionStrategy
 		{
-			// Used in Light -> Color Conversion
+
 			WaveLength5NmStep = 0,
 			WaveLength1NmStep = 1,
 
-			NoForce          = 0,
-			ForceTruncating  = 2,
-			ForceStretching  = 4,
-			Force            = ForceTruncating | ForceStretching,
+			NoForce           = 0,
+			ForceLowTruncate  = 2,
+			ForceLowStretch   = 4,
+			ForceHighTruncate = 8,
+			ForceHighStretch  = 16,
+			ForceLow          = ForceLowStretch | ForceLowTruncate,
+			ForceHigh         = ForceHighStretch | ForceHighTruncate,
+			ForceTruncate     = ForceLowTruncate | ForceHighTruncate,
+			ForceStretch      = ForceLowStretch | ForceHighStretch,
+			Force             = ForceLow | ForceHigh,
 
 			Default = WaveLength5NmStep | NoForce
 		}
