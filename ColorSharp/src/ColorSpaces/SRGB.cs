@@ -36,19 +36,39 @@ namespace Litipk.ColorSharp
 	namespace ColorSpaces
 	{
 		/**
-		 * <summary>HP's & Microsoft's 1996 sRGB Color Space.</summary>
+		 * <summary>HP's and Microsoft's 1996 sRGB Color Space.</summary>
 		 */
 		public sealed class SRGB : AConvertibleColor
 		{
 			#region private properties
 
-			public readonly double R, G, B;
+			/**
+			 * <value>Red component</value>
+			 */
+			public readonly double R;
+
+			/**
+			 * <value>Green component</value>
+			 */
+			public readonly double G;
+
+			/**
+			 * <value>Blue component</value>
+			 */
+			public readonly double B;
 
 			#endregion
 
 
 			#region constructors
 
+			/**
+			 * <summary>Creates a new color sample in the sRGB color space</summary>
+			 * <param name="R">Red component (between 0 and 1)</param>
+			 * <param name="G">Green component (between 0 and 1)</param>
+			 * <param name="B">Blue component (between 0 and 1)</param>
+			 * <param name="dataSource">If you aren't working with ColorSharp internals, don't use this parameter</param>
+			 */
 			public SRGB (double R, double G, double B, AConvertibleColor dataSource=null) : base(dataSource)
 			{
 				this.R = R;
@@ -61,6 +81,9 @@ namespace Litipk.ColorSharp
 
 			#region AConvertibleColor methods
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override bool IsInsideColorSpace()
 			{
 				return (
@@ -71,8 +94,8 @@ namespace Litipk.ColorSharp
 			}
 
 			/**
-		 * Converts the HP's & Microsoft's 1996 sRGB sample to a CIE 1931 XYZ sample
-		 */
+			 * <inheritdoc />
+			 */
 			public override CIEXYZ ToCIEXYZ (ConversionStrategy strategy=ConversionStrategy.Default)
 			{
 				// Gamma correction
@@ -89,11 +112,17 @@ namespace Litipk.ColorSharp
 				);
 			}
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override CIExyY ToCIExyY (ConversionStrategy strategy = ConversionStrategy.Default)
 			{
 				return ToCIEXYZ ().ToCIExyY ();
 			}
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override SRGB ToSRGB (ConversionStrategy strategy = ConversionStrategy.WaveLength5NmStep)
 			{
 				return this;
@@ -104,6 +133,9 @@ namespace Litipk.ColorSharp
 
 			#region Object methods
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override bool Equals(Object obj)
 			{
 				SRGB srgbObj = obj as SRGB; 
@@ -117,6 +149,10 @@ namespace Litipk.ColorSharp
 					Math.Abs (B - srgbObj.B) <= double.Epsilon
 				);
 			}
+
+			/**
+			 * <inheritdoc />
+			 */
 			public override int GetHashCode ()
 			{
 				int hash = 17;

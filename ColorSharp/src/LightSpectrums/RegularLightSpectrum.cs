@@ -36,7 +36,10 @@ namespace Litipk.ColorSharp
 
 	namespace LightSpectrums
 	{
-		public class RegularLightSpectrum : ALightSpectrum
+		/**
+		 * Class to handle light spectrum samples with equidistant data points
+		 */
+		public sealed class RegularLightSpectrum : ALightSpectrum
 		{
 			#region properties
 

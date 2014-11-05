@@ -35,19 +35,26 @@ namespace Litipk.ColorSharp
 {
 	namespace ColorSpaces
 	{
+		/**
+		 *
+		 */
 		public abstract class AConvertibleColor
 		{
 			#region properties
 
-			// If this "color" comes from another data source, then we keep the original data.
-			protected AConvertibleColor DataSource = null;
+			/**
+			 * <value>Original color sample</value>
+			 */
+			public readonly AConvertibleColor DataSource = null;
 
 			#endregion
 
 
 			#region constructors
 
-			// TODO: Check if this should be public in order to work as expected with reflection.
+			/**
+			 * Boilerplate constructor
+			 */
 			protected AConvertibleColor(AConvertibleColor dataSource = null)
 			{
 				DataSource = dataSource;
@@ -58,37 +65,49 @@ namespace Litipk.ColorSharp
 
 			#region conversion skeleton
 
+			/**
+			 * <see cref="ConvertTo"/>
+			 */
 			public T ConvertTo<T> (ConversionStrategy strategy=ConversionStrategy.Default) where T : AConvertibleColor
 			{
-				Type t = typeof(T);
+				return (T)ConvertTo (typeof(T), strategy);
+			}
+
+			/**
+			 * <summary>Method that allows conversions passing the type as a parameter.</summary>
+			 * <remarks>DON'T USE it to implement conversion methods, use the non type-parametric variants.</remarks>
+			 */
+			public AConvertibleColor ConvertTo (Type t, ConversionStrategy strategy=ConversionStrategy.Default)
+			{
 				Type tt = GetType ();
 
 				if (t == tt) {
 					// Dumb conversion
-					return (T)(AConvertibleColor)this;
+					return this;
 				}
 
 				if (DataSource != null) {
 					if (DataSource.GetType () == t) {
-						return (T)DataSource;
+						return DataSource;
 					}
 
-					return DataSource.ConvertTo<T> (strategy);
+					return DataSource.ConvertTo(t, strategy);
 				}
 
-				return InnerConvertTo<T> (strategy);
+				return InnerConvertTo(t, strategy);
 			}
 
-			protected T InnerConvertTo<T> (ConversionStrategy strategy = ConversionStrategy.Default) where T : AConvertibleColor
+			/**
+			 * Helper method used by ConvertTo.
+			 */
+			private AConvertibleColor InnerConvertTo (Type t, ConversionStrategy strategy = ConversionStrategy.Default)
 			{
-				Type t = typeof(T);
-
 				if (t == typeof(CIEXYZ))
-					return (T)(AConvertibleColor)ToCIEXYZ (strategy);
+					return ToCIEXYZ (strategy);
 				if (t == typeof(CIExyY))
-					return (T)(AConvertibleColor)ToCIExyY(strategy);
+					return ToCIExyY(strategy);
 				if (t == typeof(SRGB))
-					return (T)(AConvertibleColor)ToSRGB (strategy);
+					return ToSRGB (strategy);
 
 				throw new NotImplementedException ("This conversion isn't implemented.");
 			}
@@ -114,7 +133,7 @@ namespace Litipk.ColorSharp
 			public abstract CIExyY ToCIExyY (ConversionStrategy strategy = ConversionStrategy.Default);
 
 			/**
-			 * <summary>Converts the color sample to an HP's & Microsoft's 1996 sRGB sample.</summary>
+			 * <summary>Converts the color sample to an HP's and Microsoft's 1996 sRGB sample.</summary>
 			 */
 			public abstract SRGB ToSRGB(ConversionStrategy strategy = ConversionStrategy.Default);
 

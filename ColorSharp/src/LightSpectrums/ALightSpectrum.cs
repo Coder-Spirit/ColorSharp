@@ -39,29 +39,43 @@ namespace Litipk.ColorSharp
 
 	namespace LightSpectrums
 	{
+		/**
+		 * <summary>Abstract class that provides basic methods to manipulate light spectrums.</summary>
+		 */
 		public abstract class ALightSpectrum : AConvertibleColor, IRealFunctionWithFiniteSupport
 		{
+			/**
+			 * Boilerplate constructor
+			 */
 			protected ALightSpectrum(AConvertibleColor dataSource=null) : base(dataSource) { }
 
-			#region inheritable methods
+			#region abstract methods
 
 			#region IRealFunctionWithFiniteSupport methods
 
 			/**
-			 * This gives us the wave amplitude at a given wave length, if it's necessary the method will do interpolation.
+			 * <inheritdoc />
 			 */
 			public abstract double EvaluateAt(double waveLength);
 
-			// Analytic aproximations also have their confidence intervals, so
-			// there aren't exceptional cases here.
+			/**
+			 * <inheritdoc />
+			 */
 			public abstract double GetSupportMinValue ();
+
+			/**
+			 * <inheritdoc />
+			 */
 			public abstract double GetSupportMaxValue ();
 
-			// 
+			/**
+			 * <inheritdoc />
+			 */
 			public abstract double GetMaxValueOnSupport ();
 
-			// We need to know how many data points we have to make computations using all the information we have.
-			// If the concrete implementation is "analytical", then must return -1.
+			/**
+			 * <inheritdoc />
+			 */
 			public abstract int GetNumberOfDataPoints();
 
 			#endregion
@@ -77,6 +91,9 @@ namespace Litipk.ColorSharp
 
 			#region AConvertibleColor methods
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override CIEXYZ ToCIEXYZ (ConversionStrategy strategy=ConversionStrategy.Default)
 			{
 				// TODO : Check ConversionStrategy
@@ -92,11 +109,17 @@ namespace Litipk.ColorSharp
 				);
 			}
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override CIExyY ToCIExyY (ConversionStrategy strategy = ConversionStrategy.Default)
 			{
 				return ToCIEXYZ ().ToCIExyY (strategy);
 			}
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override SRGB ToSRGB(ConversionStrategy strategy = ConversionStrategy.Default)
 			{
 				return ToCIEXYZ ().ToSRGB (strategy);

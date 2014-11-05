@@ -35,17 +35,14 @@ namespace Litipk.ColorSharp
 {
 	namespace InternalUtils
 	{
-		/**
-		 * Internal Class 
-		 */
-		class KeyValuePairComparer : IComparer<KeyValuePair<double, double>> {
+		sealed class KeyValuePairComparer : IComparer<KeyValuePair<double, double>> {
 			public int Compare(KeyValuePair<double, double> a, KeyValuePair<double, double> b)
 			{
 				return Math.Abs (a.Key - b.Key) <= double.Epsilon ? 0 : a.Key.CompareTo (b.Key);
 			}
 		}
 
-		class xyYPointComparer : IComparer<xyYPoint> {
+		sealed class xyYPointComparer : IComparer<xyYPoint> {
 			public int Compare(xyYPoint a, xyYPoint b)
 			{
 				return (a.x == b.x) ? 
