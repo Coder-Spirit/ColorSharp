@@ -1,5 +1,8 @@
 # TODO List
 
+## Trademark Issues?
+ * [ ] Change the project name! ( and many links... :s ) 
+
 ## New color spaces
  * [ ] CIE RGB
  * [ ] CIE UVW
