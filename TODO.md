@@ -21,6 +21,10 @@
 ### Colors
   * [ ] Color Temperature
 
+## Performance
+  * [ ] Make use of OpenCL to improve conversions performance (with OpenCL.NET?)
+  * [ ] SIMD? (Mono & .NET have different approaches :s)
+
 ## Packaging
   * [ ] .DEB packages
   * [ ] .RPM packages
@@ -32,4 +36,4 @@
 ## Documentation
   * [ ] Wiki
   * [ ] Improve inline documentation (code comments)
-  * [ ] Create Changelog
+  * [X] Create Changelog
