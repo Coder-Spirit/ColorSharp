@@ -37,3 +37,4 @@
   * [ ] Wiki
   * [ ] Improve inline documentation (code comments)
   * [X] Create Changelog
+  * [ ] Create Roadmap
