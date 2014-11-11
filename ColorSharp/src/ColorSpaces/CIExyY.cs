@@ -47,10 +47,12 @@ namespace Litipk.ColorSharp
 
 			#region static properties
 			// Light wavelengths coordinates in the CIE's 1931 xyY color sapce.
-			static xyYPoint[] Sharkfin;
+			static xyYPoint[] Sharkfin1Nm;
+			static xyYPoint[] Sharkfin5Nm;
 
 			// Sharkfin transformation with performance purposes.
-			static xyYPoint[] SortedSharkfin;
+			static xyYPoint[] SortedSharkfin1Nm;
+			static xyYPoint[] SortedSharkfin5Nm;
 			#endregion
 
 			#region readonly properties
@@ -80,10 +82,28 @@ namespace Litipk.ColorSharp
 			 */
 			static CIExyY()
 			{
-				var mfX = CIE1931XYZ5NmMatchingFunctionX.Instance.Amplitudes;
-				var mfY = CIE1931XYZ5NmMatchingFunctionY.Instance.Amplitudes;
-				var mfZ = CIE1931XYZ5NmMatchingFunctionZ.Instance.Amplitudes;
+				computeSharkfin (
+					CIE1931XYZ5NmMatchingFunctionX.Instance.Amplitudes,
+					CIE1931XYZ5NmMatchingFunctionY.Instance.Amplitudes,
+					CIE1931XYZ5NmMatchingFunctionZ.Instance.Amplitudes,
+					ref Sharkfin5Nm,
+					ref SortedSharkfin5Nm
+				);
 
+				computeSharkfin (
+					CIE1931XYZ1NmMatchingFunctionX.Instance.Amplitudes,
+					CIE1931XYZ1NmMatchingFunctionY.Instance.Amplitudes,
+					CIE1931XYZ1NmMatchingFunctionZ.Instance.Amplitudes,
+					ref Sharkfin1Nm,
+					ref SortedSharkfin1Nm
+				);
+			}
+
+			/**
+			 * Computes the 'sharkin' points. 
+			 */
+			static void computeSharkfin(double[] mfX, double[] mfY, double[] mfZ, ref xyYPoint[] Sharkfin, ref xyYPoint[] SortedSharkfin)
+			{
 				var n = mfX.Length;
 
 				Sharkfin = new xyYPoint[n];
@@ -126,9 +146,9 @@ namespace Litipk.ColorSharp
 				if (y > 1.0 - x || y < (x - 0.25) * 0.5 || y < 0.4 - x * 4 || y >= 0.85)
 					return false;
 
-				xyYPoint[] points = new xyYPoint[SortedSharkfin.Length + 1];
-				Array.Copy (SortedSharkfin, 0, points, 0, SortedSharkfin.Length);
-				points[SortedSharkfin.Length] = new xyYPoint{x=x, y=y};
+				xyYPoint[] points = new xyYPoint[SortedSharkfin5Nm.Length + 1];
+				Array.Copy (SortedSharkfin5Nm, 0, points, 0, SortedSharkfin5Nm.Length);
+				points[SortedSharkfin5Nm.Length] = new xyYPoint{x=x, y=y};
 
 				xyYPoint[] convexHull = findConvexHull (points);
 
@@ -159,7 +179,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
-			public override SRGB ToSRGB (ConversionStrategy strategy = ConversionStrategy.Default)
+			public override SRGB ToSRGB (ConversionStrategy strategy = ConversionStrategy.ForceLowTruncate|ConversionStrategy.ForceHighStretch)
 			{
 				return ToCIEXYZ ().ToSRGB (strategy);
 			}

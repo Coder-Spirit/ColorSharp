@@ -67,6 +67,9 @@
     <Compile Include="src\InternalUtils\Structs.cs" />
     <Compile Include="src\ColorSpaces\ColorConversionStrategy.cs" />
     <Compile Include="src\Illuminants\D65.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1931XYZ1NmMatchingFunctionX.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1931XYZ1NmMatchingFunctionY.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1931XYZ51NmMatchingFunctionZ.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -1,4 +1,4 @@
-﻿/*
+﻿/**
  * The MIT License (MIT)
  * Copyright (c) 2014 Andrés Correa Casablanca
  * 
@@ -21,40 +21,31 @@
  * SOFTWARE.
  */
 
-/*
- * Contributors:
- *  - Andrés Correa Casablanca <castarco@gmail.com , castarco@litipk.com>
- */
+/**
+* Contributors:
+*  - Andrés Correa Casablanca <castarco@gmail.com , castarco@litipk.com>
+*/
 
 
-using System;
+using NUnit.Framework;
+using Litipk.ColorSharp.Illuminants;
 
 
-namespace Litipk.ColorSharp
+namespace Litipk.ColorSharpTests
 {
-	namespace ColorSpaces
+	[TestFixture]
+	public class D65Test
 	{
-		/**
-		 * <summary>Enum type used to specify alternative strategies in color conversion.</summary>
-		 */
-		[Flags]
-		public enum ConversionStrategy
+		[Test]
+		public void TestRGBValue()
 		{
-			WaveLength5NmStep = 0,
-			WaveLength1NmStep = 1,
+			var xyzWhitePoint = D65.XYZ_Sample.ToSRGB ();
 
-			NoForce           = 0,
-			ForceLowTruncate  = 2,
-			ForceLowStretch   = 4,
-			ForceHighTruncate = 8,
-			ForceHighStretch  = 16,
-			ForceLow          = ForceLowStretch | ForceLowTruncate,
-			ForceHigh         = ForceHighStretch | ForceHighTruncate,
-			ForceTruncate     = ForceLowTruncate | ForceHighTruncate,
-			ForceStretch      = ForceLowStretch | ForceHighStretch,
-			Force             = ForceLow | ForceHigh,
+			Assert.AreEqual (1.0, xyzWhitePoint.R, 0.0001);
+			Assert.AreEqual (1.0, xyzWhitePoint.G, 0.0001);
+			Assert.AreEqual (1.0, xyzWhitePoint.B, 0.0010);
 
-			Default = WaveLength5NmStep | NoForce
+			var specWhitePoint = D65.spectrum_Sample.ToSRGB ();
 		}
 	}
 }

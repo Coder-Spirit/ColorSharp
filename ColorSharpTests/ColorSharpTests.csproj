@@ -37,6 +37,7 @@
     <Compile Include="tests\ColorSpaces\CIExyYTest.cs" />
     <Compile Include="tests\ColorSpaces\CIEXYZTest.cs" />
     <Compile Include="tests\LightSpectrums\RegularLightSpectrumTest.cs" />
+    <Compile Include="tests\Illuminants\D65Test.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -48,5 +49,8 @@
       <Project>{960524F3-F375-4CDE-A82A-609CC32048E4}</Project>
       <Name>ColorSharp</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="tests\Illuminants\" />
   </ItemGroup>
 </Project>

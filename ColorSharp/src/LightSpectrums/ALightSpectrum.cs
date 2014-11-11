@@ -98,13 +98,21 @@ namespace Litipk.ColorSharp
 			 */
 			public override CIEXYZ ToCIEXYZ (ConversionStrategy strategy=ConversionStrategy.Default)
 			{
-				// TODO : Check ConversionStrategy
+				AMatchingFunction[] MFs;
 
-				AMatchingFunction[] MFs = {
-					CIE1931XYZ5NmMatchingFunctionX.Instance,
-					CIE1931XYZ5NmMatchingFunctionY.Instance,
-					CIE1931XYZ5NmMatchingFunctionZ.Instance
-				};
+				if ((strategy & ConversionStrategy.WaveLength1NmStep) != 0) {
+					MFs = new AMatchingFunction[] {
+						CIE1931XYZ1NmMatchingFunctionX.Instance,
+						CIE1931XYZ1NmMatchingFunctionY.Instance,
+						CIE1931XYZ1NmMatchingFunctionZ.Instance
+					};
+				} else { // By default we choose 5 Nm
+					MFs = new AMatchingFunction[] {
+						CIE1931XYZ5NmMatchingFunctionX.Instance,
+						CIE1931XYZ5NmMatchingFunctionY.Instance,
+						CIE1931XYZ5NmMatchingFunctionZ.Instance
+					};
+				}
 
 				return new CIEXYZ (
 					MFs [0].DoConvolution (this), MFs [1].DoConvolution (this), MFs [2].DoConvolution (this), DataSource ?? this
@@ -122,7 +130,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
-			public override SRGB ToSRGB(ConversionStrategy strategy = ConversionStrategy.Default)
+			public override SRGB ToSRGB(ConversionStrategy strategy = ConversionStrategy.ForceLowTruncate|ConversionStrategy.ForceHighStretch)
 			{
 				return ToCIEXYZ ().ToSRGB (strategy);
 			}
