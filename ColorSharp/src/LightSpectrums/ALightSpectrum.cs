@@ -81,8 +81,10 @@ namespace Litipk.ColorSharp
 			#endregion
 
 			/**
+			 * <summary>
 			 * Supposing the light spectrum we have is a discrete sample, this gives us the next data point.
 			 * If the method returns -1.0 , then we suppose we have an "analytic" spectrum, so we don't have samples.
+			 * </summary>
 			 */
 			public abstract double GetNextAmplitudeSample (double waveLength);
 

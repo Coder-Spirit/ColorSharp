@@ -57,6 +57,9 @@ namespace Litipk.ColorSharp
 
 			#region AMatchingFunction implementation
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override double EvaluateAt(double waveLength)
 			{
 				if (waveLength < TabularData[0].Key || waveLength > TabularData[TabularData.Count-1].Key) {
@@ -84,16 +87,25 @@ namespace Litipk.ColorSharp
 				);
 			}
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override double GetSupportMinValue ()
 			{
 				return TabularData [0].Key;
 			}
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override double GetSupportMaxValue ()
 			{
 				return TabularData [TabularData.Count - 1].Key;
 			}
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override int GetNumberOfDataPoints()
 			{
 				return TabularData.Count;

@@ -65,16 +65,25 @@ namespace Litipk.ColorSharp
 
 			#region ALightSpectrum methods
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override double GetSupportMinValue ()
 			{
 				return RawAmplitudes[0].Key;
 			}
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override double GetSupportMaxValue ()
 			{
 				return RawAmplitudes[RawAmplitudes.Count-1].Key;
 			}
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override double GetMaxValueOnSupport ()
 			{
 				double max = 0;
@@ -88,11 +97,17 @@ namespace Litipk.ColorSharp
 				return max;
 			}
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override int GetNumberOfDataPoints ()
 			{
 				return RawAmplitudes.Count;
 			}
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override double EvaluateAt(double waveLength)
 			{
 				if (waveLength < RawAmplitudes[0].Key || waveLength > RawAmplitudes[RawAmplitudes.Count-1].Key) {
@@ -114,8 +129,7 @@ namespace Litipk.ColorSharp
 			}
 
 			/**
-			 * Supposing the light spectrum we have is a discrete sample, this gives us the next data point.
-			 * If the method returns -1.0 , then we suppose we have an "analytic" spectrum, so we don't have samples.
+			 * <inheritdoc />
 			 */
 			public override double GetNextAmplitudeSample (double waveLength)
 			{
@@ -139,6 +153,9 @@ namespace Litipk.ColorSharp
 
 			#region AConvertibleColor methods
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override bool IsInsideColorSpace()
 			{
 				if (RawAmplitudes[0].Key <= double.Epsilon)

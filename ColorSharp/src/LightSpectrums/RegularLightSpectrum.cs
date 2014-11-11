@@ -78,6 +78,9 @@ namespace Litipk.ColorSharp
 
 			#region ALightSpectrum methods
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override double EvaluateAt (double waveLength)
 			{
 				if (waveLength >= MinWaveLength && waveLength <= MaxWaveLength) {
@@ -98,16 +101,25 @@ namespace Litipk.ColorSharp
 				throw new ArgumentOutOfRangeException ();
 			}
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override double GetSupportMinValue()
 			{
 				return MinWaveLength;
 			}
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override double GetSupportMaxValue()
 			{
 				return MaxWaveLength;
 			}
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override double GetMaxValueOnSupport ()
 			{
 				double max = 0;
@@ -121,11 +133,17 @@ namespace Litipk.ColorSharp
 				return max;
 			}
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override int GetNumberOfDataPoints()
 			{
 				return Amplitudes.Length;
 			}
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override double GetNextAmplitudeSample (double waveLength)
 			{
 				if (waveLength < MinWaveLength && waveLength >= MaxWaveLength) {
@@ -140,6 +158,9 @@ namespace Litipk.ColorSharp
 
 			#region AConvertibleColor methods
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override bool IsInsideColorSpace()
 			{
 				if (MinWaveLength <= double.Epsilon)

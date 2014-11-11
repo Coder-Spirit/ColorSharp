@@ -67,7 +67,12 @@ namespace Litipk.ColorSharp
 
 			#region constructors
 
-			// Constructor
+			/**
+			 * <summary>Creates a new regular matching function.</summary>
+			 * <param name="minWaveLength">Lower boundary of the matching function's support.</param>
+			 * <param name="maxWaveLength">Upper boundary of the matching function's support.</param>
+			 * <param name="amplitudes">Data points.</param>
+			 */
 			public RegularMatchingFunction (double minWaveLength, double maxWaveLength, double[] amplitudes)
 			{
 				MinWaveLength = minWaveLength;
@@ -76,7 +81,12 @@ namespace Litipk.ColorSharp
 				Amplitudes    = amplitudes;
 			}
 
-			// Constructor
+			/**
+			 * <summary>Creates a new regular matching function.</summary>
+			 * <param name="minWaveLength">Lower boundary of the matching function's support.</param>
+			 * <param name="amplitudes">Data points.</param>
+			 * <param name="nmPerStep">Number of nanometers between data points.</param>
+			 */
 			public RegularMatchingFunction (double minWaveLength, double[] amplitudes, double nmPerStep)
 			{
 				NmPerStep     = nmPerStep;
@@ -90,6 +100,9 @@ namespace Litipk.ColorSharp
 
 			#region AMatchingFunction implementation
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override double EvaluateAt (double waveLength)
 			{
 				if (waveLength >= MinWaveLength && waveLength <= MaxWaveLength) {
@@ -110,16 +123,25 @@ namespace Litipk.ColorSharp
 				throw new ArgumentOutOfRangeException ();
 			}
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override double GetSupportMinValue ()
 			{
 				return MinWaveLength;
 			}
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override double GetSupportMaxValue ()
 			{
 				return MaxWaveLength;
 			}
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override int GetNumberOfDataPoints()
 			{
 				return Amplitudes.Length;
