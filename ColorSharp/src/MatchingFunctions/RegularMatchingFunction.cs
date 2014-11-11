@@ -34,16 +34,33 @@ namespace Litipk.ColorSharp
 {
 	namespace MatchingFunctions
 	{
+		/**
+		 * <summary>
+		 * Implementation of AMatching function based on equally spaced data points.
+		 * </summary>
+		 */
 		public class RegularMatchingFunction : AMatchingFunction
 		{
 			#region readonly properties
 
-			// Needed values to interpret the data points
+			/**
+			 * <value>Number of nanometers between each data point.</value>
+			 */
 			public readonly double NmPerStep;
+
+			/**
+			 * <value>Minimum wave length with an associated data point.</value>
+			 */
 			public readonly double MinWaveLength;
+
+			/**
+			 * <value>Maximum wave length with an associated data point.</value>
+			 */
 			public readonly double MaxWaveLength;
 
-			// Data points
+			/**
+			 * <value>Data points</value>
+			 */
 			public readonly double[] Amplitudes;
 			#endregion
 

@@ -37,10 +37,19 @@ namespace Litipk.ColorSharp
 
 	namespace MatchingFunctions
 	{
+		/**
+		 * <summary>
+		 * Abstract class to handle 'matching functions'. The matching functions are used to transform spectrums into
+		 * simpler parametric spaces (with information loss), like CIE's 1931 XYZ color space.
+		 * </summary>
+		 */
 		public abstract class AMatchingFunction : IRealFunctionWithFiniteSupport
 		{
 			#region shared methods
 
+			/**
+			 * <summary>Applies the matching function to a spectrum to obtain a parameter of a color space.</summary>
+			 */
 			public double DoConvolution (ALightSpectrum lss)
 			{
 				double minWavelength = Math.Max (this.GetSupportMinValue (), lss.GetSupportMinValue ());
@@ -65,21 +74,25 @@ namespace Litipk.ColorSharp
 			#region abstract methods to be implemented in subclasses
 
 			/**
-			 *
+			 * <summary>Returns the value of the matching function for a given wave length.</summary>
 			 */
 			public abstract double EvaluateAt (double waveLength);
 
 			/**
-			 * We need to know the matching function support in our algorithms.
-			 * Analytic aproximations also have their confidence intervals, so
-			 * there aren't exceptional cases here.
+			 * <summary>The matching function has a support interval. This method gives us its lower bound.</summary>
 			 */
 			public abstract double GetSupportMinValue ();
+
+			/**
+			 * <summary>The matching function has a support interval. This method gives us its upper bound.</summary>
+			 */
 			public abstract double GetSupportMaxValue ();
 
 			/**
-			 * We need to know how many data points we have to make computations using all the information we have.
-			 * If the concrete implementation is "analytical", then must return -1.
+			 * <summary>
+			 * Returns us the number of data points used to construct the matching function. It returns -1 if the inner
+			 * implementation is analytical and there aren't data points.
+			 * </summary>
 			 */
 			public abstract int GetNumberOfDataPoints();
 
