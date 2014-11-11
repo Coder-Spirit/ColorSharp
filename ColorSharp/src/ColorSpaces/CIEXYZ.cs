@@ -109,7 +109,7 @@ namespace Litipk.ColorSharp
 			/**
 			* <inheritdoc />
 			*/
-			public override SRGB ToSRGB (ConversionStrategy strategy=ConversionStrategy.Default)
+			public override SRGB ToSRGB (ConversionStrategy strategy=ConversionStrategy.ForceLowTruncate|ConversionStrategy.ForceHighStretch)
 			{
 				// Linear transformation
 				double r = X * 3.2406 + Y * -1.5372 + Z * -0.4986;
