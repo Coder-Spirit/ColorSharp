@@ -28,6 +28,8 @@
 
 
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 
 namespace Litipk.ColorSharp
@@ -44,33 +46,33 @@ namespace Litipk.ColorSharp
 			#region properties
 
 			// Needed values to interpret the data points
-			readonly double NmPerStep;
-			readonly double MinWaveLength;
-			readonly double MaxWaveLength;
+			public readonly double NmPerStep;
+			public readonly double MinWaveLength;
+			public readonly double MaxWaveLength;
 
 			// Data points
-			readonly double[] Amplitudes;
+			public readonly ReadOnlyCollection<double> Amplitudes;
 			#endregion
 
 
 			#region constructors
 
 			// Constructor
-			public RegularLightSpectrum (double minWaveLength, double maxWaveLength, double[] amplitudes, AConvertibleColor dataSource=null) : base(dataSource)
+			public RegularLightSpectrum (double minWaveLength, double maxWaveLength, IList<double> amplitudes, AConvertibleColor dataSource=null) : base(dataSource)
 			{
 				MinWaveLength = minWaveLength;
 				MaxWaveLength = maxWaveLength;
-				NmPerStep = (maxWaveLength - minWaveLength) / (amplitudes.Length - 1);
-				Amplitudes = amplitudes;
+				NmPerStep = (maxWaveLength - minWaveLength) / (amplitudes.Count - 1);
+				Amplitudes = new ReadOnlyCollection<double> (amplitudes);
 			}
 
 			// Constructor
-			public RegularLightSpectrum (double minWaveLength, double[] amplitudes, double nmPerStep, AConvertibleColor dataSource=null) : base(dataSource)
+			public RegularLightSpectrum (double minWaveLength, IList<double> amplitudes, double nmPerStep, AConvertibleColor dataSource=null) : base(dataSource)
 			{
 				NmPerStep = nmPerStep;
 				MinWaveLength = minWaveLength;
-				MaxWaveLength = minWaveLength + nmPerStep * (amplitudes.Length - 1);
-				Amplitudes = amplitudes;
+				MaxWaveLength = minWaveLength + nmPerStep * (amplitudes.Count - 1);
+				Amplitudes = new ReadOnlyCollection<double> (amplitudes);
 			}
 
 			#endregion
@@ -86,7 +88,7 @@ namespace Litipk.ColorSharp
 				if (waveLength >= MinWaveLength && waveLength <= MaxWaveLength) {
 					double dblIndex = (waveLength - MinWaveLength) / NmPerStep;
 					double floorIndex = Math.Floor (dblIndex);
-					uint uIndex = (uint)floorIndex;
+					int uIndex = (int)floorIndex;
 
 					if (dblIndex - floorIndex <= 2*double.Epsilon) {
 						return Amplitudes [uIndex];
@@ -124,7 +126,7 @@ namespace Litipk.ColorSharp
 			{
 				double max = 0;
 
-				for (int i = 0; i < Amplitudes.Length; i++) {
+				for (int i = 0; i < Amplitudes.Count; i++) {
 					if (Amplitudes [i] > max) {
 						max = Amplitudes [i];
 					}
@@ -138,7 +140,7 @@ namespace Litipk.ColorSharp
 			 */
 			public override int GetNumberOfDataPoints()
 			{
-				return Amplitudes.Length;
+				return Amplitudes.Count;
 			}
 
 			/**
