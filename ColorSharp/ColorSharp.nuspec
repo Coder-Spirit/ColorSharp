@@ -11,10 +11,12 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>
- - Improved documentation
- - Minor cleanups
- - Big refactor
- - Removed NUnit dependency
+ - Added Illuminants
+ - Added more precise matching functions
+ - Improved XML documentation
+ - Increased unit testing coverage
+ - Improved class constructors flexibility
+ - Exposed more immutable properties
     </releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>Light Color Colour CIEXYZ CIExyY sRGB</tags>

@@ -1,6 +1,20 @@
 ColorSharp's Changelog
 ======================
 
+## 2014-11-12 : 0.8.0 Release
+
+### Contributors
+ * Andrés Correa Casablanca <castarco@gmail.com , castarco@litipk.com>
+
+### Changes
+ * Added Illuminants (only D65)
+ * Added more precise matching functions
+ * Improved XML documentation
+ * Increased unit testing coverage
+ * Improved class constructors flexibility
+ * Exposed more immutable properties
+
+
 ## 2014-11-05 : 0.7.0 Release
 
 ### Contributors
