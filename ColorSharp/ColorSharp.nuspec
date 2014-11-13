@@ -11,12 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>
- - Added Illuminants
- - Added more precise matching functions
- - Improved XML documentation
- - Increased unit testing coverage
- - Improved class constructors flexibility
- - Exposed more immutable properties
+ - Bugfix in the D65 Illuminant (spectrum sample)
     </releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>Light Color Colour CIEXYZ CIExyY sRGB</tags>

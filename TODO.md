@@ -15,14 +15,14 @@
  * [ ] C (Average / North sky Daylight (obsolete))
  * [ ] D50 (Horizon Light. ICC profile PCS)
  * [ ] D55 (Mid-morning / Mid-afternoon Daylight)
- * [ ] D65 (Noon Daylight: Television, sRGB color space)
+ * [*] D65 (Noon Daylight: Television, sRGB color space)
  * [ ] D75 (North sky Daylight)
  * [ ] E (Equal energy)
  * [ ] F2 (Cool White Fluorescent)
  * [ ] F7 (D65 simulator, Daylight simulator)
  * [ ] F11 (Philips TL84, Ultralume 40)
  * [ ] Custom White Points
- 
+
 ## Feature Extraction
 
 ### Light Spectrums
@@ -51,4 +51,4 @@
   * [ ] Create Roadmap
 
 ## Trademark Issues?
- * [ ] Change the project name! ( and many links... :s ) 
+ * [ ] Change the project name! ( and many links... :s )

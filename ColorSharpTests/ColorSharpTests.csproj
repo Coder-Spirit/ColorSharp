@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Litipk.ColorSharpTests</RootNamespace>
     <AssemblyName>ColorSharpTests</AssemblyName>
-    <ReleaseVersion>0.8.0</ReleaseVersion>
+    <ReleaseVersion>0.8.1</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

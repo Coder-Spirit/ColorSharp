@@ -41,11 +41,18 @@ namespace Litipk.ColorSharpTests
 		{
 			var xyzWhitePoint = D65.XYZ_Sample.ToSRGB ();
 
+			// Because there are a lot of transformations, we can't ensure a very little delta
 			Assert.AreEqual (1.0, xyzWhitePoint.R, 0.0001);
 			Assert.AreEqual (1.0, xyzWhitePoint.G, 0.0001);
 			Assert.AreEqual (1.0, xyzWhitePoint.B, 0.0010);
 
+
 			var specWhitePoint = D65.spectrum_Sample.ToSRGB ();
+
+			// Because there are a lot of transformations, we can't ensure a very little delta
+			Assert.AreEqual (1.0, specWhitePoint.R, 0.0002);
+			Assert.AreEqual (1.0, specWhitePoint.G, 0.0001);
+			Assert.AreEqual (1.0, specWhitePoint.B, 0.0010);
 		}
 	}
 }

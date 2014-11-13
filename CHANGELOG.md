@@ -1,6 +1,15 @@
 ColorSharp's Changelog
 ======================
 
+## 2014-11-12 : 0.8.1 Release
+
+### Contributors
+ * Andrés Correa Casablanca <castarco@gmail.com , castarco@litipk.com>
+
+### Bugfixes
+ * Fixed D65 spectrum data points.
+
+
 ## 2014-11-12 : 0.8.0 Release
 
 ### Contributors
