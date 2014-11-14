@@ -69,7 +69,7 @@
     <Compile Include="src\Illuminants\D65.cs" />
     <Compile Include="src\MatchingFunctions\CIE1931XYZ1NmMatchingFunctionX.cs" />
     <Compile Include="src\MatchingFunctions\CIE1931XYZ1NmMatchingFunctionY.cs" />
-    <Compile Include="src\MatchingFunctions\CIE1931XYZ51NmMatchingFunctionZ.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1931XYZ1NmMatchingFunctionZ.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

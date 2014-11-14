@@ -102,9 +102,9 @@ namespace Litipk.ColorSharp
 			/**
 			 * Computes the 'sharkin' points. 
 			 */
-			static void computeSharkfin(double[] mfX, double[] mfY, double[] mfZ, ref xyYPoint[] Sharkfin, ref xyYPoint[] SortedSharkfin)
+			static void computeSharkfin(IList<double> mfX, IList<double> mfY, IList<double> mfZ, ref xyYPoint[] Sharkfin, ref xyYPoint[] SortedSharkfin)
 			{
-				var n = mfX.Length;
+				var n = mfX.Count;
 
 				Sharkfin = new xyYPoint[n];
 

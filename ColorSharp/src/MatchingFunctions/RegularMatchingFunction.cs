@@ -28,6 +28,8 @@
 
 
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 
 namespace Litipk.ColorSharp
@@ -61,7 +63,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * <value>Data points</value>
 			 */
-			public readonly double[] Amplitudes;
+			public readonly ReadOnlyCollection<double> Amplitudes;
 			#endregion
 
 
@@ -73,12 +75,12 @@ namespace Litipk.ColorSharp
 			 * <param name="maxWaveLength">Upper boundary of the matching function's support.</param>
 			 * <param name="amplitudes">Data points.</param>
 			 */
-			public RegularMatchingFunction (double minWaveLength, double maxWaveLength, double[] amplitudes)
+			public RegularMatchingFunction (double minWaveLength, double maxWaveLength, IList<double> amplitudes)
 			{
 				MinWaveLength = minWaveLength;
 				MaxWaveLength = maxWaveLength;
-				NmPerStep     = (maxWaveLength - minWaveLength) / (amplitudes.Length - 1);
-				Amplitudes    = amplitudes;
+				NmPerStep     = (maxWaveLength - minWaveLength) / (amplitudes.Count - 1);
+				Amplitudes    =  new ReadOnlyCollection<double> (amplitudes);
 			}
 
 			/**
@@ -87,12 +89,12 @@ namespace Litipk.ColorSharp
 			 * <param name="amplitudes">Data points.</param>
 			 * <param name="nmPerStep">Number of nanometers between data points.</param>
 			 */
-			public RegularMatchingFunction (double minWaveLength, double[] amplitudes, double nmPerStep)
+			public RegularMatchingFunction (double minWaveLength, IList<double> amplitudes, double nmPerStep)
 			{
 				NmPerStep     = nmPerStep;
 				MinWaveLength = minWaveLength;
-				MaxWaveLength = minWaveLength + nmPerStep * (amplitudes.Length - 1);
-				Amplitudes    = amplitudes;
+				MaxWaveLength = minWaveLength + nmPerStep * (amplitudes.Count - 1);
+				Amplitudes    =  new ReadOnlyCollection<double> (amplitudes);
 			}
 
 			#endregion
@@ -108,7 +110,7 @@ namespace Litipk.ColorSharp
 				if (waveLength >= MinWaveLength && waveLength <= MaxWaveLength) {
 					double dblIndex = (waveLength - MinWaveLength) / NmPerStep;
 					double floorIndex = Math.Floor (dblIndex);
-					uint uIndex = (uint)floorIndex;
+					int uIndex = (int)floorIndex;
 
 					if (dblIndex - floorIndex <= 2*double.Epsilon) {
 						return Amplitudes [uIndex];
@@ -144,7 +146,7 @@ namespace Litipk.ColorSharp
 			 */
 			public override int GetNumberOfDataPoints()
 			{
-				return Amplitudes.Length;
+				return Amplitudes.Count;
 			}
 
 			#endregion
