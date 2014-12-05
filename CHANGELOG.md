@@ -1,6 +1,14 @@
 ColorSharp's Changelog
 ======================
 
+## 2014-12-05 : 0.8.2 Release
+
+### Contributors
+ * Andrés Correa Casablanca <castarco@gmail.com , castarco@litipk.com>
+
+## Minor changes
+ * Added new constructor to the RegularLightSpectrum class.
+
 ## 2014-11-12 : 0.8.1 Release
 
 ### Contributors
