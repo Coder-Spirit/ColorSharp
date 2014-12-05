@@ -75,6 +75,15 @@ namespace Litipk.ColorSharp
 				Amplitudes = new ReadOnlyCollection<double> (amplitudes);
 			}
 
+			// Constructor
+			public RegularLightSpectrum (IList<double> amplitudes, double nmPerStep, double maxWavelength, AConvertibleColor dataSource=null) : base(dataSource)
+			{
+				NmPerStep = nmPerStep;
+				MaxWaveLength = maxWavelength;
+				MinWaveLength = maxWavelength - nmPerStep * (amplitudes.Count - 1);
+				Amplitudes = new ReadOnlyCollection<double> (amplitudes);
+			}
+
 			#endregion
 
 
