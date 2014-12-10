@@ -16,4 +16,10 @@
     <copyright>Copyright 2014</copyright>
     <tags>Light Color Colour CIEXYZ CIExyY sRGB</tags>
   </metadata>
+  <files>
+    <file src="bin\Release\net40\ColorSharp.dll" target="lib\net40" />
+    <file src="bin\Release\net40\ColorSharp.xml" target="lib\net40" />
+    <file src="bin\Release\net45\ColorSharp.dll" target="lib\net45" />
+    <file src="bin\Release\net45\ColorSharp.xml" target="lib\net45" />
+  </files>
 </package>

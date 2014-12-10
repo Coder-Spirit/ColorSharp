@@ -9,19 +9,30 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-		Release_x86_64|Any CPU = Release_x86_64|Any CPU
+		Release 4.0|Any CPU = Release 4.0|Any CPU
+		Release 4.5|Any CPU = Release 4.5|Any CPU
+		AfterBuild|Any CPU = AfterBuild|Any CPU
+		Package|Any CPU = Package|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1EC57B2E-C96F-411B-A238-B8E490634009}.AfterBuild|Any CPU.ActiveCfg = AfterBuild|Any CPU
 		{1EC57B2E-C96F-411B-A238-B8E490634009}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1EC57B2E-C96F-411B-A238-B8E490634009}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1EC57B2E-C96F-411B-A238-B8E490634009}.Release_x86_64|Any CPU.ActiveCfg = Release|Any CPU
-		{1EC57B2E-C96F-411B-A238-B8E490634009}.Release_x86_64|Any CPU.Build.0 = Release|Any CPU
+		{1EC57B2E-C96F-411B-A238-B8E490634009}.Package|Any CPU.ActiveCfg = Package|Any CPU
+		{1EC57B2E-C96F-411B-A238-B8E490634009}.Release 4.0|Any CPU.ActiveCfg = Release 4.0|Any CPU
+		{1EC57B2E-C96F-411B-A238-B8E490634009}.Release 4.0|Any CPU.Build.0 = Release 4.0|Any CPU
+		{1EC57B2E-C96F-411B-A238-B8E490634009}.Release 4.5|Any CPU.ActiveCfg = Release 4.5|Any CPU
+		{1EC57B2E-C96F-411B-A238-B8E490634009}.Release 4.5|Any CPU.Build.0 = Release 4.5|Any CPU
 		{1EC57B2E-C96F-411B-A238-B8E490634009}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EC57B2E-C96F-411B-A238-B8E490634009}.Release|Any CPU.Build.0 = Release|Any CPU
+		{960524F3-F375-4CDE-A82A-609CC32048E4}.AfterBuild|Any CPU.ActiveCfg = AfterBuild|Any CPU
 		{960524F3-F375-4CDE-A82A-609CC32048E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{960524F3-F375-4CDE-A82A-609CC32048E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{960524F3-F375-4CDE-A82A-609CC32048E4}.Release_x86_64|Any CPU.ActiveCfg = Release_x86_64|Any CPU
-		{960524F3-F375-4CDE-A82A-609CC32048E4}.Release_x86_64|Any CPU.Build.0 = Release_x86_64|Any CPU
+		{960524F3-F375-4CDE-A82A-609CC32048E4}.Package|Any CPU.ActiveCfg = Package|Any CPU
+		{960524F3-F375-4CDE-A82A-609CC32048E4}.Release 4.0|Any CPU.ActiveCfg = Release 4.0|Any CPU
+		{960524F3-F375-4CDE-A82A-609CC32048E4}.Release 4.0|Any CPU.Build.0 = Release 4.0|Any CPU
+		{960524F3-F375-4CDE-A82A-609CC32048E4}.Release 4.5|Any CPU.ActiveCfg = Release 4.5|Any CPU
+		{960524F3-F375-4CDE-A82A-609CC32048E4}.Release 4.5|Any CPU.Build.0 = Release 4.5|Any CPU
 		{960524F3-F375-4CDE-A82A-609CC32048E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{960524F3-F375-4CDE-A82A-609CC32048E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection

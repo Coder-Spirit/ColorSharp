@@ -8,9 +8,7 @@
     <RootNamespace>Litipk.ColorSharp</RootNamespace>
     <AssemblyName>ColorSharp</AssemblyName>
     <Description>A .NET/Mono library to handle color spaces (and light spectrums!)</Description>
-    <SignAssembly>true</SignAssembly>
     <DelaySign>false</DelaySign>
-    <AssemblyOriginatorKeyFile>colorsharp.snk</AssemblyOriginatorKeyFile>
     <ReleaseVersion>0.8.2</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -22,6 +20,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>colorsharp.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -30,22 +30,47 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <DocumentationFile>bin\Release\ColorSharp.xml</DocumentationFile>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>colorsharp.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release_x86_64|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release 4.0|AnyCPU' ">
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release_x86_64</OutputPath>
+    <OutputPath>bin\Release\net40</OutputPath>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\ColorSharp.xml</DocumentationFile>
-    <PlatformTarget>x64</PlatformTarget>
+    <DocumentationFile>bin\Release\net40\ColorSharp.xml</DocumentationFile>
     <ConsolePause>false</ConsolePause>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>colorsharp.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release 4.5|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\net45</OutputPath>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\net45\ColorSharp.xml</DocumentationFile>
+    <ConsolePause>false</ConsolePause>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>colorsharp.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AfterBuild|AnyCPU' ">
+    <Optimize>false</Optimize>
+    <OutputPath>bin\AfterBuild</OutputPath>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Package|AnyCPU' ">
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Package</OutputPath>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="MathNet.Numerics">
-      <HintPath>..\packages\MathNet.Numerics.Signed.3.2.3\lib\net40\MathNet.Numerics.dll</HintPath>
-    </Reference>
     <Reference Include="System.Numerics" />
+    <Reference Include="MathNet.Numerics">
+      <HintPath>..\packages\MathNet.Numerics.Signed.3.3.0\lib\net40\MathNet.Numerics.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,9 +106,20 @@
     <Folder Include="src\Illuminants\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="ColorSharp.nuspec" />
     <None Include="build_nuget_pkg.sh" />
     <None Include="colorsharp.pub" />
+    <None Include="packages.config" />
   </ItemGroup>
+  <Target Name="AfterBuild">
+    <GetAssemblyIdentity AssemblyFiles="$(OutputPath)$(AssemblyName).dll">
+      <Output TaskParameter="Assemblies" ItemName="OutputAssemblyInfo" />
+    </GetAssemblyIdentity>
+    <Message Text="Info: %(OutputAssemblyInfo.Version)" />
+  </Target>
+  <Target Name="Package">
+    <RemoveDir Directories="NuGet" />
+    <MakeDir Directories="NuGet" />
+    <Exec WorkingDirectory="$(BuildDir)" Command="nuget pack -Verbosity detailed -Symbols -OutputDir &quot;NuGet&quot; -Version %(OutputAssemblyInfo.Version) -Properties &quot;Configuration=$(Configuration)&quot;" />
+  </Target>
 </Project>
