@@ -164,14 +164,14 @@ namespace Litipk.ColorSharp
 			{
 				CIEXYZ xyzObj = obj as CIEXYZ; 
 
-				if (xyzObj == null || GetHashCode () != obj.GetHashCode ())
+				if (xyzObj == this) {
+					return true;
+				}
+				if (xyzObj == null || GetHashCode () != obj.GetHashCode ()) {
 					return false;
+				}
 
-				return (
-					Math.Abs (X - xyzObj.X) <= double.Epsilon &&
-					Math.Abs (Y - xyzObj.Y) <= double.Epsilon &&
-					Math.Abs (Z - xyzObj.Z) <= double.Epsilon
-				);
+				return (X == xyzObj.X && Y == xyzObj.Y && Z == xyzObj.Z);
 			}
 
 			/**
@@ -179,13 +179,11 @@ namespace Litipk.ColorSharp
 			 */
 			public override int GetHashCode ()
 			{
-				int hash = 23;
+				int hash = 30967 + X.GetHashCode ();  // 30967 == 173 * 179
 
-				hash = hash * 57 + X.GetHashCode ();
-				hash = hash * 57 + Y.GetHashCode ();
-				hash = hash * 57 + Z.GetHashCode ();
+				hash = hash * 179 + Y.GetHashCode ();
 
-				return hash;
+				return hash * 179 + Z.GetHashCode ();
 			}
 
 			#endregion

@@ -30,12 +30,12 @@
 using System;
 using System.Collections.Generic;
 
+using Litipk.ColorSharp.ColorSpaces;
+using Litipk.ColorSharp.InternalUtils;
+
 
 namespace Litipk.ColorSharp
 {
-	using ColorSpaces;
-	using InternalUtils;
-
 	namespace LightSpectrums
 	{
 		/**
@@ -167,6 +167,36 @@ namespace Litipk.ColorSharp
 				}
 
 				return true;
+			}
+
+			#endregion
+
+
+			#region Object methods
+
+			/**
+			 *  <inheritdoc />
+			 */
+			public override bool Equals(Object obj)
+			{
+				TabularLightSpectrum tls = obj as TabularLightSpectrum;
+
+				if (tls == this) {
+					return true;
+				}
+				if (tls == null || GetHashCode () != tls.GetHashCode ()) {
+					return false;
+				} 
+
+				return RawAmplitudes.Equals(tls.RawAmplitudes);
+			}
+
+			/**
+			 *  <inheritdoc />
+			 */
+			public override int GetHashCode ()
+			{
+				return 27221 + RawAmplitudes.GetHashCode ();  // 27221 = 163 * 167
 			}
 
 			#endregion

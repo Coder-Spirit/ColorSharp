@@ -34,6 +34,6 @@ Global
 		$0.VersionControlPolicy = $2
 		$2.inheritsSet = Mono
 		description = A .Net/Mono library to handle color spaces (and light spectrums!)
-		version = 0.8.2
+		version = 0.8.3
 	EndGlobalSection
 EndGlobal

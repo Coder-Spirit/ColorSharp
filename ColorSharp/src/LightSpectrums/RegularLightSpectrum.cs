@@ -31,11 +31,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
+using Litipk.ColorSharp.ColorSpaces;
+
 
 namespace Litipk.ColorSharp
 {
-	using ColorSpaces;
-
 	namespace LightSpectrums
 	{
 		/**
@@ -183,6 +183,46 @@ namespace Litipk.ColorSharp
 				}
 
 				return true;
+			}
+
+			#endregion
+
+
+			#region Object methods
+
+			/**
+			 *  <inheritdoc />
+			 */
+			public override bool Equals(Object obj)
+			{
+				RegularLightSpectrum rls = obj as RegularLightSpectrum;
+
+				if (rls == this) {
+					return true;
+				}
+				if (rls == null || GetHashCode () != rls.GetHashCode ()) {
+					return false;
+				} 
+
+				return (
+					NmPerStep     == rls.NmPerStep     &&
+					MinWaveLength == rls.MinWaveLength &&
+					MaxWaveLength == rls.MaxWaveLength &&
+					Amplitudes.Equals(rls.Amplitudes)
+				);
+			}
+
+			/**
+			 *  <inheritdoc />
+			 */
+			public override int GetHashCode ()
+			{
+				int hash = 25591 + NmPerStep.GetHashCode ();  // 25591 == 157 * 163
+
+				hash = hash * 163 + MinWaveLength.GetHashCode ();
+				hash = hash * 163 + MaxWaveLength.GetHashCode ();
+
+				return hash * 163 + Amplitudes.GetHashCode ();
 			}
 
 			#endregion

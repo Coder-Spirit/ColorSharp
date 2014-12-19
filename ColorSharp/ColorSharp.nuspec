@@ -11,7 +11,9 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>
- - Bugfix in the D65 Illuminant (spectrum sample)
+ - Updated MathNet.Numerics dependency
+ - Added HashCode to light spectrum objects
+ - Minor performance tweaks
     </releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>Light Color Colour CIEXYZ CIExyY sRGB</tags>

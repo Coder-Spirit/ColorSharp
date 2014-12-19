@@ -27,16 +27,13 @@
  */
 
 
-using System;
-using System.Collections.Generic;
+using Litipk.ColorSharp.ColorSpaces;
+using Litipk.ColorSharp.MatchingFunctions;
+using Litipk.ColorSharp.InternalUtils;
 
 
 namespace Litipk.ColorSharp
 {
-	using ColorSpaces;
-	using MatchingFunctions;
-	using InternalUtils;
-
 	namespace LightSpectrums
 	{
 		/**

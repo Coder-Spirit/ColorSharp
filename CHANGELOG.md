@@ -1,12 +1,23 @@
 ColorSharp's Changelog
 ======================
 
+## 2014-12-19 : 0.8.3 Release
+
+### Contributors
+* Andrés Correa Casablanca <castarco@gmail.com , castarco@litipk.com>
+
+### Changes
+ * Updated MathNet.Numerics dependency
+ * Added HashCode to light spectrum objects
+ * Minor performance tweaks
+
+
 ## 2014-12-05 : 0.8.2 Release
 
 ### Contributors
  * Andrés Correa Casablanca <castarco@gmail.com , castarco@litipk.com>
 
-## Minor changes
+### Minor changes
  * Added new constructor to the RegularLightSpectrum class.
 
 ## 2014-11-12 : 0.8.1 Release

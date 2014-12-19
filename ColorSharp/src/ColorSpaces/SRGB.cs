@@ -140,14 +140,14 @@ namespace Litipk.ColorSharp
 			{
 				SRGB srgbObj = obj as SRGB; 
 
-				if (srgbObj == null || GetHashCode () != obj.GetHashCode ())
+				if (srgbObj == this) {
+					return true;
+				}
+				if (srgbObj == null || GetHashCode () != obj.GetHashCode ()) {
 					return false;
+				}
 
-				return (
-					Math.Abs (R - srgbObj.R) <= double.Epsilon &&
-					Math.Abs (G - srgbObj.G) <= double.Epsilon &&
-					Math.Abs (B - srgbObj.B) <= double.Epsilon
-				);
+				return (R == srgbObj.R && G == srgbObj.G && B == srgbObj.B);
 			}
 
 			/**
@@ -155,13 +155,11 @@ namespace Litipk.ColorSharp
 			 */
 			public override int GetHashCode ()
 			{
-				int hash = 17;
+				int hash = 32399 + R.GetHashCode (); // 32399 == 179 * 181
 
-				hash = hash * 19 + R.GetHashCode ();
-				hash = hash * 19 + G.GetHashCode ();
-				hash = hash * 19 + B.GetHashCode ();
+				hash = hash * 181 + G.GetHashCode ();
 
-				return hash;
+				return hash * 181 + B.GetHashCode ();
 			}
 
 			#endregion
