@@ -1,0 +1,11 @@
+language: csharp
+
+solution: ColorSharp.sln
+
+install:
+   - nuget restore ColorSharp.sln
+   - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
+
+script:
+   - xbuild /p:Configuration=Release ColorSharp.sln
+   - mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./ColorSharpTests/bin/Release/ColorSharpTests.dll
