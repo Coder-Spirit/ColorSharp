@@ -2,7 +2,7 @@
 
 ## New color spaces
  * [ ] CIE RGB
- * [*] CIE UVW
+ * [X] CIE UVW
  * [ ] CIELUV
  * [ ] CIELAB
  * [ ] HSV
@@ -15,7 +15,7 @@
  * [ ] C (Average / North sky Daylight (obsolete))
  * [ ] D50 (Horizon Light. ICC profile PCS)
  * [ ] D55 (Mid-morning / Mid-afternoon Daylight)
- * [*] D65 (Noon Daylight: Television, sRGB color space)
+ * [X] D65 (Noon Daylight: Television, sRGB color space)
  * [ ] D75 (North sky Daylight)
  * [ ] E (Equal energy)
  * [ ] F2 (Cool White Fluorescent)
@@ -41,7 +41,7 @@
   * [ ] .RPM packages
 
 ## Quality Assurance
-  * [ ] TravisCI Integration
+  * [X] TravisCI Integration
   * [ ] AppVeyor Integration
   * [ ] Coverity Scan Integration
 
