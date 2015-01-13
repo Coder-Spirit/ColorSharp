@@ -1,5 +1,23 @@
 language: csharp
 
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "C1UKPXwk6qiUHaEOjvmOYJXY8HlQjPikJONVUxMjxDchHY99BdP6xu41u1Wyu9SHQkdeW7zppKPY5QDioMom6ejqTFVHpSLpy8+h8RqtLtBdJR4mHFPAWlBOIwwfubinXs47ivSUKhQDdSPitJFoFTZMab/4eWKTwcfBjrM55iI="
+
+addons:
+  coverity_scan:
+    project:
+      name: "Litipk/ColorSharp"
+      description: "Build submitted via Travis CI"
+    notification_email: castarco@gmail.com
+    build_command_prepend:
+       - msbuild /t:Clean
+       - nuget restore ColorSharp.sln
+    build_command:   "msbuild /t:Rebuild"
+    branch_pattern: coverity_scan
+
 solution: ColorSharp.sln
 
 install:
