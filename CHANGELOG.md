@@ -1,6 +1,17 @@
 ColorSharp's Changelog
 ======================
 
+## 2015-01-13 : 0.9.0 Release
+
+### Contributors
+* Andrés Correa Casablanca <castarco@gmail.com , castarco@litipk.com>
+
+### Changes
+ * Added CIE's 1960 UVW color space
+ * Less destructive conversions (now the data is better preserved)
+ * Now ToSRGB, ToCIExyY and ToCIEUVW are virtual methods, not abstract.
+
+
 ## 2014-12-19 : 0.8.3 Release
 
 ### Contributors

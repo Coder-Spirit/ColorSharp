@@ -28,7 +28,6 @@
 
 
 using System;
-using System.Collections.Generic;
 
 
 namespace Litipk.ColorSharp
@@ -102,8 +101,23 @@ namespace Litipk.ColorSharp
 			 */
 			public override CIExyY ToCIExyY (ConversionStrategy strategy=ConversionStrategy.Default)
 			{
+				CIExyY xyYDS = DataSource as CIExyY;
+				if (xyYDS != null) {
+					return xyYDS;
+				}
+
 				double XYZ = X + Y + Z;
 				return new CIExyY (X / XYZ, Y / XYZ, Y, DataSource ?? this);
+			}
+
+			/**
+			 * <inheritdoc />
+			 */
+			public override CIEUVW ToCIEUVW (ConversionStrategy strategy = ConversionStrategy.Default)
+			{
+				return (DataSource as CIEUVW) ?? new CIEUVW (
+					2.0 * X / 3.0, Y, 0.5 * (-X + 3 * Y + Z), DataSource ?? this
+				);
 			}
 
 			/**
@@ -111,6 +125,11 @@ namespace Litipk.ColorSharp
 			*/
 			public override SRGB ToSRGB (ConversionStrategy strategy=ConversionStrategy.ForceLowTruncate|ConversionStrategy.ForceHighStretch)
 			{
+				SRGB srgbDS = DataSource as SRGB;
+				if (srgbDS != null) {
+					return srgbDS;
+				}
+
 				// Linear transformation
 				double r = X * 3.2406 + Y * -1.5372 + Z * -0.4986;
 				double g = X * -0.9689 + Y * 1.8758 + Z * 0.0415;

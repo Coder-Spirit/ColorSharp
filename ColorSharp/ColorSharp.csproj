@@ -11,7 +11,7 @@
     <SignAssembly>true</SignAssembly>
     <DelaySign>false</DelaySign>
     <AssemblyOriginatorKeyFile>colorsharp.snk</AssemblyOriginatorKeyFile>
-    <ReleaseVersion>0.8.3</ReleaseVersion>
+    <ReleaseVersion>0.9.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -70,6 +70,7 @@
     <Compile Include="src\MatchingFunctions\CIE1931XYZ1NmMatchingFunctionX.cs" />
     <Compile Include="src\MatchingFunctions\CIE1931XYZ1NmMatchingFunctionY.cs" />
     <Compile Include="src\MatchingFunctions\CIE1931XYZ1NmMatchingFunctionZ.cs" />
+    <Compile Include="src\ColorSpaces\CIEUVW.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

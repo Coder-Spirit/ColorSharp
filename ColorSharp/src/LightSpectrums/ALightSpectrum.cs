@@ -116,22 +116,6 @@ namespace Litipk.ColorSharp
 				);
 			}
 
-			/**
-			 * <inheritdoc />
-			 */
-			public override CIExyY ToCIExyY (ConversionStrategy strategy = ConversionStrategy.Default)
-			{
-				return ToCIEXYZ ().ToCIExyY (strategy);
-			}
-
-			/**
-			 * <inheritdoc />
-			 */
-			public override SRGB ToSRGB(ConversionStrategy strategy = ConversionStrategy.ForceLowTruncate|ConversionStrategy.ForceHighStretch)
-			{
-				return ToCIEXYZ ().ToSRGB (strategy);
-			}
-
 			#endregion
 		}
 	}

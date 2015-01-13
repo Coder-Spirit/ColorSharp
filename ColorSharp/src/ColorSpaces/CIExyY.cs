@@ -165,7 +165,7 @@ namespace Litipk.ColorSharp
 			 */
 			public override CIEXYZ ToCIEXYZ (ConversionStrategy strategy=ConversionStrategy.Default)
 			{
-				return new CIEXYZ (x*Y/y, Y, Y*(1.0 - x - y)/y, DataSource ?? this);
+				return (DataSource as CIEXYZ) ?? new CIEXYZ (x*Y/y, Y, Y*(1.0 - x - y)/y, DataSource ?? this);
 			}
 
 			/**
@@ -174,14 +174,6 @@ namespace Litipk.ColorSharp
 			public override CIExyY ToCIExyY (ConversionStrategy strategy = ConversionStrategy.Default)
 			{
 				return this;
-			}
-
-			/**
-			 * <inheritdoc />
-			 */
-			public override SRGB ToSRGB (ConversionStrategy strategy = ConversionStrategy.ForceLowTruncate|ConversionStrategy.ForceHighStretch)
-			{
-				return ToCIEXYZ ().ToSRGB (strategy);
 			}
 
 			#endregion

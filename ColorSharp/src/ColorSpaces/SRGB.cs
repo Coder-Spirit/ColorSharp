@@ -98,6 +98,11 @@ namespace Litipk.ColorSharp
 			 */
 			public override CIEXYZ ToCIEXYZ (ConversionStrategy strategy=ConversionStrategy.Default)
 			{
+				CIEXYZ xyzDS = DataSource as CIEXYZ;
+				if (xyzDS != null) {
+					return xyzDS;
+				}
+
 				// Gamma correction
 				double r = R > 0.04045 ? Math.Pow((R+0.055)/1.055, 2.4) : R/12.92 ;
 				double g = G > 0.04045 ? Math.Pow((G+0.055)/1.055, 2.4) : G/12.92 ;
@@ -110,14 +115,6 @@ namespace Litipk.ColorSharp
 					r * 0.019332 + g * 0.119193 + b * 0.950444,
 					DataSource ?? this
 				);
-			}
-
-			/**
-			 * <inheritdoc />
-			 */
-			public override CIExyY ToCIExyY (ConversionStrategy strategy = ConversionStrategy.Default)
-			{
-				return ToCIEXYZ ().ToCIExyY ();
 			}
 
 			/**

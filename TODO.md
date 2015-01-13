@@ -2,7 +2,7 @@
 
 ## New color spaces
  * [ ] CIE RGB
- * [ ] CIE UVW
+ * [*] CIE UVW
  * [ ] CIELUV
  * [ ] CIELAB
  * [ ] HSV
@@ -42,6 +42,7 @@
 
 ## Quality Assurance
   * [ ] TravisCI Integration
+  * [ ] AppVeyor Integration
   * [ ] Coverity Scan Integration
 
 ## Documentation
@@ -52,3 +53,4 @@
 
 ## Trademark Issues?
  * [ ] Change the project name! ( and many links... :s )
+

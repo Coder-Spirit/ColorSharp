@@ -100,12 +100,14 @@ namespace Litipk.ColorSharp
 			/**
 			 * Helper method used by ConvertTo.
 			 */
-			private AConvertibleColor InnerConvertTo (Type t, ConversionStrategy strategy = ConversionStrategy.Default)
+			AConvertibleColor InnerConvertTo (Type t, ConversionStrategy strategy = ConversionStrategy.Default)
 			{
 				if (t == typeof(CIEXYZ))
 					return ToCIEXYZ (strategy);
 				if (t == typeof(CIExyY))
 					return ToCIExyY(strategy);
+				if (t == typeof(CIEUVW))
+					return ToCIEUVW (strategy);
 				if (t == typeof(SRGB))
 					return ToSRGB (strategy);
 
@@ -130,12 +132,26 @@ namespace Litipk.ColorSharp
 			/**
 			 * <summary>Converts the color sample to a CIE's 1931 xyY color sample.</summary>
 			 */
-			public abstract CIExyY ToCIExyY (ConversionStrategy strategy = ConversionStrategy.Default);
+			public virtual CIExyY ToCIExyY (ConversionStrategy strategy = ConversionStrategy.Default)
+			{
+				return (DataSource as CIExyY) ?? ToCIEXYZ ().ToCIExyY ();
+			}
+
+			/**
+			 * <summary>Converts the color sample to a CIE's 1960 UVW color sample.</summary>
+			 */
+			public virtual CIEUVW ToCIEUVW (ConversionStrategy strategy = ConversionStrategy.Default)
+			{
+				return (DataSource as CIEUVW) ?? ToCIEXYZ ().ToCIEUVW ();
+			}
 
 			/**
 			 * <summary>Converts the color sample to an HP's and Microsoft's 1996 sRGB sample.</summary>
 			 */
-			public abstract SRGB ToSRGB(ConversionStrategy strategy = ConversionStrategy.Default);
+			public virtual SRGB ToSRGB(ConversionStrategy strategy = ConversionStrategy.Default)
+			{
+				return (DataSource as SRGB) ?? ToCIEXYZ ().ToSRGB ();
+			}
 
 			#endregion
 		}
