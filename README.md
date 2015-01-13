@@ -1,7 +1,9 @@
 ColorSharp
 ==========
 
-A .NET/Mono library to handle color spaces (and light spectrums!)
+A .NET/Mono library to handle color spaces and light spectrums.
+
+[![Build Status](https://travis-ci.org/Litipk/ColorSharp.svg?branch=master)](https://travis-ci.org/Litipk/ColorSharp)
 
 ## Getting Started
 
@@ -13,8 +15,10 @@ ColorSharp is available as a [nuget package](https://www.nuget.org/packages/Colo
 
  * [Documentation](https://github.com/Litipk/ColorSharp/wiki)
  * [TODO list](https://github.com/Litipk/ColorSharp/blob/master/TODO.md)
+ * [Changelog](https://github.com/Litipk/ColorSharp/blob/master/CHANGELOG.md)
  * [Blog](https://colorsharp.wordpress.com/)
  * [OpenHUB Profile](https://www.openhub.net/p/ColorSharp)
+ * [Travis CI Builds](https://travis-ci.org/Litipk/ColorSharp)
 
 ## Inspiration
 
