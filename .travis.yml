@@ -12,10 +12,8 @@ addons:
       name: "Litipk/ColorSharp"
       description: "Build submitted via Travis CI"
     notification_email: castarco@gmail.com
-    build_command_prepend:
-       - msbuild /t:Clean
-       - .\.nuget\nuget.exe restore .\ColorSharp.sln
-    build_command:   "msbuild /t:Rebuild"
+    build_command_prepend: "msbuild /t:Clean; ./.nuget/nuget.exe restore ./ColorSharp.sln"
+    build_command: "msbuild /t:Rebuild"
     branch_pattern: coverity_scan
 
 solution: ColorSharp.sln
