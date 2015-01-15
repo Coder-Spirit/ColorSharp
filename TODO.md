@@ -2,7 +2,6 @@
 
 ## New color spaces
  * [ ] CIE RGB
- * [X] CIE UVW
  * [ ] CIELUV
  * [ ] CIELAB
  * [ ] HSV
@@ -32,23 +31,28 @@
 ### Colors
   * [ ] Color Temperature
 
+## Color Operations
+  * IsAdditive : bool
+  * colorC = colorA + colorB
+
 ## Performance
   * [ ] Make use of OpenCL to improve conversions performance (with OpenCL.NET?)
   * [ ] SIMD? (Mono & .NET have different approaches :s)
 
 ## Packaging
+  * [ ] Multiple versions for multiple .NET versionsi conside one single NuGet package
   * [ ] .DEB packages
   * [ ] .RPM packages
 
 ## Quality Assurance
-  * [X] TravisCI Integration
+  * [ ]  
+  * [ ] >= 85% Unit Testing Coverage
   * [ ] AppVeyor Integration
   * [ ] Coverity Scan Integration
 
 ## Documentation
   * [ ] Wiki
   * [ ] Improve inline documentation (code comments)
-  * [X] Create Changelog
   * [ ] Create Roadmap
 
 ## Trademark Issues?
