@@ -1,9 +1,7 @@
-ColorSharp
+ColorSharp [![Build Status](https://travis-ci.org/Litipk/ColorSharp.svg?branch=master)](https://travis-ci.org/Litipk/ColorSharp)
 ==========
 
 A .NET/Mono library to handle color spaces and light spectrums.
-
-[![Build Status](https://travis-ci.org/Litipk/ColorSharp.svg?branch=master)](https://travis-ci.org/Litipk/ColorSharp)
 
 ## Getting Started
 
@@ -11,33 +9,23 @@ ColorSharp is available as a [nuget package](https://www.nuget.org/packages/Colo
 
 `PM> Install-Package ColorSharp`
 
-## Project Links
+## Learn more
 
- * [Documentation](https://github.com/Litipk/ColorSharp/wiki)
- * [TODO list](https://github.com/Litipk/ColorSharp/blob/master/TODO.md)
+ * [Project Documentation](https://github.com/Litipk/ColorSharp/wiki) : Here you can find how to use ColorSharp in your applications.
+ * [External References](https://github.com/Litipk/ColorSharp/blob/master/REFERENCES.md) : Here you can learn about the science behind ColorSharp and discover other projects that have inspired us.
+ * [Blog](https://colorsharp.wordpress.com/) : News, technical articles, opinion...
+
+## Project Status
+
  * [Changelog](https://github.com/Litipk/ColorSharp/blob/master/CHANGELOG.md)
- * [Blog](https://colorsharp.wordpress.com/)
- * [OpenHUB Profile](https://www.openhub.net/p/ColorSharp)
  * [Travis CI Builds](https://travis-ci.org/Litipk/ColorSharp)
+ * [OpenHUB Profile](https://www.openhub.net/p/ColorSharp)
 
-## Inspiration
+## How to contribute
 
-This library is inspired by the following projects and information sources.
-
-### Code Libraries
-
-* .NET/Mono:
-  * [THEjoezack/ColorMine](https://github.com/THEjoezack/ColorMine/)
-  * [tompazourek/Colourful](https://github.com/tompazourek/Colourful)
-* Python:
-  * [Colour Science for Python](http://colour-science.org/index.php): This is an incredible project that has many repositories in Github, not only with Python code, but also with Matlab source code and other resources.
-  * [fish2000/ColorPy](https://github.com/fish2000/ColorPy)
-
-### Books
-
-* *1998* - *Color Space Conversions* - Adrian Ford, Alan Roberts .
-* *2005* - *Colorimetry: Fundamentals and Applications* - Noboru Ohta, Alan R. Robertson .
-* *2007* - *Colorimetry: Understanding the CIE system* - János Schanda .
+ * First of all, you can take a look on the [TODO list](https://github.com/Litipk/ColorSharp/blob/master/TODO.md) and decide if there is something that you want to do :) . If you think there are missing improvements in this file, then you are invited to modify the TODO list.
+ * You can also send us bug reports through the [tracker](https://github.com/Litipk/ColorSharp/issues), or look for bugs to solve.
+ * If you are really interested on helping to improve ColorSharp, we recommend to read the [contributing guidelines](https://github.com/Litipk/ColorSharp/blob/master/CONTRIBUTING.md).
 
 ## License
 
