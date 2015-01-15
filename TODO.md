@@ -45,7 +45,7 @@
   * [ ] .RPM packages
 
 ## Quality Assurance
-  * [ ]  
+  * [ ] Ensure immutability wherever it's possible.
   * [ ] >= 85% Unit Testing Coverage
   * [ ] AppVeyor Integration
   * [ ] Coverity Scan Integration
