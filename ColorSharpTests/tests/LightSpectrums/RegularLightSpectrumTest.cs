@@ -49,6 +49,16 @@ namespace Litipk.ColorSharpTests
 		}
 
 		[Test]
+		public void TestEquality()
+		{
+			var ls1 = new RegularLightSpectrum (100.0, 200.0, new [] { 20.0, 50.0, 20.0 });
+			var ls2 = new RegularLightSpectrum (100.0, 200.0, new [] { 20.0, 50.0, 20.0 });
+
+			Assert.AreEqual (ls1, ls2);
+			Assert.AreEqual (ls2, ls1);
+		}
+
+		[Test]
 		public void TestToCIEXYZ()
 		{
 			var ls = new RegularLightSpectrum (380.0, 780.0, new [] {

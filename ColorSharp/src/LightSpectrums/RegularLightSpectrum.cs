@@ -28,6 +28,7 @@
 
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -200,15 +201,15 @@ namespace Litipk.ColorSharp
 				if (rls == this) {
 					return true;
 				}
-				if (rls == null || GetHashCode () != rls.GetHashCode ()) {
+				if (rls == null) {
 					return false;
-				} 
+				}
 
 				return (
 					NmPerStep     == rls.NmPerStep     &&
 					MinWaveLength == rls.MinWaveLength &&
 					MaxWaveLength == rls.MaxWaveLength &&
-					Amplitudes.Equals(rls.Amplitudes)
+					Amplitudes.SequenceEqual(rls.Amplitudes)
 				);
 			}
 
