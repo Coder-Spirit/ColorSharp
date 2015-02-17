@@ -156,7 +156,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
-			public override bool IsInsideColorSpace()
+			public override bool IsInsideColorSpace(bool highPrecision = false)
 			{
 				if (RawAmplitudes[0].Key <= double.Epsilon)
 					return false;

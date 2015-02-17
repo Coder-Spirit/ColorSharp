@@ -173,7 +173,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
-			public override bool IsInsideColorSpace()
+			public override bool IsInsideColorSpace(bool highPrecision = false)
 			{
 				if (MinWaveLength <= double.Epsilon)
 					return false;

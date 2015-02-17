@@ -84,7 +84,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
-			public override bool IsInsideColorSpace()
+			public override bool IsInsideColorSpace(bool highPrecision = false)
 			{
 				return (
 					0.0 <= R && R <= 1.0 &&

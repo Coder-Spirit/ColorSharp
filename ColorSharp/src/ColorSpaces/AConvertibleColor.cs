@@ -122,7 +122,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * <summary>Tells us if the object represents a valid color sample in current color space.</summary>
 			 */
-			public abstract bool IsInsideColorSpace ();
+			public abstract bool IsInsideColorSpace (bool highPrecision = false);
 
 			/**
 			 * <summary>Converts the color sample to a CIE's 1931 XYZ color sample.</summary>

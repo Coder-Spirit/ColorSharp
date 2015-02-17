@@ -110,11 +110,17 @@ namespace Litipk.ColorSharp
 
 				for (int i = 0; i < n; i++) {
 					var XYZ = mfX [i] + mfY [i] + mfZ [i];
-					Sharkfin [i] = new xyYPoint { x = mfX [i] / XYZ, y = mfY [i] / XYZ };
+
+					if (Math.Abs (XYZ) < double.Epsilon) {
+						Sharkfin [i] = new xyYPoint { x = 0.0, y = 0.0 };
+					} else {
+						Sharkfin [i] = new xyYPoint { x = mfX [i] / XYZ, y = mfY [i] / XYZ };
+					}
 				}
 
 				// Used to speedup the convex hull algorithm
 				SortedSharkfin = (xyYPoint[])Sharkfin.Clone();
+
 				Array.Sort (SortedSharkfin, new xyYPointComparer());
 			}
 
@@ -140,15 +146,23 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
-			public override bool IsInsideColorSpace()
+			public override bool IsInsideColorSpace(bool highPrecision = false)
 			{
 				// Fast checks
 				if (y > 1.0 - x || y < (x - 0.25) * 0.5 || y < 0.4 - x * 4 || y >= 0.85)
 					return false;
 
-				xyYPoint[] points = new xyYPoint[SortedSharkfin5Nm.Length + 1];
-				Array.Copy (SortedSharkfin5Nm, 0, points, 0, SortedSharkfin5Nm.Length);
-				points[SortedSharkfin5Nm.Length] = new xyYPoint{x=x, y=y};
+				xyYPoint[] points;
+
+				if (highPrecision) {
+					points = new xyYPoint[SortedSharkfin1Nm.Length + 1];
+					Array.Copy (SortedSharkfin1Nm, 0, points, 0, SortedSharkfin1Nm.Length);
+					points [SortedSharkfin1Nm.Length] = new xyYPoint{ x = x, y = y };
+				} else {
+					points = new xyYPoint[SortedSharkfin5Nm.Length + 1];
+					Array.Copy (SortedSharkfin5Nm, 0, points, 0, SortedSharkfin5Nm.Length);
+					points [SortedSharkfin5Nm.Length] = new xyYPoint{ x = x, y = y };
+				}
 
 				xyYPoint[] convexHull = findConvexHull (points);
 
@@ -191,7 +205,7 @@ namespace Litipk.ColorSharp
 				if (xyYObj == this) {
 					return true;
 				}
-				if (xyYObj == null || GetHashCode () != obj.GetHashCode ()) {
+				if (xyYObj == null) {
 					return false;
 				}
 
