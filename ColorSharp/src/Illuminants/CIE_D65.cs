@@ -27,15 +27,12 @@
 */
 
 
-using System;
-using System.Collections.Generic;
+using Litipk.ColorSharp.ColorSpaces;
+using Litipk.ColorSharp.LightSpectrums;
 
 
 namespace Litipk.ColorSharp
 {
-	using ColorSpaces;
-	using LightSpectrums;
-
 	namespace Illuminants
 	{
 		/**
@@ -44,7 +41,7 @@ namespace Litipk.ColorSharp
 		 * hence it is also called a daylight illuminant.
 		 * </summary>
 		 */
-		public static class D65
+		public static class CIE_D65
 		{
 			/**
 			 * <value>D65 expressed as a CIE's 1931 XYZ sample (White Point).</value>

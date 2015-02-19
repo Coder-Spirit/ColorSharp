@@ -9,8 +9,8 @@
     <AssemblyName>ColorSharp</AssemblyName>
     <Description>A .NET/Mono library to handle color spaces (and light spectrums!)</Description>
     <SignAssembly>true</SignAssembly>
-    <DelaySign>true</DelaySign>
-    <AssemblyOriginatorKeyFile>colorsharp.pub</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
+    <AssemblyOriginatorKeyFile>colorsharp.snk</AssemblyOriginatorKeyFile>
     <ReleaseVersion>0.9.3</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -66,11 +66,12 @@
     <Compile Include="src\InternalUtils\Comparers.cs" />
     <Compile Include="src\InternalUtils\Structs.cs" />
     <Compile Include="src\ColorSpaces\ColorConversionStrategy.cs" />
-    <Compile Include="src\Illuminants\D65.cs" />
     <Compile Include="src\MatchingFunctions\CIE1931XYZ1NmMatchingFunctionX.cs" />
     <Compile Include="src\MatchingFunctions\CIE1931XYZ1NmMatchingFunctionY.cs" />
     <Compile Include="src\MatchingFunctions\CIE1931XYZ1NmMatchingFunctionZ.cs" />
-    <Compile Include="src\ColorSpaces\CIEUVW.cs" />
+    <Compile Include="src\ColorSpaces\CIEUCS.cs" />
+    <Compile Include="src\Illuminants\CIE_D65.cs" />
+    <Compile Include="src\Illuminants\CIE_A.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

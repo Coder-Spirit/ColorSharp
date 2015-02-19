@@ -30,7 +30,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -38,11 +38,12 @@
     <Compile Include="tests\ColorSpaces\CIEXYZTest.cs" />
     <Compile Include="tests\LightSpectrums\RegularLightSpectrumTest.cs" />
     <Compile Include="tests\Illuminants\D65Test.cs" />
+    <Compile Include="tests\Illuminants\ATest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="tests\MatchingFunctions\EMPTY" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ColorSharp\ColorSharp.csproj">

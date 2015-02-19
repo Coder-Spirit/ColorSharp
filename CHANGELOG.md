@@ -7,9 +7,9 @@ ColorSharp's Changelog
 * Andrés Correa Casablanca <castarco@gmail.com , castarco@litipk.com>
 
 ### Changes
- * Added CIE's 1960 UVW color space
+ * Added CIE's 1960 UCS color space
  * Less destructive conversions (now the data is better preserved)
- * Now ToSRGB, ToCIExyY and ToCIEUVW are virtual methods, not abstract.
+ * Now ToSRGB, ToCIExyY and ToCIEUCS are virtual methods, not abstract.
  * Updated MathNet.Numerics dependency.
 
 

@@ -113,10 +113,15 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
-			public override CIEUVW ToCIEUVW (ConversionStrategy strategy = ConversionStrategy.Default)
+			public override CIEUCS ToCIEUCS (ConversionStrategy strategy = ConversionStrategy.Default)
 			{
-				return (DataSource as CIEUVW) ?? new CIEUVW (
-					2.0 * X / 3.0, Y, 0.5 * (-X + 3 * Y + Z), DataSource ?? this
+				return (DataSource as CIEUCS) ?? new CIEUCS (
+					2.0 * X / 3.0,                // U
+					Y,                            // V
+					4 * X / (X + 15 * Y + 3 * Z), // u
+					6 * Y / (X + 15 * Y + 3 * Z), // v
+					0.5 * (-X + 3 * Y + Z),       // W
+					DataSource ?? this    
 				);
 			}
 

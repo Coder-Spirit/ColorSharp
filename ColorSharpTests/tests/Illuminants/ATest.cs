@@ -29,35 +29,26 @@
 
 using NUnit.Framework;
 using Litipk.ColorSharp.ColorSpaces;
+using Litipk.ColorSharp.Illuminants;
 
 
 namespace Litipk.ColorSharpTests
 {
 	[TestFixture]
-	public class CIEXYZTest
+	public class ATest
 	{
 		[Test]
-		public void TestConversionSimpleChains()
+		public void TestConsistency()
 		{
-			Assert.AreEqual (
-				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<CIExyY> (),
-				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<SRGB> ().ConvertTo<CIExyY> ()
+			var baseXYZ = CIE_A.spectrum_Sample.ConvertTo<CIEXYZ> ();
+			var correctedXYZ = new CIEXYZ (
+				baseXYZ.X / baseXYZ.Y, 1.0, baseXYZ.Z / baseXYZ.Y
 			);
 
-			Assert.AreEqual (
-				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<SRGB> (),
-				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<CIExyY> ().ConvertTo<SRGB> ()
-			);
-
-			Assert.AreEqual (
-				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<CIEUCS> (),
-				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<CIExyY> ().ConvertTo<CIEUCS> ()
-			);
-
-			Assert.AreEqual (
-				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<CIExyY> (),
-				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<CIEUCS> ().ConvertTo<CIExyY> ()
-			);
+			Assert.AreEqual (correctedXYZ.X, CIE_A.XYZ_Sample.X, 0.0005);
+			Assert.AreEqual (correctedXYZ.Y, CIE_A.XYZ_Sample.Y, 0.0001);
+			Assert.AreEqual (correctedXYZ.Z, CIE_A.XYZ_Sample.Z, 0.0002);
 		}
 	}
 }
+

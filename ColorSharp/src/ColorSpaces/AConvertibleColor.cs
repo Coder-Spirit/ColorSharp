@@ -106,8 +106,8 @@ namespace Litipk.ColorSharp
 					return ToCIEXYZ (strategy);
 				if (t == typeof(CIExyY))
 					return ToCIExyY(strategy);
-				if (t == typeof(CIEUVW))
-					return ToCIEUVW (strategy);
+				if (t == typeof(CIEUCS))
+					return ToCIEUCS (strategy);
 				if (t == typeof(SRGB))
 					return ToSRGB (strategy);
 
@@ -138,11 +138,11 @@ namespace Litipk.ColorSharp
 			}
 
 			/**
-			 * <summary>Converts the color sample to a CIE's 1960 UVW color sample.</summary>
+			 * <summary>Converts the color sample to a CIE's 1960 UCS color sample.</summary>
 			 */
-			public virtual CIEUVW ToCIEUVW (ConversionStrategy strategy = ConversionStrategy.Default)
+			public virtual CIEUCS ToCIEUCS (ConversionStrategy strategy = ConversionStrategy.Default)
 			{
-				return (DataSource as CIEUVW) ?? ToCIEXYZ ().ToCIEUVW ();
+				return (DataSource as CIEUCS) ?? ToCIEXYZ ().ToCIEUCS ();
 			}
 
 			/**
