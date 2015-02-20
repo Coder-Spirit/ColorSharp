@@ -1,6 +1,8 @@
 ColorSharp [![Build Status](https://travis-ci.org/Litipk/ColorSharp.svg?branch=master)](https://travis-ci.org/Litipk/ColorSharp)
 ==========
 
+[![Join the chat at https://gitter.im/Litipk/ColorSharp](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Litipk/ColorSharp?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 A .NET/Mono library to handle color spaces and light spectrums.
 
 ## Getting Started
