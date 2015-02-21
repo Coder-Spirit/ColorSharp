@@ -29,12 +29,12 @@
 
 using System;
 
+using Litipk.ColorSharp.LightSpectrums;
+using Litipk.ColorSharp.InternalUtils;
+
 
 namespace Litipk.ColorSharp
 {
-	using LightSpectrums;
-	using InternalUtils;
-
 	namespace MatchingFunctions
 	{
 		/**

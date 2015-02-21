@@ -39,6 +39,9 @@ namespace Litipk.ColorSharpTests
 		[Test]
 		public void TestRGBValue()
 		{
+			var tmp = CIE_D65.spectrum_Sample.ToCIEXYZ ();
+			//System.Console.WriteLine ("(X="+tmp.X+", "+"Y="+tmp.Y+", Z="+tmp.Z+")");
+
 			var xyzWhitePoint = CIE_D65.XYZ_Sample.ToSRGB ();
 
 			// Because there are a lot of transformations, we can't ensure a very little delta
