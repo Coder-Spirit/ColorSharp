@@ -28,6 +28,8 @@
 
 
 using NUnit.Framework;
+
+using Litipk.ColorSharp.ColorSpaces;
 using Litipk.ColorSharp.Illuminants;
 
 
@@ -37,11 +39,8 @@ namespace Litipk.ColorSharpTests
 	public class D65Test
 	{
 		[Test]
-		public void TestRGBValue()
+		public void TestRGBValue ()
 		{
-			var tmp = CIE_D65.spectrum_Sample.ToCIEXYZ ();
-			//System.Console.WriteLine ("(X="+tmp.X+", "+"Y="+tmp.Y+", Z="+tmp.Z+")");
-
 			var xyzWhitePoint = CIE_D65.XYZ_Sample.ToSRGB ();
 
 			// Because there are a lot of transformations, we can't ensure a very little delta
@@ -56,6 +55,22 @@ namespace Litipk.ColorSharpTests
 			Assert.AreEqual (1.0, specWhitePoint.R, 0.0002);
 			Assert.AreEqual (1.0, specWhitePoint.G, 0.0001);
 			Assert.AreEqual (1.0, specWhitePoint.B, 0.0010);
+		}
+
+		[Test]
+		public void TestCIExyYVaue ()
+		{
+			var pointA = CIE_D65.XYZ_Sample.ToCIExyY (ConversionStrategy.Default);
+
+			// Because there are a lot of transformations, we can't ensure a very little delta
+			Assert.AreEqual (0.31271, pointA.x, 0.00002);
+			Assert.AreEqual (0.32902, pointA.y, 0.00001);
+
+			var pointB = CIE_D65.XYZ_Sample.ToCIExyY (ConversionStrategy.WaveLength1NmStep);
+
+			// Because there are a lot of transformations, we can't ensure a very little delta
+			Assert.AreEqual (0.31271, pointB.x, 0.00001);
+			Assert.AreEqual (0.32902, pointB.y, 0.00001);
 		}
 	}
 }
