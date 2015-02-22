@@ -22,27 +22,23 @@
  */
 
 /*
- * Contributors:
- *  - Andrés Correa Casablanca <castarco@gmail.com , castarco@litipk.com>
- */
+* Contributors:
+*  - Andrés Correa Casablanca <castarco@gmail.com , castarco@litipk.com>
+*/
 
 
 namespace Litipk.ColorSharp
 {
 	namespace InternalUtils
 	{
-		interface IRealFunctionWithFiniteSupport
+		interface IRealInterpolatedFunctionWithFiniteSupport : IRealFunctionWithFiniteSupport
 		{
 			/**
-			 * This gives us the wave amplitude at a given wave length, if it's necessary the method will do interpolation.
+			 * We need to know how many data points we have to make computations using all the information we have.
+			 * If the concrete implementation is "analytical", then must return -1.
 			 */
-			double EvaluateAt(double val);
-
-			/**
-			 * Analytic aproximations also have their confidence intervals, so there aren't exceptional cases here.
-			 */
-			double GetSupportMinValue ();
-			double GetSupportMaxValue ();
+			int GetNumberOfDataPoints();
 		}
 	}
 }
+

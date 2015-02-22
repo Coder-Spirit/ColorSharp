@@ -33,6 +33,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 using Litipk.ColorSharp.ColorSpaces;
+using Litipk.ColorSharp.InternalUtils;
 
 
 namespace Litipk.ColorSharp
@@ -42,7 +43,7 @@ namespace Litipk.ColorSharp
 		/**
 		 * Class to handle light spectrum samples with equidistant data points
 		 */
-		public sealed class RegularLightSpectrum : ALightSpectrum
+		public sealed class RegularLightSpectrum : AInterpolatedLightSpectrum
 		{
 			#region properties
 

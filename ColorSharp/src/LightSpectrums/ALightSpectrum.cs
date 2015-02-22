@@ -70,11 +70,6 @@ namespace Litipk.ColorSharp
 			 */
 			public abstract double GetMaxValueOnSupport ();
 
-			/**
-			 * <inheritdoc />
-			 */
-			public abstract int GetNumberOfDataPoints();
-
 			#endregion
 
 			/**
@@ -99,15 +94,15 @@ namespace Litipk.ColorSharp
 
 				if ((strategy & ConversionStrategy.WaveLength1NmStep) != 0) {
 					MFs = new AMatchingFunction[] {
-						CIE1931XYZ1NmMatchingFunctionX.Instance,
-						CIE1931XYZ1NmMatchingFunctionY.Instance,
-						CIE1931XYZ1NmMatchingFunctionZ.Instance
+						CIE1931XYZ1Nm2DegX.Instance,
+						CIE1931XYZ1Nm2DegY.Instance,
+						CIE1931XYZ1Nm2DegZ.Instance
 					};
 				} else { // By default we choose 5 Nm
 					MFs = new AMatchingFunction[] {
-						CIE1931XYZ5NmMatchingFunctionX.Instance,
-						CIE1931XYZ5NmMatchingFunctionY.Instance,
-						CIE1931XYZ5NmMatchingFunctionZ.Instance
+						CIE1931XYZ5Nm2DegX.Instance,
+						CIE1931XYZ5Nm2DegY.Instance,
+						CIE1931XYZ5Nm2DegZ.Instance
 					};
 				}
 

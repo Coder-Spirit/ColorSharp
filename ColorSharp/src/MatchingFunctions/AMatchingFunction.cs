@@ -54,7 +54,17 @@ namespace Litipk.ColorSharp
 			{
 				double minWavelength = Math.Max (this.GetSupportMinValue (), lss.GetSupportMinValue ());
 				double maxWavelength = Math.Min (this.GetSupportMaxValue (), lss.GetSupportMaxValue ());
-				int numberOfPartitions = Math.Max (this.GetNumberOfDataPoints (), lss.GetNumberOfDataPoints ());
+
+				int numberOfPartitions;
+
+				if (lss is AInterpolatedLightSpectrum) {
+					numberOfPartitions = Math.Max (
+						this.GetNumberOfDataPoints (),
+						(lss as AInterpolatedLightSpectrum).GetNumberOfDataPoints ()
+					);
+				} else {
+					numberOfPartitions = this.GetNumberOfDataPoints ();
+				}
 
 				if (numberOfPartitions == -1) {
 					numberOfPartitions = ((int)Math.Round (maxWavelength-minWavelength)) + 2;

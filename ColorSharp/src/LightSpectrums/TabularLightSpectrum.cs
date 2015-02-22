@@ -41,7 +41,7 @@ namespace Litipk.ColorSharp
 		/**
 		 * Class to handle light spectrum samples with not equidistant data points
 		 */
-		public sealed class TabularLightSpectrum : ALightSpectrum
+		public sealed class TabularLightSpectrum : AInterpolatedLightSpectrum
 		{
 			#region private properties
 

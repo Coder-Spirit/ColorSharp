@@ -22,27 +22,29 @@
  */
 
 /*
- * Contributors:
- *  - Andrés Correa Casablanca <castarco@gmail.com , castarco@litipk.com>
- */
+* Contributors:
+*  - Andrés Correa Casablanca <castarco@gmail.com , castarco@litipk.com>
+*/
+
+
+using Litipk.ColorSharp.ColorSpaces;
+using Litipk.ColorSharp.MatchingFunctions;
+using Litipk.ColorSharp.InternalUtils;
 
 
 namespace Litipk.ColorSharp
 {
-	namespace InternalUtils
+	namespace LightSpectrums
 	{
-		interface IRealFunctionWithFiniteSupport
+		/**
+		 * <summary>Abstract class that provides basic methods to manipulate light spectrums.</summary>
+		 */
+		public abstract class AInterpolatedLightSpectrum : ALightSpectrum, IRealInterpolatedFunctionWithFiniteSupport
 		{
-			/**
-			 * This gives us the wave amplitude at a given wave length, if it's necessary the method will do interpolation.
-			 */
-			double EvaluateAt(double val);
+			protected AInterpolatedLightSpectrum(AConvertibleColor dataSource=null) : base(dataSource) { }
 
-			/**
-			 * Analytic aproximations also have their confidence intervals, so there aren't exceptional cases here.
-			 */
-			double GetSupportMinValue ();
-			double GetSupportMaxValue ();
+			public abstract int GetNumberOfDataPoints();
 		}
 	}
 }
+

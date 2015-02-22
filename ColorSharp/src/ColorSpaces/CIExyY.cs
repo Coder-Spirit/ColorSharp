@@ -83,17 +83,17 @@ namespace Litipk.ColorSharp
 			static CIExyY()
 			{
 				computeSharkfin (
-					CIE1931XYZ5NmMatchingFunctionX.Instance.Amplitudes,
-					CIE1931XYZ5NmMatchingFunctionY.Instance.Amplitudes,
-					CIE1931XYZ5NmMatchingFunctionZ.Instance.Amplitudes,
+					CIE1931XYZ5Nm2DegX.Instance.Amplitudes,
+					CIE1931XYZ5Nm2DegY.Instance.Amplitudes,
+					CIE1931XYZ5Nm2DegZ.Instance.Amplitudes,
 					ref Sharkfin5Nm,
 					ref SortedSharkfin5Nm
 				);
 
 				computeSharkfin (
-					CIE1931XYZ1NmMatchingFunctionX.Instance.Amplitudes,
-					CIE1931XYZ1NmMatchingFunctionY.Instance.Amplitudes,
-					CIE1931XYZ1NmMatchingFunctionZ.Instance.Amplitudes,
+					CIE1931XYZ1Nm2DegX.Instance.Amplitudes,
+					CIE1931XYZ1Nm2DegY.Instance.Amplitudes,
+					CIE1931XYZ1Nm2DegZ.Instance.Amplitudes,
 					ref Sharkfin1Nm,
 					ref SortedSharkfin1Nm
 				);

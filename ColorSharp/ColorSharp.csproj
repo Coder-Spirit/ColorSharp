@@ -59,19 +59,27 @@
     <Compile Include="src\ColorSpaces\CIEXYZ.cs" />
     <Compile Include="src\ColorSpaces\SRGB.cs" />
     <Compile Include="src\InternalUtils\IRealFunctionWithFiniteSupport.cs" />
-    <Compile Include="src\MatchingFunctions\CIE1931XYZ5NmMatchingFunctionY.cs" />
-    <Compile Include="src\MatchingFunctions\CIE1931XYZ5NmMatchingFunctionX.cs" />
-    <Compile Include="src\MatchingFunctions\CIE1931XYZ5NmMatchingFunctionZ.cs" />
     <Compile Include="src\ColorSpaces\CIExyY.cs" />
     <Compile Include="src\InternalUtils\Comparers.cs" />
     <Compile Include="src\InternalUtils\Structs.cs" />
     <Compile Include="src\ColorSpaces\ColorConversionStrategy.cs" />
-    <Compile Include="src\MatchingFunctions\CIE1931XYZ1NmMatchingFunctionX.cs" />
-    <Compile Include="src\MatchingFunctions\CIE1931XYZ1NmMatchingFunctionY.cs" />
-    <Compile Include="src\MatchingFunctions\CIE1931XYZ1NmMatchingFunctionZ.cs" />
     <Compile Include="src\ColorSpaces\CIEUCS.cs" />
     <Compile Include="src\Illuminants\CIE_D65.cs" />
     <Compile Include="src\Illuminants\CIE_A.cs" />
+    <Compile Include="src\InternalUtils\IRealInterpolatedFunctionWithFiniteSupport.cs" />
+    <Compile Include="src\LightSpectrums\AInterpolatedLightSpectrum.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1931XYZ1Nm2DegZ.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1931XYZ1Nm2DegY.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1931XYZ1Nm2DegX.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1931XYZ5Nm2DegX.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1931XYZ5Nm2DegY.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1931XYZ5Nm2DegZ.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1964XYZ1Nm10DegX.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1964XYZ1Nm10DegY.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1964XYZ1Nm10DegZ.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1964XYZ5Nm10DegX.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1964XYZ5Nm10DegY.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1964XYZ5Nm10DegZ.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
