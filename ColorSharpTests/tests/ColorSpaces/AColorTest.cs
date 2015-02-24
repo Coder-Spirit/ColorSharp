@@ -33,26 +33,37 @@ using Litipk.ColorSharp.ColorSpaces;
 namespace Litipk.ColorSharpTests
 {
 	[TestFixture]
-	public class CIExyYTest
+	public class AColorTest
 	{
 		[Test]
-		public void TestIsInsideColorSpace()
+		public void TestConversionSimpleChains()
 		{
-			Assert.IsFalse (new CIExyY (0.25, 0.75, 1.0).IsInsideColorSpace ());
-			Assert.IsFalse (new CIExyY (0.30, 0.05, 1.0).IsInsideColorSpace ());
-			Assert.IsFalse (new CIExyY (0.40, 0.10, 1.0).IsInsideColorSpace ());
-			Assert.IsFalse (new CIExyY (0.50, 0.15, 1.0).IsInsideColorSpace ());
-			Assert.IsFalse (new CIExyY (0.65, 0.20, 1.0).IsInsideColorSpace ());
-			Assert.IsFalse (new CIExyY (0.80, 0.80, 1.0).IsInsideColorSpace ());
+			// From XYZ
+			Assert.AreEqual (
+				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<CIExyY> (),
+				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<SRGB> ().ConvertTo<CIExyY> ()
+			);
 
-			Assert.IsTrue (new CIExyY (0.05, 0.30, 1.0).IsInsideColorSpace ());
-			Assert.IsTrue (new CIExyY (0.10, 0.65, 1.0).IsInsideColorSpace ());
-			Assert.IsTrue (new CIExyY (0.20, 0.10, 1.0).IsInsideColorSpace ());
-			Assert.IsTrue (new CIExyY (0.65, 0.25, 1.0).IsInsideColorSpace ());
-			Assert.IsTrue (new CIExyY (0.70, 0.27, 1.0).IsInsideColorSpace ());
+			Assert.AreEqual (
+				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<SRGB> (),
+				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<CIExyY> ().ConvertTo<SRGB> ()
+			);
 
-			// High Precision
-			Assert.IsFalse(new CIExyY (0.05, 0.25, 1.0).IsInsideColorSpace (true));
+			Assert.AreEqual (
+				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<CIEUCS> (),
+				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<CIExyY> ().ConvertTo<CIEUCS> ()
+			);
+
+			Assert.AreEqual (
+				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<CIExyY> (),
+				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<CIEUCS> ().ConvertTo<CIExyY> ()
+			);
+
+			// From xyY
+			Assert.AreEqual (
+				new CIExyY (0.5, 0.5, 1.0).ConvertTo<SRGB>(),
+				new CIExyY (0.5, 0.5, 1.0).ConvertTo<CIEXYZ>().ConvertTo<SRGB>()
+			);
 		}
 	}
 }

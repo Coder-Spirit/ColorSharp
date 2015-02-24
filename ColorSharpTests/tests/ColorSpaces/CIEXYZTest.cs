@@ -36,28 +36,6 @@ namespace Litipk.ColorSharpTests
 	[TestFixture]
 	public class CIEXYZTest
 	{
-		[Test]
-		public void TestConversionSimpleChains()
-		{
-			Assert.AreEqual (
-				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<CIExyY> (),
-				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<SRGB> ().ConvertTo<CIExyY> ()
-			);
 
-			Assert.AreEqual (
-				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<SRGB> (),
-				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<CIExyY> ().ConvertTo<SRGB> ()
-			);
-
-			Assert.AreEqual (
-				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<CIEUCS> (),
-				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<CIExyY> ().ConvertTo<CIEUCS> ()
-			);
-
-			Assert.AreEqual (
-				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<CIExyY> (),
-				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<CIEUCS> ().ConvertTo<CIExyY> ()
-			);
-		}
 	}
 }

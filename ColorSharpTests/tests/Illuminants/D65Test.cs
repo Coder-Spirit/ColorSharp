@@ -60,17 +60,11 @@ namespace Litipk.ColorSharpTests
 		[Test]
 		public void TestCIExyYVaue ()
 		{
-			var pointA = CIE_D65.XYZ_Sample.ToCIExyY (ConversionStrategy.Default);
+			var pointA = CIE_D65.XYZ_Sample.ToCIExyY ();
 
 			// Because there are a lot of transformations, we can't ensure a very little delta
 			Assert.AreEqual (0.31271, pointA.x, 0.00002);
 			Assert.AreEqual (0.32902, pointA.y, 0.00001);
-
-			var pointB = CIE_D65.XYZ_Sample.ToCIExyY (ConversionStrategy.WaveLength1NmStep);
-
-			// Because there are a lot of transformations, we can't ensure a very little delta
-			Assert.AreEqual (0.31271, pointB.x, 0.00001);
-			Assert.AreEqual (0.32902, pointB.y, 0.00001);
 		}
 	}
 }

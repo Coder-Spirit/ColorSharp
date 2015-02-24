@@ -39,6 +39,7 @@
     <Compile Include="tests\LightSpectrums\RegularLightSpectrumTest.cs" />
     <Compile Include="tests\Illuminants\D65Test.cs" />
     <Compile Include="tests\Illuminants\ATest.cs" />
+    <Compile Include="tests\ColorSpaces\AColorTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
