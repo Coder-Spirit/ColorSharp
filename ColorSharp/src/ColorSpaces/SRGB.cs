@@ -96,7 +96,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
-			public override CIEXYZ ToCIEXYZ (ConversionStrategy strategy=ConversionStrategy.Default)
+			public override CIEXYZ ToCIEXYZ (ColorStrategy strategy=ColorStrategy.Default)
 			{
 				CIEXYZ xyzDS = DataSource as CIEXYZ;
 				if (xyzDS != null) {
@@ -120,7 +120,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
-			public override SRGB ToSRGB (ConversionStrategy strategy = ConversionStrategy.WaveLength5NmStep)
+			public override SRGB ToSRGB (ColorStrategy strategy = ColorStrategy.Default)
 			{
 				return this;
 			}

@@ -91,7 +91,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
-			public override CIEXYZ ToCIEXYZ (ConversionStrategy strategy=ConversionStrategy.Default)
+			public override CIEXYZ ToCIEXYZ (ColorStrategy strategy=ColorStrategy.Default)
 			{
 				return this;
 			}
@@ -99,7 +99,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
-			public override CIExyY ToCIExyY (ConversionStrategy strategy=ConversionStrategy.Default)
+			public override CIExyY ToCIExyY (ColorStrategy strategy=ColorStrategy.Default)
 			{
 				CIExyY xyYDS = DataSource as CIExyY;
 				if (xyYDS != null) {
@@ -113,7 +113,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
-			public override CIEUCS ToCIEUCS (ConversionStrategy strategy = ConversionStrategy.Default)
+			public override CIEUCS ToCIEUCS (ColorStrategy strategy = ColorStrategy.Default)
 			{
 				return (DataSource as CIEUCS) ?? new CIEUCS (
 					2.0 * X / 3.0,                // U
@@ -128,7 +128,7 @@ namespace Litipk.ColorSharp
 			/**
 			* <inheritdoc />
 			*/
-			public override SRGB ToSRGB (ConversionStrategy strategy=ConversionStrategy.ForceLowTruncate|ConversionStrategy.ForceHighStretch)
+			public override SRGB ToSRGB (ColorStrategy strategy=ColorStrategy.ForceLowTruncate|ColorStrategy.ForceHighStretch)
 			{
 				SRGB srgbDS = DataSource as SRGB;
 				if (srgbDS != null) {
@@ -145,7 +145,7 @@ namespace Litipk.ColorSharp
 				g = g > 0.0031308 ? 1.055 * Math.Pow(g, 1 / 2.4) - 0.055 : 12.92 * g;
 				b = b > 0.0031308 ? 1.055 * Math.Pow(b, 1 / 2.4) - 0.055 : 12.92 * b;
 
-				if ((strategy & ConversionStrategy.ForceLowStretch) != 0) {
+				if ((strategy & ColorStrategy.ForceLowStretch) != 0) {
 					double minChannelValue = Math.Min (r, Math.Min (g, b));
 
 					if (minChannelValue < 0.0) {
@@ -153,13 +153,13 @@ namespace Litipk.ColorSharp
 						g -= minChannelValue;
 						b -= minChannelValue;
 					}
-				} else if ((strategy & ConversionStrategy.ForceLowTruncate) != 0) {
+				} else if ((strategy & ColorStrategy.ForceLowTruncate) != 0) {
 					r = Math.Max (0.0, r);
 					g = Math.Max (0.0, g);
 					b = Math.Max (0.0, b);
 				}
 
-				if ((strategy & ConversionStrategy.ForceHighStretch) != 0) {
+				if ((strategy & ColorStrategy.ForceHighStretch) != 0) {
 					double maxChannelValue = Math.Max (r, Math.Max (g, b));
 
 					if (maxChannelValue > 1.0) {
@@ -167,7 +167,7 @@ namespace Litipk.ColorSharp
 						g = g / maxChannelValue;
 						b = b / maxChannelValue;
 					}
-				} else if ((strategy & ConversionStrategy.ForceHighTruncate) != 0) {
+				} else if ((strategy & ColorStrategy.ForceHighTruncate) != 0) {
 					r = Math.Min (1.0, r);
 					g = Math.Min (1.0, g);
 					b = Math.Min (1.0, b);

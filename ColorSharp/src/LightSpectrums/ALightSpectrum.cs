@@ -88,21 +88,31 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
-			public override CIEXYZ ToCIEXYZ (ConversionStrategy strategy=ConversionStrategy.Default)
+			public override CIEXYZ ToCIEXYZ (ColorStrategy strategy=ColorStrategy.Default)
+			{
+				// We don't need the Color Conversion strategy here, but the Spectrum Conversion strategy
+				return ToCIEXYZ (SpectrumStrategy.Default);
+			}
+
+			public CIEXYZ ToCIEXYZ (SpectrumStrategy strategy=SpectrumStrategy.Default)
 			{
 				AMatchingFunction[] MFs;
 
-				if ((strategy & ConversionStrategy.WaveLength1NmStep) != 0) {
+				if (strategy == SpectrumStrategy.Nm1Deg2) {
 					MFs = new AMatchingFunction[] {
-						CIE1931XYZ1Nm2DegX.Instance,
-						CIE1931XYZ1Nm2DegY.Instance,
-						CIE1931XYZ1Nm2DegZ.Instance
+						CIE1931XYZ1Nm2DegX.Instance, CIE1931XYZ1Nm2DegY.Instance, CIE1931XYZ1Nm2DegZ.Instance
 					};
-				} else { // By default we choose 5 Nm
+				} else if (strategy == SpectrumStrategy.Nm1Deg10) {
 					MFs = new AMatchingFunction[] {
-						CIE1931XYZ5Nm2DegX.Instance,
-						CIE1931XYZ5Nm2DegY.Instance,
-						CIE1931XYZ5Nm2DegZ.Instance
+						CIE1964XYZ1Nm10DegX.Instance, CIE1964XYZ1Nm10DegY.Instance, CIE1964XYZ1Nm10DegZ.Instance
+					};
+				} else if (strategy == SpectrumStrategy.Nm5Deg10) {
+					MFs = new AMatchingFunction[] {
+						CIE1964XYZ5Nm10DegX.Instance, CIE1964XYZ5Nm10DegY.Instance, CIE1964XYZ5Nm10DegZ.Instance
+					};
+				} else { // if (strategy == SpectrumStrategy.Nm5Deg2) {
+					MFs = new AMatchingFunction[] {
+						CIE1931XYZ5Nm2DegX.Instance, CIE1931XYZ5Nm2DegY.Instance, CIE1931XYZ5Nm2DegZ.Instance
 					};
 				}
 

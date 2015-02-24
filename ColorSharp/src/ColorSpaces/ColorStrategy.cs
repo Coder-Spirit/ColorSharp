@@ -38,11 +38,8 @@ namespace Litipk.ColorSharp
 		 * <summary>Enum type used to specify alternative strategies in color conversion.</summary>
 		 */
 		[Flags]
-		public enum ConversionStrategy
+		public enum ColorStrategy
 		{
-			WaveLength5NmStep = 0,
-			WaveLength1NmStep = 1,
-
 			NoForce           = 0,
 			ForceLowTruncate  = 2,
 			ForceLowStretch   = 4,
@@ -54,7 +51,7 @@ namespace Litipk.ColorSharp
 			ForceStretch      = ForceLowStretch | ForceHighStretch,
 			Force             = ForceLow | ForceHigh,
 
-			Default = WaveLength5NmStep | NoForce
+			Default = NoForce
 		}
 	}
 }

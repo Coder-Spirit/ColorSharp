@@ -180,7 +180,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
-			public override CIEXYZ ToCIEXYZ (ConversionStrategy strategy=ConversionStrategy.Default)
+			public override CIEXYZ ToCIEXYZ (ColorStrategy strategy=ColorStrategy.Default)
 			{
 				// TODO: Can be improved using extra info (minor case components, and boolean flags)
 				// TODO: It's also possible to create a direct conversion to the xyY color space
@@ -192,7 +192,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
-			public override CIEUCS ToCIEUCS (ConversionStrategy strategy = ConversionStrategy.Default)
+			public override CIEUCS ToCIEUCS (ColorStrategy strategy = ColorStrategy.Default)
 			{
 				return this;
 			}

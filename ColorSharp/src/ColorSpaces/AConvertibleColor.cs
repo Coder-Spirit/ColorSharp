@@ -68,7 +68,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * <see cref="ConvertTo"/>
 			 */
-			public T ConvertTo<T> (ConversionStrategy strategy=ConversionStrategy.Default) where T : AConvertibleColor
+			public T ConvertTo<T> (ColorStrategy strategy=ColorStrategy.Default) where T : AConvertibleColor
 			{
 				return (T)ConvertTo (typeof(T), strategy);
 			}
@@ -77,7 +77,7 @@ namespace Litipk.ColorSharp
 			 * <summary>Method that allows conversions passing the type as a parameter.</summary>
 			 * <remarks>DON'T USE it to implement conversion methods, use the non type-parametric variants.</remarks>
 			 */
-			public AConvertibleColor ConvertTo (Type t, ConversionStrategy strategy=ConversionStrategy.Default)
+			public AConvertibleColor ConvertTo (Type t, ColorStrategy strategy=ColorStrategy.Default)
 			{
 				Type tt = GetType ();
 
@@ -100,7 +100,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * Helper method used by ConvertTo.
 			 */
-			AConvertibleColor InnerConvertTo (Type t, ConversionStrategy strategy = ConversionStrategy.Default)
+			AConvertibleColor InnerConvertTo (Type t, ColorStrategy strategy = ColorStrategy.Default)
 			{
 				if (t == typeof(CIEXYZ))
 					return ToCIEXYZ (strategy);
@@ -127,12 +127,12 @@ namespace Litipk.ColorSharp
 			/**
 			 * <summary>Converts the color sample to a CIE's 1931 XYZ color sample.</summary>
 			 */
-			public abstract CIEXYZ ToCIEXYZ(ConversionStrategy strategy = ConversionStrategy.Default);
+			public abstract CIEXYZ ToCIEXYZ(ColorStrategy strategy = ColorStrategy.Default);
 
 			/**
 			 * <summary>Converts the color sample to a CIE's 1931 xyY color sample.</summary>
 			 */
-			public virtual CIExyY ToCIExyY (ConversionStrategy strategy = ConversionStrategy.Default)
+			public virtual CIExyY ToCIExyY (ColorStrategy strategy = ColorStrategy.Default)
 			{
 				return (DataSource as CIExyY) ?? ToCIEXYZ ().ToCIExyY ();
 			}
@@ -140,7 +140,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * <summary>Converts the color sample to a CIE's 1960 UCS color sample.</summary>
 			 */
-			public virtual CIEUCS ToCIEUCS (ConversionStrategy strategy = ConversionStrategy.Default)
+			public virtual CIEUCS ToCIEUCS (ColorStrategy strategy = ColorStrategy.Default)
 			{
 				return (DataSource as CIEUCS) ?? ToCIEXYZ ().ToCIEUCS ();
 			}
@@ -148,7 +148,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * <summary>Converts the color sample to an HP's and Microsoft's 1996 sRGB sample.</summary>
 			 */
-			public virtual SRGB ToSRGB(ConversionStrategy strategy = ConversionStrategy.Default)
+			public virtual SRGB ToSRGB(ColorStrategy strategy = ColorStrategy.ForceLowTruncate|ColorStrategy.ForceHighStretch)
 			{
 				return (DataSource as SRGB) ?? ToCIEXYZ ().ToSRGB ();
 			}
