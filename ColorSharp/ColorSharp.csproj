@@ -84,6 +84,7 @@
     <Compile Include="src\Illuminants\CIE_B.cs" />
     <Compile Include="src\Illuminants\CIE_C.cs" />
     <Compile Include="src\Illuminants\CIE_D50.cs" />
+    <Compile Include="src\Illuminants\CIE_D55.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
