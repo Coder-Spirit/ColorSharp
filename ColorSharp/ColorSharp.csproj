@@ -81,6 +81,9 @@
     <Compile Include="src\MatchingFunctions\CIE1964XYZ5Nm10DegZ.cs" />
     <Compile Include="src\ColorSpaces\ColorStrategy.cs" />
     <Compile Include="src\LightSpectrums\SpectrumStrategy.cs" />
+    <Compile Include="src\Illuminants\CIE_B.cs" />
+    <Compile Include="src\Illuminants\CIE_C.cs" />
+    <Compile Include="src\Illuminants\CIE_D50.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

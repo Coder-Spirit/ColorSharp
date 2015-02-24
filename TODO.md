@@ -9,10 +9,10 @@
  * [ ] CMYK
 
 ## Illuminants
- * [ ] A (Incandescent / Tungsten)
- * [ ] B (Direct sunlight at noon (obsolete))
- * [ ] C (Average / North sky Daylight (obsolete))
- * [ ] D50 (Horizon Light. ICC profile PCS)
+ * [X] A (Incandescent / Tungsten)
+ * [X] B (Direct sunlight at noon (obsolete))
+ * [X] C (Average / North sky Daylight (obsolete))
+ * [X] D50 (Horizon Light. ICC profile PCS)
  * [ ] D55 (Mid-morning / Mid-afternoon Daylight)
  * [X] D65 (Noon Daylight: Television, sRGB color space)
  * [ ] D75 (North sky Daylight)
