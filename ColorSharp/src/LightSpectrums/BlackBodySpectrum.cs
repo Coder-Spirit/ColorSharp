@@ -78,23 +78,9 @@ namespace Litipk.ColorSharp
 			public override double EvaluateAt (double waveLength)
 			{
 				// 2*h*c² = 2 * 299792458 * 1.98644568e-25 = 1.1910428661813628e-16
-				double a = (
-					1.1910428661813628e-16 / (
-						Math.Pow(waveLength, 5) * (
-							Math.Exp(1.98644568e-25 / (waveLength * CCT * 1.3806488e-23)) - 1.0
-						)
-					)
-				);
-
-				double b = (
-					(3.7417749e-16 * Math.Pow(waveLength, -5.0) / Math.PI) * Math.Pow(
-						(Math.Exp(1.4388e-2 / (waveLength * CCT)) - 1), -1
-					)
-				);
-
-				Console.WriteLine (a + " <--> " + b);
-
-				return a;
+				return (1.1910428661813628e19 /*1.1910428661813628e-16*/ / (
+					Math.Pow(waveLength/* * 1e-7*/, 5.0) * (Math.Exp(0.014387769576158687 / (waveLength * CCT)) - 1.0)
+				));
 			}
 
 			public override double GetMaxValueOnSupport ()

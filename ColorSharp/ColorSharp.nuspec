@@ -11,11 +11,12 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>
- - Updated MathNet.Numerics dependency
- - Added HashCode to light spectrum objects
- - Minor performance tweaks
+- Added new Illuminants
+- Added new Matching Functions
+- Improved spectrum -> color conversion mechanism
+- Minor API breaks.
     </releaseNotes>
-    <copyright>Copyright 2014</copyright>
+    <copyright>Copyright 2014-2015</copyright>
     <tags>Light Color Colour CIEXYZ CIExyY sRGB</tags>
   </metadata>
 </package>

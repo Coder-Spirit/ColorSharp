@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Litipk.ColorSharpTests</RootNamespace>
     <AssemblyName>ColorSharpTests</AssemblyName>
-    <ReleaseVersion>0.9.3</ReleaseVersion>
+    <ReleaseVersion>0.10.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,6 +40,7 @@
     <Compile Include="tests\Illuminants\D65Test.cs" />
     <Compile Include="tests\Illuminants\ATest.cs" />
     <Compile Include="tests\ColorSpaces\AColorTest.cs" />
+    <Compile Include="tests\LightSpectrums\BlackBodySpectrumTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
