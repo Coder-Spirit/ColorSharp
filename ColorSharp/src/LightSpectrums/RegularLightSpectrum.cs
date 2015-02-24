@@ -157,6 +157,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
+			/*
 			public override double GetNextAmplitudeSample (double waveLength)
 			{
 				if (waveLength < MinWaveLength && waveLength >= MaxWaveLength) {
@@ -165,6 +166,7 @@ namespace Litipk.ColorSharp
 
 				return MinWaveLength + ((uint)Math.Floor ((waveLength - MinWaveLength) / NmPerStep) + 1) * NmPerStep;
 			}
+			*/
 
 			#endregion
 

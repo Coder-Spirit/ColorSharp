@@ -131,6 +131,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
+			/*
 			public override double GetNextAmplitudeSample (double waveLength)
 			{
 				if (waveLength < RawAmplitudes[0].Key || waveLength >= RawAmplitudes[RawAmplitudes.Count-1].Key) {
@@ -147,6 +148,7 @@ namespace Litipk.ColorSharp
 
 				return RawAmplitudes [index + 1].Key;
 			}
+			*/
 
 			#endregion
 

@@ -78,7 +78,7 @@ namespace Litipk.ColorSharp
 			 * If the method returns -1.0 , then we suppose we have an "analytic" spectrum, so we don't have samples.
 			 * </summary>
 			 */
-			public abstract double GetNextAmplitudeSample (double waveLength);
+			//public abstract double GetNextAmplitudeSample (double waveLength);
 
 			#endregion
 
@@ -98,27 +98,49 @@ namespace Litipk.ColorSharp
 			{
 				AMatchingFunction[] MFs;
 
+				int step;
 				if (strategy == SpectrumStrategy.Nm1Deg2) {
+					step = 1;
 					MFs = new AMatchingFunction[] {
 						CIE1931XYZ1Nm2DegX.Instance, CIE1931XYZ1Nm2DegY.Instance, CIE1931XYZ1Nm2DegZ.Instance
 					};
 				} else if (strategy == SpectrumStrategy.Nm1Deg10) {
+					step = 1;
 					MFs = new AMatchingFunction[] {
 						CIE1964XYZ1Nm10DegX.Instance, CIE1964XYZ1Nm10DegY.Instance, CIE1964XYZ1Nm10DegZ.Instance
 					};
 				} else if (strategy == SpectrumStrategy.Nm5Deg10) {
+					step = 5;
 					MFs = new AMatchingFunction[] {
 						CIE1964XYZ5Nm10DegX.Instance, CIE1964XYZ5Nm10DegY.Instance, CIE1964XYZ5Nm10DegZ.Instance
 					};
 				} else { // if (strategy == SpectrumStrategy.Nm5Deg2) {
+					step = 5;
 					MFs = new AMatchingFunction[] {
 						CIE1931XYZ5Nm2DegX.Instance, CIE1931XYZ5Nm2DegY.Instance, CIE1931XYZ5Nm2DegZ.Instance
 					};
 				}
 
-				return new CIEXYZ (
-					MFs [0].DoConvolution (this), MFs [1].DoConvolution (this), MFs [2].DoConvolution (this), DataSource ?? this
-				);
+				double X = 0.0, Y = 0.0, Z = 0.0;
+				int n = MFs [0].GetNumberOfDataPoints ();
+				double minV = MFs [0].GetSupportMinValue ();
+
+				for (int i = 0; i < n; i++) {
+					if (i * step + minV < GetSupportMinValue ()) {
+						continue;
+					}
+					if (i * step + minV > GetSupportMaxValue ()) {
+						break;
+					}
+
+					double v = EvaluateAt (i * step + minV);
+
+					X += MFs [0].EvaluateAt (i * step + minV) * v * step;
+					Y += MFs [1].EvaluateAt (i * step + minV) * v * step;
+					Z += MFs [2].EvaluateAt (i * step + minV) * v * step;
+				}
+
+				return new CIEXYZ (X, Y, Z);
 			}
 
 			#endregion
