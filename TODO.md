@@ -13,7 +13,7 @@
  * [X] B (Direct sunlight at noon (obsolete))
  * [X] C (Average / North sky Daylight (obsolete))
  * [X] D50 (Horizon Light. ICC profile PCS)
- * [ ] D55 (Mid-morning / Mid-afternoon Daylight)
+ * [X] D55 (Mid-morning / Mid-afternoon Daylight)
  * [X] D65 (Noon Daylight: Television, sRGB color space)
  * [ ] D75 (North sky Daylight)
  * [ ] E (Equal energy)
@@ -21,6 +21,9 @@
  * [ ] F7 (D65 simulator, Daylight simulator)
  * [ ] F11 (Philips TL84, Ultralume 40)
  * [ ] Custom White Points
+
+## Connectivity & Interoperability
+ * [ ] Connection with spectralworkbench.org's API .
 
 ## Feature Extraction
 
@@ -52,7 +55,7 @@
 
 ## Documentation
   * [ ] Wiki
-  * [ ] Improve inline documentation (code comments)
+  * [X] Improve inline documentation (code comments)
   * [ ] Create Roadmap
 
 ## Trademark Issues?
