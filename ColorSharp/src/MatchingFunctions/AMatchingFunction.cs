@@ -27,9 +27,6 @@
  */
 
 
-using System;
-
-using Litipk.ColorSharp.LightSpectrums;
 using Litipk.ColorSharp.InternalUtils;
 
 
@@ -45,42 +42,6 @@ namespace Litipk.ColorSharp
 		 */
 		public abstract class AMatchingFunction : IRealFunctionWithFiniteSupport
 		{
-			#region shared methods
-
-			/**
-			 * <summary>Applies the matching function to a spectrum to obtain a parameter of a color space.</summary>
-			 */
-			public double DoConvolution (ALightSpectrum lss)
-			{
-				double minWavelength = Math.Max (this.GetSupportMinValue (), lss.GetSupportMinValue ());
-				double maxWavelength = Math.Min (this.GetSupportMaxValue (), lss.GetSupportMaxValue ());
-
-				int numberOfPartitions;
-
-				if (lss is AInterpolatedLightSpectrum) {
-					numberOfPartitions = Math.Max (
-						this.GetNumberOfDataPoints (),
-						(lss as AInterpolatedLightSpectrum).GetNumberOfDataPoints ()
-					);
-				} else {
-					numberOfPartitions = this.GetNumberOfDataPoints ();
-				}
-
-				if (numberOfPartitions == -1) {
-					numberOfPartitions = ((int)Math.Round (maxWavelength-minWavelength)) + 2;
-				}
-
-				return MathNet.Numerics.Integration.NewtonCotesTrapeziumRule.IntegrateComposite (
-					waveLength => this.EvaluateAt(waveLength)*lss.EvaluateAt(waveLength),
-					minWavelength,
-					maxWavelength,
-					numberOfPartitions
-				);
-			}
-
-			#endregion
-
-
 			#region abstract methods to be implemented in subclasses
 
 			/**

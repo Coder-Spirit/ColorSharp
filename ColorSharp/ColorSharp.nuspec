@@ -14,6 +14,7 @@
 - Added new Illuminants
 - Added new Matching Functions
 - Improved spectrum -> color conversion mechanism
+- Added black body spectrums
 - Minor API breaks.
     </releaseNotes>
     <copyright>Copyright 2014-2015</copyright>
