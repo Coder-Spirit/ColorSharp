@@ -187,20 +187,6 @@ namespace Litipk.ColorSharp
 				return Amplitudes.Count;
 			}
 
-			/**
-			 * <inheritdoc />
-			 */
-			/*
-			public override double GetNextAmplitudeSample (double waveLength)
-			{
-				if (waveLength < MinWaveLength && waveLength >= MaxWaveLength) {
-					throw new ArgumentOutOfRangeException ();
-				}
-
-				return MinWaveLength + ((uint)Math.Floor ((waveLength - MinWaveLength) / NmPerStep) + 1) * NmPerStep;
-			}
-			*/
-
 			#endregion
 
 
