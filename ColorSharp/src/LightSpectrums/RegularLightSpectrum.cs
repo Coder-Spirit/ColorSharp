@@ -47,19 +47,38 @@ namespace Litipk.ColorSharp
 		{
 			#region properties
 
-			// Needed values to interpret the data points
+			/**
+			 * <value>Nanometers between each data point.</value>
+			 */
 			public readonly double NmPerStep;
+
+			/**
+			 * <value>Minimum wavelength for which we have information on this spectrum.</value>
+			 */
 			public readonly double MinWaveLength;
+
+			/**
+			 * <value>Maximum wavelength for which we have information on this spectrum.</value>
+			 */
 			public readonly double MaxWaveLength;
 
-			// Data points
+			/**
+			 * <value>Equidistant data points (usually relative values)</value>
+			 */
 			public readonly ReadOnlyCollection<double> Amplitudes;
 			#endregion
 
 
 			#region constructors
 
-			// Constructor
+			/**
+			 * <param name="minWaveLength">Associated wavelength to the first value of 'amplitudes'.</param>
+			 * <param name="maxWaveLength">Associated wavelength to the last value of 'amplitudes'.</param>
+			 * <param name="amplitudes">Equidistant data points.</param>
+			 * <param name="dataSource">
+			 *     Reference to a AConvertibleColor instance from which this object has been generated.
+			 * </param>
+			 */
 			public RegularLightSpectrum (double minWaveLength, double maxWaveLength, IList<double> amplitudes, AConvertibleColor dataSource=null) : base(dataSource)
 			{
 				MinWaveLength = minWaveLength;
@@ -68,7 +87,14 @@ namespace Litipk.ColorSharp
 				Amplitudes = new ReadOnlyCollection<double> (amplitudes);
 			}
 
-			// Constructor
+			/**
+			 * <param name="minWaveLength">Associated wavelength to the first value of 'amplitudes'.</param>
+			 * <param name="amplitudes">Equidistant data points.</param>
+			 * <param name="nmPerStep">Nanometers between each data point in 'amplitudes'.</param>
+			 * <param name="dataSource">
+			 *     Reference to a AConvertibleColor instance from which this object has been generated.
+			 * </param>
+			 */
 			public RegularLightSpectrum (double minWaveLength, IList<double> amplitudes, double nmPerStep, AConvertibleColor dataSource=null) : base(dataSource)
 			{
 				NmPerStep = nmPerStep;
@@ -77,12 +103,19 @@ namespace Litipk.ColorSharp
 				Amplitudes = new ReadOnlyCollection<double> (amplitudes);
 			}
 
-			// Constructor
-			public RegularLightSpectrum (IList<double> amplitudes, double nmPerStep, double maxWavelength, AConvertibleColor dataSource=null) : base(dataSource)
+			/**
+			 * <param name="amplitudes">Equidistant data points.</param>
+			 * <param name="nmPerStep">Nanometers between each data point in 'amplitudes'.</param>
+			 * <param name="maxWaveLength">Associated wavelength to the last value of 'amplitudes'.</param>
+			 * <param name="dataSource">
+			 *     Reference to a AConvertibleColor instance from which this object has been generated.
+			 * </param>
+			 */
+			public RegularLightSpectrum (IList<double> amplitudes, double nmPerStep, double maxWaveLength, AConvertibleColor dataSource=null) : base(dataSource)
 			{
 				NmPerStep = nmPerStep;
-				MaxWaveLength = maxWavelength;
-				MinWaveLength = maxWavelength - nmPerStep * (amplitudes.Count - 1);
+				MaxWaveLength = maxWaveLength;
+				MinWaveLength = maxWaveLength - nmPerStep * (amplitudes.Count - 1);
 				Amplitudes = new ReadOnlyCollection<double> (amplitudes);
 			}
 

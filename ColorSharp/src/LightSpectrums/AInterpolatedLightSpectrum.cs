@@ -28,7 +28,6 @@
 
 
 using Litipk.ColorSharp.ColorSpaces;
-using Litipk.ColorSharp.MatchingFunctions;
 using Litipk.ColorSharp.InternalUtils;
 
 
@@ -41,10 +40,16 @@ namespace Litipk.ColorSharp
 		 */
 		public abstract class AInterpolatedLightSpectrum : ALightSpectrum, IRealInterpolatedFunctionWithFiniteSupport
 		{
+			/**
+			 * <inheritdoc />
+			 */
 			protected AInterpolatedLightSpectrum(AConvertibleColor dataSource=null) : base(dataSource) { }
 
+			/**
+			 * <summary>Gives us the number of data points used to construct the spectrum object.</summary>
+			 */
 			public abstract int GetNumberOfDataPoints();
 		}
 	}
 }
-
+	

@@ -48,8 +48,6 @@ namespace Litipk.ColorSharp
 
 			#region abstract methods
 
-			#region IRealFunctionWithFiniteSupport methods
-
 			/**
 			 * <inheritdoc />
 			 */
@@ -72,16 +70,6 @@ namespace Litipk.ColorSharp
 
 			#endregion
 
-			/**
-			 * <summary>
-			 * Supposing the light spectrum we have is a discrete sample, this gives us the next data point.
-			 * If the method returns -1.0 , then we suppose we have an "analytic" spectrum, so we don't have samples.
-			 * </summary>
-			 */
-			//public abstract double GetNextAmplitudeSample (double waveLength);
-
-			#endregion
-
 
 			#region AConvertibleColor methods
 
@@ -94,6 +82,10 @@ namespace Litipk.ColorSharp
 				return ToCIEXYZ (SpectrumStrategy.Default);
 			}
 
+			/**
+			 * <see cref="ToCIEXYZ(ColorStrategy)"/>
+			 * <param name="strategy">Strategy used to obtain the tristimulous values</param>
+			 */
 			public CIEXYZ ToCIEXYZ (SpectrumStrategy strategy=SpectrumStrategy.Default)
 			{
 				AMatchingFunction[] MFs;

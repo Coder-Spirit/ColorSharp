@@ -36,6 +36,9 @@ namespace Litipk.ColorSharp
 		 */
 		sealed public class CIE1964XYZ5Nm10DegZ : RegularMatchingFunction
 		{
+			/**
+			 * <summary>Component Z of CIE's 1964 10º matching functions (5nm of precision)</summary>
+			 */
 			public static readonly CIE1964XYZ5Nm10DegZ Instance = new CIE1964XYZ5Nm10DegZ (
 				360.0, new [] {
 					0.000000535027,

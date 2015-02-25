@@ -34,76 +34,80 @@ namespace Litipk.ColorSharp
 {
 	namespace LightSpectrums
 	{
+		/**
+		 * <summary>Class to represent black body spectrums at a given temperature.</summary>
+		 */
 		public sealed class BlackBodySpectrum : ALightSpectrum
 		{
 			#region properties
 
+			/**
+			 *
+			 */
 			public readonly double CCT;
-
-			public readonly double MinWaveLength;
-			public readonly double MaxWaveLength;
 
 			#endregion
 
 			#region constructors
 
-			public BlackBodySpectrum (double cct) : this (cct, 380.0, 780.0)
+			/**
+			 * <param name="cct">Black body's temperature (in Kelvin degrees).</param>
+			 */
+			public BlackBodySpectrum (double cct)
 			{
-				// Nothing to do here
-			}
-
-			public BlackBodySpectrum (double cct, double minWaveLength, double maxWaveLength)
-			{
-				if (minWaveLength <= 0.0) {
-					throw new ArgumentOutOfRangeException ("minWaveLength", "minWaveLength must be greater than 0");
-				}
-
-				if (maxWaveLength <= minWaveLength) {
-					throw new ArgumentException("maxWaveLength must be greater than minWaveLength", "maxWaveLength");
-				}
-
 				if (cct <= 1) {
 					throw new ArgumentOutOfRangeException ("cct", "cct must be greater than 1");
 				}
 
 				CCT = cct;
-				MinWaveLength = minWaveLength;
-				MaxWaveLength = maxWaveLength;
 			}
 
 			#endregion
 
 			#region inherited methods
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override double EvaluateAt (double waveLength)
 			{
-				// 2*h*c² = 2 * 299792458 * 1.98644568e-25 = 1.1910428661813628e-16
-				return (1.1910428661813628e19 /*1.1910428661813628e-16*/ / (
-					Math.Pow(waveLength/* * 1e-7*/, 5.0) * (Math.Exp(0.014387769576158687 / (waveLength * CCT)) - 1.0)
+				// Conversion from nanometers to meters
+				waveLength *= 1e-9;
+
+				// Applying Plank's Law : https://en.wikipedia.org/wiki/Planck's_law
+				return (1.1910428661813628e-16 * Math.Pow(waveLength, -5.0) / (
+					Math.Exp(0.014387769576158687 / (waveLength * CCT)) - 1.0
 				));
 			}
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override double GetMaxValueOnSupport ()
 			{
-				double result = Double.NegativeInfinity;
-
-				for (int i = 0; i + MinWaveLength < MaxWaveLength; i++) {
-					result = Math.Max (EvaluateAt (MinWaveLength + i), result);
-				}
-
-				return result;
+				// https://en.wikipedia.org/wiki/Wien's_displacement_law
+				return EvaluateAt (2.8977721e6/CCT);
 			}
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override double GetSupportMinValue ()
 			{
-				return MinWaveLength;
+				return 1e-6;
 			}
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override double GetSupportMaxValue ()
 			{
-				return MaxWaveLength;
+				return double.PositiveInfinity;
 			}
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override bool IsInsideColorSpace (bool highPrecision = false)
 			{
 				return true;

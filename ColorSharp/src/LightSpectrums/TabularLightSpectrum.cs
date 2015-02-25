@@ -128,28 +128,6 @@ namespace Litipk.ColorSharp
 				return (1.0-alpha)*RawAmplitudes [index].Value + alpha*RawAmplitudes [index+1].Value;
 			}
 
-			/**
-			 * <inheritdoc />
-			 */
-			/*
-			public override double GetNextAmplitudeSample (double waveLength)
-			{
-				if (waveLength < RawAmplitudes[0].Key || waveLength >= RawAmplitudes[RawAmplitudes.Count-1].Key) {
-					// TODO: Add extrapolation?
-					throw new ArgumentOutOfRangeException();
-				}
-
-				int index = RawAmplitudes.BinarySearch(
-					new KeyValuePair<double, double>(waveLength, 0), new KeyValuePairComparer()
-				);
-
-				if (index < 0)
-					index = ~index;
-
-				return RawAmplitudes [index + 1].Key;
-			}
-			*/
-
 			#endregion
 
 

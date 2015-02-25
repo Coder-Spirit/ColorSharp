@@ -40,17 +40,45 @@ namespace Litipk.ColorSharp
 		[Flags]
 		public enum ColorStrategy
 		{
+			/// <summary>If the color can't be represented in the new color space, an exception will be thrown.</summary>
 			NoForce           = 0,
+
+			/// <summary>
+			/// "Truncates" component values in the new color space if they're lower than the new color space's lower boundaries.
+			/// </summary>
 			ForceLowTruncate  = 2,
+
+			/// <summary>
+			/// "Stretches" component values in the new color space if they're lower than the new color space's lower boundaries.
+			/// </summary>
 			ForceLowStretch   = 4,
+
+			/// <summary>
+			/// "Truncates" component values in the new color space if they're lower than the new color space's upper boundaries.
+			/// </summary>
 			ForceHighTruncate = 8,
+
+			/// <summary>
+			/// "Stretches" component values in the new color space if they're lower than the new color space's upper boundaries.
+			/// </summary>
 			ForceHighStretch  = 16,
+
+			/// <summary>Combination of ForceLowStretch and ForceLowTruncate</summary>
 			ForceLow          = ForceLowStretch | ForceLowTruncate,
+
+			/// <summary>Combination of ForceHighStretch and ForceHighTruncate</summary>
 			ForceHigh         = ForceHighStretch | ForceHighTruncate,
+
+			/// <summary>Combination of ForceLowTruncate and ForceHighTruncate</summary>
 			ForceTruncate     = ForceLowTruncate | ForceHighTruncate,
+
+			/// <summary>Combination of ForceLowStretch and ForceHighStretch</summary>
 			ForceStretch      = ForceLowStretch | ForceHighStretch,
+
+			/// <summary>Combination of ForceLow and ForceHigh</summary>
 			Force             = ForceLow | ForceHigh,
 
+			/// <summary>NoForce</summary>
 			Default = NoForce
 		}
 	}

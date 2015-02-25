@@ -30,13 +30,16 @@
 using System;
 using System.Collections.Generic;
 
+using Litipk.ColorSharp.InternalUtils;
+
 
 namespace Litipk.ColorSharp
 {
-	using InternalUtils;
-
 	namespace MatchingFunctions
 	{
+		/**
+		 * <summary>Useful to define matching functions with irregular spaced data points.</summary>
+		 */
 		public class TabularMatchingFunction : AMatchingFunction
 		{
 			#region private properties
@@ -47,7 +50,10 @@ namespace Litipk.ColorSharp
 
 			#region constructors
 
-			// Constructor
+			/**
+			 * <summary>Useful to define matching functions with irregular spaced data points.</summary>
+			 * <param name="tabularData">irregular spaced data points</param>
+			 */
 			public TabularMatchingFunction (List<KeyValuePair<double, double>> tabularData)
 			{
 				TabularData = tabularData;

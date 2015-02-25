@@ -40,18 +40,32 @@ namespace Litipk.ColorSharp
 		[Flags]
 		public enum SpectrumStrategy
 		{
+			/// <summary>Use the 1nm step matching functions to obtain the chromaticity components of the spectrum.</summary>
 			WaveLength1NmStep = 0,
+
+			/// <summary>Use the 5nm step matching functions to obtain the chromaticity components of the spectrum.</summary>
 			WaveLength5NmStep = 1,
 
+			/// <summary>Use the 2º matching functions to obtain the chromaticity components of the spectrum.</summary>
 			TwoDegs = 2,
+
+			/// <summary>Use the 10º matching functions to obtain the chromaticity components of the spectrum.</summary>
 			TenDegs = 4,
 
+			/// <summary>Combination of WaveLength1NmStep and TwoDegs</summary>
 			Nm1Deg2 = WaveLength1NmStep | TwoDegs,
+
+			/// <summary>Combination of WaveLength5NmStep and TwoDegs</summary>
 			Nm5Deg2 = WaveLength5NmStep | TwoDegs,
+
+			/// <summary>Combination of WaveLength1NmStep and TenDegs</summary>
 			Nm1Deg10 = WaveLength1NmStep | TenDegs,
+
+			/// <summary>Combination of WaveLength5NmStep and TenDegs</summary>
 			Nm5Deg10 = WaveLength5NmStep | TenDegs,
 
-			Default = WaveLength5NmStep | TwoDegs
+			/// <summary>Nm5Deg2</summary>
+			Default = Nm5Deg2
 		}
 	}
 }
