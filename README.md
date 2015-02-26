@@ -14,6 +14,8 @@ ColorSharp is available as a [nuget package](https://www.nuget.org/packages/Colo
  * [Project Documentation](https://github.com/Litipk/ColorSharp/wiki) : Here you can find how to use ColorSharp in your applications.
  * [External References](https://github.com/Litipk/ColorSharp/blob/master/REFERENCES.md) : Here you can learn about the science behind ColorSharp and discover other projects that have inspired us.
  * [Blog](https://colorsharp.wordpress.com/) : News, technical articles, opinion...
+ * [Chat Room](https://gitter.im/Litipk/ColorSharp) : If you want to have a real-time chat with other ColorSharp users or developers, you can do it here.
+ * [Group / Mail List](https://groups.io/org/groupsio/litipk_colorsharp) : If a chat room isn't enough to post your doubts or ideas, you can join to our mail list.
 
 ## Project Status
 
@@ -23,7 +25,7 @@ ColorSharp is available as a [nuget package](https://www.nuget.org/packages/Colo
 
 ## How to contribute
 
- * First of all, you can take a look on the [TODO list](https://github.com/Litipk/ColorSharp/blob/master/TODO.md) and decide if there is something that you want to do :) . If you think there are missing improvements in this file, then you are invited to modify the TODO list.
+ * First of all, you can take a look on the [TODO list](https://github.com/Litipk/ColorSharp/blob/master/TODO.md) and decide if there is something that you want to do :wink: . If you think there are missing improvements in this file, then you are invited to modify the TODO list.
  * You can also send us bug reports through the [tracker](https://github.com/Litipk/ColorSharp/issues), or look for bugs to solve.
  * If you are really interested on helping to improve ColorSharp, we recommend to read the [contributing guidelines](https://github.com/Litipk/ColorSharp/blob/master/CONTRIBUTING.md).
 
