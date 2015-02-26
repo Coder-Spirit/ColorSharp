@@ -28,7 +28,8 @@
 
 
 using System;
-using System.Collections.Generic;
+
+using Litipk.ColorSharp.LightSpectrums;
 
 
 namespace Litipk.ColorSharp
@@ -123,6 +124,18 @@ namespace Litipk.ColorSharp
 			 * <summary>Tells us if the object represents a valid color sample in current color space.</summary>
 			 */
 			public abstract bool IsInsideColorSpace (bool highPrecision = false);
+
+			/**
+			 * <summary>Gives us the Correlater Color Temperature associated to the spectrum or color.</summary>
+			 */
+			public virtual double GetCCT ()
+			{
+				if (DataSource is BlackBodySpectrum) {
+					return DataSource.GetCCT ();
+				}
+
+				return ToCIEUCS ().GetCCT ();
+			}
 
 			/**
 			 * <summary>Converts the color sample to a CIE's 1931 XYZ color sample.</summary>

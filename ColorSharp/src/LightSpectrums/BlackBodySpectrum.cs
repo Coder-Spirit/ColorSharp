@@ -113,6 +113,14 @@ namespace Litipk.ColorSharp
 				return true;
 			}
 
+			/**
+			 * <inheritdoc />
+			 */
+			public override double GetCCT ()
+			{
+				return CCT;
+			}
+
 			#endregion
 		}
 	}

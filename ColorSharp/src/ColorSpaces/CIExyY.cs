@@ -190,6 +190,30 @@ namespace Litipk.ColorSharp
 				return this;
 			}
 
+			/**
+			 * <inheritdoc />
+			 */
+			public override CIEUCS ToCIEUCS (ColorStrategy strategy = ColorStrategy.Default)
+			{
+				if (DataSource is CIEUCS) {
+					return DataSource as CIEUCS;
+				}
+
+				// Warning, it's not a good idea to do it with other types, we do with CIEXYZ bacause
+				// we have a more precise conversion and because a call-loop it's not possible.
+				if (DataSource is CIEXYZ) {
+					return (DataSource as CIEXYZ).ToCIEUCS ();
+				}
+
+				double div = (12 * y - 2 * x + 3);
+				double yy = Y / y;
+
+				return new CIEUCS (
+					DataSource ?? this,
+					4 * x / div, 6 * y / div, 0.5 * (-x * yy + 3 * Y + yy * (1.0 - x - y))
+				);
+			}
+
 			#endregion
 
 

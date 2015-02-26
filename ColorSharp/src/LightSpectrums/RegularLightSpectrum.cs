@@ -33,7 +33,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 using Litipk.ColorSharp.ColorSpaces;
-using Litipk.ColorSharp.InternalUtils;
 
 
 namespace Litipk.ColorSharp

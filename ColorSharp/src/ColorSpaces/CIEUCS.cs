@@ -28,6 +28,9 @@
 
 
 using System;
+using System.Collections.Generic;
+
+using Litipk.ColorSharp.LightSpectrums;
 
 
 namespace Litipk.ColorSharp
@@ -73,6 +76,8 @@ namespace Litipk.ColorSharp
 			 * <value>Y component of the CIE's 1960 Yuv color space (also V in UCS).</value>
 			 */
 			public double Y { get { return V; } }
+
+			static List<CIEUCS> TemperatureChromaticities = null;
 
 			#endregion
 
@@ -146,10 +151,10 @@ namespace Litipk.ColorSharp
 					throw new ArgumentException ("Invalid color point");
 				}
 
-				if (Math.Abs (U / (U + V + W) - u) > 8*double.Epsilon) {
+				if (Math.Abs (U / (U + V + W) - u) > 1e-15) {
 					throw new ArgumentException ("Inconsistent data");
 				}
-				if (Math.Abs (V / (U + V + W) - v) > 8*double.Epsilon) {
+				if (Math.Abs (V / (U + V + W) - v) > 1e-15) {
 					throw new ArgumentException ("Inconsistent data");
 				}
 
@@ -175,6 +180,66 @@ namespace Litipk.ColorSharp
 			{
 				// TODO : Improve ?
 				return ToCIExyY ().IsInsideColorSpace (highPrecision);
+			}
+
+			public override double GetCCT ()
+			{
+				if (DataSource is BlackBodySpectrum) {
+					return (DataSource as BlackBodySpectrum).CCT;
+				}
+
+				if (TemperatureChromaticities == null) {
+					// Oversized to improve alignment (needs 302).
+					TemperatureChromaticities = new List<CIEUCS> (512);
+
+					// From 1000º K to 20000º K
+					for (double t = 1000.0; t < 20001.0; t *= 1.01) {
+						TemperatureChromaticities.Add (
+							new BlackBodySpectrum (t).ToCIEXYZ (SpectrumStrategy.Nm1Deg2).ToCIEUCS ()
+						);
+					}
+				}
+
+				int bestI = 0;
+				double minDuv = double.PositiveInfinity;
+
+				// First gross grained search
+				// TODO: This is a naive search, must be improved!
+				for (int i = 0; i < TemperatureChromaticities.Count; i++) {
+					double tmpDuv = Math.Sqrt (
+		                Math.Pow (u - TemperatureChromaticities [i].u, 2) +
+		                Math.Pow (v - TemperatureChromaticities [i].v, 2)
+	                );
+
+					if (minDuv > tmpDuv) {
+						minDuv = tmpDuv;
+						bestI = i;
+					}
+				}
+				double bestTmp = TemperatureChromaticities [bestI].GetCCT ();
+
+				// Preparing the following fine grained search
+				double tMin = TemperatureChromaticities [
+					(bestI > 0) ? bestI - 1 : bestI
+				].GetCCT ();
+				double tMax = TemperatureChromaticities [
+					(bestI < TemperatureChromaticities.Count - 1) ? bestI + 1 : bestI
+				].GetCCT ();
+				double tDiff = (tMax - tMin) / 100.0;
+
+				// Second fine grained search
+				for (double t = tMin; t < tMax; t += tDiff) {
+					var tmpUV = new BlackBodySpectrum (t).ToCIEXYZ (SpectrumStrategy.Nm1Deg2).ToCIEUCS ();
+
+					double tmpDuv = Math.Sqrt (Math.Pow (u - tmpUV.u, 2) +	Math.Pow (v - tmpUV.v, 2));
+
+					if (minDuv > tmpDuv) {
+						minDuv = tmpDuv;
+						bestTmp = t;
+					}
+				}
+
+				return bestTmp;
 			}
 
 			/**

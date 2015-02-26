@@ -132,7 +132,7 @@ namespace Litipk.ColorSharp
 					Z += MFs [2].EvaluateAt (i * step + minV) * v * step;
 				}
 
-				return new CIEXYZ (X, Y, Z);
+				return new CIEXYZ (X, Y, Z, DataSource ?? this);
 			}
 
 			#endregion
