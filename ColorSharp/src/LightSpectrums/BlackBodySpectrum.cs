@@ -121,6 +121,14 @@ namespace Litipk.ColorSharp
 				return CCT;
 			}
 
+			/**
+			 * <inheritdoc />
+			 */
+			public override double GetDuv ()
+			{
+				return 0;
+			}
+
 			#endregion
 		}
 	}

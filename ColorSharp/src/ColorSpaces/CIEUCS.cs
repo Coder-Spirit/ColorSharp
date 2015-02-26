@@ -79,6 +79,10 @@ namespace Litipk.ColorSharp
 
 			static List<CIEUCS> TemperatureChromaticities = null;
 
+			double CCT = double.NaN;
+
+			double Duv = double.NaN;
+
 			#endregion
 
 
@@ -188,6 +192,11 @@ namespace Litipk.ColorSharp
 					return (DataSource as BlackBodySpectrum).CCT;
 				}
 
+				if (!double.IsNaN (CCT)) {
+					return CCT;
+				}
+
+				// Precomputing interpolation tables...
 				if (TemperatureChromaticities == null) {
 					// Oversized to improve alignment (needs 302).
 					TemperatureChromaticities = new List<CIEUCS> (512);
@@ -201,7 +210,7 @@ namespace Litipk.ColorSharp
 				}
 
 				int bestI = 0;
-				double minDuv = double.PositiveInfinity;
+				Duv = double.PositiveInfinity;
 
 				// First gross grained search
 				// TODO: This is a naive search, must be improved!
@@ -211,12 +220,12 @@ namespace Litipk.ColorSharp
 		                Math.Pow (v - TemperatureChromaticities [i].v, 2)
 	                );
 
-					if (minDuv > tmpDuv) {
-						minDuv = tmpDuv;
+					if (Duv > tmpDuv) {
+						Duv = tmpDuv;
 						bestI = i;
 					}
 				}
-				double bestTmp = TemperatureChromaticities [bestI].GetCCT ();
+				CCT = TemperatureChromaticities [bestI].GetCCT ();
 
 				// Preparing the following fine grained search
 				double tMin = TemperatureChromaticities [
@@ -233,13 +242,26 @@ namespace Litipk.ColorSharp
 
 					double tmpDuv = Math.Sqrt (Math.Pow (u - tmpUV.u, 2) +	Math.Pow (v - tmpUV.v, 2));
 
-					if (minDuv > tmpDuv) {
-						minDuv = tmpDuv;
-						bestTmp = t;
+					if (Duv > tmpDuv) {
+						Duv = tmpDuv;
+						CCT = t;
 					}
 				}
 
-				return bestTmp;
+				return CCT;
+			}
+
+			public override double GetDuv ()
+			{
+				if (DataSource is BlackBodySpectrum) {
+					return 0;
+				}
+
+				if (double.IsNaN (Duv)) {
+					GetCCT ();
+				}
+
+				return Duv;
 			}
 
 			/**

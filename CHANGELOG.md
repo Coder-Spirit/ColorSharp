@@ -1,10 +1,16 @@
 ColorSharp's Changelog
 ======================
 
-## 2015-02-25 : 0.10.0 Release
+## 2015-02-26 : 0.11.0 Release
 
 ### Contributors
  * Andrés Correa Casablanca <castarco@gmail.com , castarco@litipk.com>
+
+### Changes
+ * Added CCT (Correlated Color Temparature) computation.
+ * Added Duv (Distance on CIE's 1960 UCS/Yuv color space) computation.
+
+## 2015-02-25 : 0.10.0 Release
 
 ### Project Handling
  * Until we have more contributors, removed the references to contributors for

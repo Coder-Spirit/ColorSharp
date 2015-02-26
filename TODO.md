@@ -32,11 +32,11 @@
   * [ ] Color Rendering Index (CRI)
 
 ### Colors
-  * [ ] Color Temperature
+  * [X] Color Temperature
 
 ## Color Operations
-  * IsAdditive : bool
-  * colorC = colorA + colorB
+  * [ ] IsAdditive : bool
+  * [ ] colorC = colorA + colorB
 
 ## Performance
   * [ ] Make use of OpenCL to improve conversions performance (with OpenCL.NET?)

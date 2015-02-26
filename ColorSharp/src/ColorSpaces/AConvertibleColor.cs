@@ -137,6 +137,15 @@ namespace Litipk.ColorSharp
 				return ToCIEUCS ().GetCCT ();
 			}
 
+			public virtual double GetDuv ()
+			{
+				if (DataSource is BlackBodySpectrum) {
+					return 0;
+				}
+
+				return ToCIEUCS ().GetDuv ();
+			}
+
 			/**
 			 * <summary>Converts the color sample to a CIE's 1931 XYZ color sample.</summary>
 			 */
