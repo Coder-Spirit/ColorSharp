@@ -177,7 +177,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
-			public override CIEXYZ ToCIEXYZ (ColorStrategy strategy=ColorStrategy.Default)
+			public override CIEXYZ ToCIEXYZ ()
 			{
 				return (DataSource as CIEXYZ) ?? new CIEXYZ (x*Y/y, Y, Y*(1.0 - x - y)/y, DataSource ?? this);
 			}
@@ -185,7 +185,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
-			public override CIExyY ToCIExyY (ColorStrategy strategy = ColorStrategy.Default)
+			public override CIExyY ToCIExyY ()
 			{
 				return this;
 			}
@@ -193,7 +193,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
-			public override CIEUCS ToCIEUCS (ColorStrategy strategy = ColorStrategy.Default)
+			public override CIEUCS ToCIEUCS ()
 			{
 				if (DataSource is CIEUCS) {
 					return DataSource as CIEUCS;

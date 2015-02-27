@@ -30,6 +30,7 @@
 using System;
 
 using Litipk.ColorSharp.LightSpectrums;
+using Litipk.ColorSharp.Strategies;
 
 
 namespace Litipk.ColorSharp
@@ -69,16 +70,16 @@ namespace Litipk.ColorSharp
 			/**
 			 * <see cref="ConvertTo"/>
 			 */
-			public T ConvertTo<T> (ColorStrategy strategy=ColorStrategy.Default) where T : AConvertibleColor
+			public T ConvertTo<T> () where T : AConvertibleColor
 			{
-				return (T)ConvertTo (typeof(T), strategy);
+				return (T)ConvertTo (typeof(T));
 			}
 
 			/**
 			 * <summary>Method that allows conversions passing the type as a parameter.</summary>
 			 * <remarks>DON'T USE it to implement conversion methods, use the non type-parametric variants.</remarks>
 			 */
-			public AConvertibleColor ConvertTo (Type t, ColorStrategy strategy=ColorStrategy.Default)
+			public AConvertibleColor ConvertTo (Type t)
 			{
 				Type tt = GetType ();
 
@@ -92,25 +93,27 @@ namespace Litipk.ColorSharp
 						return DataSource;
 					}
 
-					return DataSource.ConvertTo(t, strategy);
+					return DataSource.ConvertTo(t);
 				}
 
-				return InnerConvertTo(t, strategy);
+				return InnerConvertTo(t);
 			}
 
 			/**
 			 * Helper method used by ConvertTo.
 			 */
-			AConvertibleColor InnerConvertTo (Type t, ColorStrategy strategy = ColorStrategy.Default)
+			AConvertibleColor InnerConvertTo (Type t)
 			{
 				if (t == typeof(CIEXYZ))
-					return ToCIEXYZ (strategy);
+					return ToCIEXYZ ();
 				if (t == typeof(CIExyY))
-					return ToCIExyY(strategy);
+					return ToCIExyY();
 				if (t == typeof(CIEUCS))
-					return ToCIEUCS (strategy);
+					return ToCIEUCS ();
 				if (t == typeof(SRGB))
-					return ToSRGB (strategy);
+					return ToSRGB ();
+				if (t == typeof(LMS))
+					return ToLMS ();
 
 				throw new NotImplementedException ("This conversion isn't implemented.");
 			}
@@ -126,7 +129,7 @@ namespace Litipk.ColorSharp
 			public abstract bool IsInsideColorSpace (bool highPrecision = false);
 
 			/**
-			 * <summary>Gives us the Correlater Color Temperature associated to the spectrum or color.</summary>
+			 * <summary>Gives us the Correlated Color Temperature associated to the spectrum or color.</summary>
 			 */
 			public virtual double GetCCT ()
 			{
@@ -137,6 +140,11 @@ namespace Litipk.ColorSharp
 				return ToCIEUCS ().GetCCT ();
 			}
 
+			/**
+			 * <summary>
+			 * Gives us the distance in the UCS color space between our color point and the nearest planckian locus.
+			 * </summary>
+			 */
 			public virtual double GetDuv ()
 			{
 				if (DataSource is BlackBodySpectrum) {
@@ -149,12 +157,25 @@ namespace Litipk.ColorSharp
 			/**
 			 * <summary>Converts the color sample to a CIE's 1931 XYZ color sample.</summary>
 			 */
-			public abstract CIEXYZ ToCIEXYZ(ColorStrategy strategy = ColorStrategy.Default);
+			public abstract CIEXYZ ToCIEXYZ();
+
+			/**
+			 * <summary>Converts the color point to an LMS cones stimulous value.</summary>
+			 */
+			public virtual LMS ToLMS (LMSStrategy strategy = LMSStrategy.Bradford)
+			{
+				if (DataSource is LMS) {
+					// TODO: Check other LMS-related TODOs...
+					return DataSource as LMS;
+				}
+
+				return ToCIEXYZ ().ToLMS (strategy);
+			}
 
 			/**
 			 * <summary>Converts the color sample to a CIE's 1931 xyY color sample.</summary>
 			 */
-			public virtual CIExyY ToCIExyY (ColorStrategy strategy = ColorStrategy.Default)
+			public virtual CIExyY ToCIExyY ()
 			{
 				return (DataSource as CIExyY) ?? ToCIEXYZ ().ToCIExyY ();
 			}
@@ -162,7 +183,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * <summary>Converts the color sample to a CIE's 1960 UCS color sample.</summary>
 			 */
-			public virtual CIEUCS ToCIEUCS (ColorStrategy strategy = ColorStrategy.Default)
+			public virtual CIEUCS ToCIEUCS ()
 			{
 				return (DataSource as CIEUCS) ?? ToCIEXYZ ().ToCIEUCS ();
 			}
@@ -170,9 +191,9 @@ namespace Litipk.ColorSharp
 			/**
 			 * <summary>Converts the color sample to an HP's and Microsoft's 1996 sRGB sample.</summary>
 			 */
-			public virtual SRGB ToSRGB(ColorStrategy strategy = ColorStrategy.ForceLowTruncate|ColorStrategy.ForceHighStretch)
+			public virtual SRGB ToSRGB(ToSmallSpaceStrategy strategy = ToSmallSpaceStrategy.ForceLowTruncate|ToSmallSpaceStrategy.ForceHighStretch)
 			{
-				return (DataSource as SRGB) ?? ToCIEXYZ ().ToSRGB ();
+				return (DataSource as SRGB) ?? ToCIEXYZ ().ToSRGB (strategy);
 			}
 
 			#endregion

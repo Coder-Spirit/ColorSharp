@@ -27,46 +27,42 @@
 */
 
 
-using System;
-
-
 namespace Litipk.ColorSharp
 {
-	namespace LightSpectrums
+	namespace Strategies
 	{
 		/**
-		 * <summary>Enum type used to specify alternative strategies in color conversion.</summary>
+		 * <summary>
+		 * Enum type used to specify alternative strategies in CIE XYZ <-> LMS conversions.
+		 * </summary>
 		 */
-		[Flags]
-		public enum SpectrumStrategy
+		public enum LMSStrategy
 		{
-			/// <summary>Use the 1nm step matching functions to obtain the chromaticity components of the spectrum.</summary>
-			WaveLength1NmStep = 0,
+			/// <summary></summary>
+			VonKries,
 
-			/// <summary>Use the 5nm step matching functions to obtain the chromaticity components of the spectrum.</summary>
-			WaveLength5NmStep = 1,
+			/// <summary></summary>
+			Bradford,
 
-			/// <summary>Use the 2º matching functions to obtain the chromaticity components of the spectrum.</summary>
-			TwoDegs = 2,
+			/// <summary></summary>
+			Sharp,
 
-			/// <summary>Use the 10º matching functions to obtain the chromaticity components of the spectrum.</summary>
-			TenDegs = 4,
+			/// <summary></summary>
+			HuntPointerEstevez,
 
-			/// <summary>Combination of WaveLength1NmStep and TwoDegs</summary>
-			Nm1Deg2 = WaveLength1NmStep | TwoDegs,
+			/// <summary></summary>
+			CMCCAT97,
 
-			/// <summary>Combination of WaveLength5NmStep and TwoDegs</summary>
-			Nm5Deg2 = WaveLength5NmStep | TwoDegs,
+			/// <summary></summary>
+			CAT02,
 
-			/// <summary>Combination of WaveLength1NmStep and TenDegs</summary>
-			Nm1Deg10 = WaveLength1NmStep | TenDegs,
+			/// <summary></summary>
+			CMCCAT2000,
 
-			/// <summary>Combination of WaveLength5NmStep and TenDegs</summary>
-			Nm5Deg10 = WaveLength5NmStep | TenDegs,
-
-			/// <summary>Nm5Deg2</summary>
-			Default = Nm5Deg2
+			/// <summary></summary>
+			XYZScaling
 		}
 	}
 }
+
 

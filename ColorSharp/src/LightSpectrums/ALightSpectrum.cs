@@ -28,8 +28,9 @@
 
 
 using Litipk.ColorSharp.ColorSpaces;
-using Litipk.ColorSharp.MatchingFunctions;
 using Litipk.ColorSharp.InternalUtils;
+using Litipk.ColorSharp.MatchingFunctions;
+using Litipk.ColorSharp.Strategies;
 
 
 namespace Litipk.ColorSharp
@@ -76,32 +77,32 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
-			public override CIEXYZ ToCIEXYZ (ColorStrategy strategy=ColorStrategy.Default)
+			public override CIEXYZ ToCIEXYZ ()
 			{
 				// We don't need the Color Conversion strategy here, but the Spectrum Conversion strategy
-				return ToCIEXYZ (SpectrumStrategy.Default);
+				return ToCIEXYZ (Spd2ClrStrategy.Default);
 			}
 
 			/**
 			 * <see cref="ToCIEXYZ(ColorStrategy)"/>
 			 * <param name="strategy">Strategy used to obtain the tristimulous values</param>
 			 */
-			public CIEXYZ ToCIEXYZ (SpectrumStrategy strategy=SpectrumStrategy.Default)
+			public CIEXYZ ToCIEXYZ (Spd2ClrStrategy strategy=Spd2ClrStrategy.Default)
 			{
 				AMatchingFunction[] MFs;
 
 				int step;
-				if (strategy == SpectrumStrategy.Nm1Deg2) {
+				if (strategy == Spd2ClrStrategy.Nm1Deg2) {
 					step = 1;
 					MFs = new AMatchingFunction[] {
 						CIE1931XYZ1Nm2DegX.Instance, CIE1931XYZ1Nm2DegY.Instance, CIE1931XYZ1Nm2DegZ.Instance
 					};
-				} else if (strategy == SpectrumStrategy.Nm1Deg10) {
+				} else if (strategy == Spd2ClrStrategy.Nm1Deg10) {
 					step = 1;
 					MFs = new AMatchingFunction[] {
 						CIE1964XYZ1Nm10DegX.Instance, CIE1964XYZ1Nm10DegY.Instance, CIE1964XYZ1Nm10DegZ.Instance
 					};
-				} else if (strategy == SpectrumStrategy.Nm5Deg10) {
+				} else if (strategy == Spd2ClrStrategy.Nm5Deg10) {
 					step = 5;
 					MFs = new AMatchingFunction[] {
 						CIE1964XYZ5Nm10DegX.Instance, CIE1964XYZ5Nm10DegY.Instance, CIE1964XYZ5Nm10DegZ.Instance

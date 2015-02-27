@@ -31,6 +31,7 @@ using System;
 using System.Collections.Generic;
 
 using Litipk.ColorSharp.LightSpectrums;
+using Litipk.ColorSharp.Strategies;
 
 
 namespace Litipk.ColorSharp
@@ -186,6 +187,9 @@ namespace Litipk.ColorSharp
 				return ToCIExyY ().IsInsideColorSpace (highPrecision);
 			}
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override double GetCCT ()
 			{
 				if (DataSource is BlackBodySpectrum) {
@@ -204,7 +208,7 @@ namespace Litipk.ColorSharp
 					// From 1000º K to 20000º K
 					for (double t = 1000.0; t < 20001.0; t *= 1.01) {
 						TemperatureChromaticities.Add (
-							new BlackBodySpectrum (t).ToCIEXYZ (SpectrumStrategy.Nm1Deg2).ToCIEUCS ()
+							new BlackBodySpectrum (t).ToCIEXYZ (Spd2ClrStrategy.Nm1Deg2).ToCIEUCS ()
 						);
 					}
 				}
@@ -238,7 +242,7 @@ namespace Litipk.ColorSharp
 
 				// Second fine grained search
 				for (double t = tMin; t < tMax; t += tDiff) {
-					var tmpUV = new BlackBodySpectrum (t).ToCIEXYZ (SpectrumStrategy.Nm1Deg2).ToCIEUCS ();
+					var tmpUV = new BlackBodySpectrum (t).ToCIEXYZ (Spd2ClrStrategy.Nm1Deg2).ToCIEUCS ();
 
 					double tmpDuv = Math.Sqrt (Math.Pow (u - tmpUV.u, 2) +	Math.Pow (v - tmpUV.v, 2));
 
@@ -251,6 +255,9 @@ namespace Litipk.ColorSharp
 				return CCT;
 			}
 
+			/**
+			 * <inheritdoc />
+			 */
 			public override double GetDuv ()
 			{
 				if (DataSource is BlackBodySpectrum) {
@@ -267,7 +274,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
-			public override CIEXYZ ToCIEXYZ (ColorStrategy strategy=ColorStrategy.Default)
+			public override CIEXYZ ToCIEXYZ ()
 			{
 				// TODO: Can be improved using extra info (minor case components, and boolean flags)
 				// TODO: It's also possible to create a direct conversion to the xyY color space
@@ -279,7 +286,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
-			public override CIEUCS ToCIEUCS (ColorStrategy strategy = ColorStrategy.Default)
+			public override CIEUCS ToCIEUCS ()
 			{
 				return this;
 			}

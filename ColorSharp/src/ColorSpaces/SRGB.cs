@@ -28,7 +28,8 @@
 
 
 using System;
-using System.Collections.Generic;
+
+using Litipk.ColorSharp.Strategies;
 
 
 namespace Litipk.ColorSharp
@@ -96,7 +97,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
-			public override CIEXYZ ToCIEXYZ (ColorStrategy strategy=ColorStrategy.Default)
+			public override CIEXYZ ToCIEXYZ ()
 			{
 				CIEXYZ xyzDS = DataSource as CIEXYZ;
 				if (xyzDS != null) {
@@ -120,7 +121,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
-			public override SRGB ToSRGB (ColorStrategy strategy = ColorStrategy.Default)
+			public override SRGB ToSRGB (ToSmallSpaceStrategy strategy = ToSmallSpaceStrategy.Default)
 			{
 				return this;
 			}

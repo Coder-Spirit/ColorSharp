@@ -32,13 +32,13 @@ using System;
 
 namespace Litipk.ColorSharp
 {
-	namespace ColorSpaces
+	namespace Strategies
 	{
 		/**
 		 * <summary>Enum type used to specify alternative strategies in color conversion.</summary>
 		 */
 		[Flags]
-		public enum ColorStrategy
+		public enum ToSmallSpaceStrategy
 		{
 			/// <summary>If the color can't be represented in the new color space, an exception will be thrown.</summary>
 			NoForce           = 0,

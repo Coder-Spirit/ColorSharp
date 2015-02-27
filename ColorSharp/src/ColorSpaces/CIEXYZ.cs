@@ -29,6 +29,8 @@
 
 using System;
 
+using Litipk.ColorSharp.Strategies;
+
 
 namespace Litipk.ColorSharp
 {
@@ -91,7 +93,29 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
-			public override CIEXYZ ToCIEXYZ (ColorStrategy strategy=ColorStrategy.Default)
+			public override LMS ToLMS (LMSStrategy strategy=LMSStrategy.Bradford)
+			{
+				LMS lmsDS = DataSource as LMS;
+				if (lmsDS != null) {
+					// TODO : Check chromatic adaptation, depends on "connecting" the ASimpleColor class
+					// TODO : Use the added historic data about strategy in LMS...
+					return lmsDS;
+				}
+
+				if (strategy == LMSStrategy.Bradford) {
+					return BradfordTransform ();
+				}
+				if (strategy == LMSStrategy.VonKries) {
+					return VonKriesTransform ();
+				}
+
+				throw new NotImplementedException ();
+			}
+
+			/**
+			 * <inheritdoc />
+			 */
+			public override CIEXYZ ToCIEXYZ ()
 			{
 				return this;
 			}
@@ -99,7 +123,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
-			public override CIExyY ToCIExyY (ColorStrategy strategy=ColorStrategy.Default)
+			public override CIExyY ToCIExyY ()
 			{
 				CIExyY xyYDS = DataSource as CIExyY;
 				if (xyYDS != null) {
@@ -113,7 +137,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
-			public override CIEUCS ToCIEUCS (ColorStrategy strategy = ColorStrategy.Default)
+			public override CIEUCS ToCIEUCS ()
 			{
 				return (DataSource as CIEUCS) ?? new CIEUCS (
 					2.0 * X / 3.0,                // U
@@ -128,7 +152,7 @@ namespace Litipk.ColorSharp
 			/**
 			* <inheritdoc />
 			*/
-			public override SRGB ToSRGB (ColorStrategy strategy=ColorStrategy.ForceLowTruncate|ColorStrategy.ForceHighStretch)
+			public override SRGB ToSRGB (ToSmallSpaceStrategy strategy=ToSmallSpaceStrategy.ForceLowTruncate|ToSmallSpaceStrategy.ForceHighStretch)
 			{
 				SRGB srgbDS = DataSource as SRGB;
 				if (srgbDS != null) {
@@ -145,7 +169,7 @@ namespace Litipk.ColorSharp
 				g = g > 0.0031308 ? 1.055 * Math.Pow(g, 1 / 2.4) - 0.055 : 12.92 * g;
 				b = b > 0.0031308 ? 1.055 * Math.Pow(b, 1 / 2.4) - 0.055 : 12.92 * b;
 
-				if ((strategy & ColorStrategy.ForceLowStretch) != 0) {
+				if ((strategy & ToSmallSpaceStrategy.ForceLowStretch) != 0) {
 					double minChannelValue = Math.Min (r, Math.Min (g, b));
 
 					if (minChannelValue < 0.0) {
@@ -153,13 +177,13 @@ namespace Litipk.ColorSharp
 						g -= minChannelValue;
 						b -= minChannelValue;
 					}
-				} else if ((strategy & ColorStrategy.ForceLowTruncate) != 0) {
+				} else if ((strategy & ToSmallSpaceStrategy.ForceLowTruncate) != 0) {
 					r = Math.Max (0.0, r);
 					g = Math.Max (0.0, g);
 					b = Math.Max (0.0, b);
 				}
 
-				if ((strategy & ColorStrategy.ForceHighStretch) != 0) {
+				if ((strategy & ToSmallSpaceStrategy.ForceHighStretch) != 0) {
 					double maxChannelValue = Math.Max (r, Math.Max (g, b));
 
 					if (maxChannelValue > 1.0) {
@@ -167,7 +191,7 @@ namespace Litipk.ColorSharp
 						g = g / maxChannelValue;
 						b = b / maxChannelValue;
 					}
-				} else if ((strategy & ColorStrategy.ForceHighTruncate) != 0) {
+				} else if ((strategy & ToSmallSpaceStrategy.ForceHighTruncate) != 0) {
 					r = Math.Min (1.0, r);
 					g = Math.Min (1.0, g);
 					b = Math.Min (1.0, b);
@@ -175,6 +199,33 @@ namespace Litipk.ColorSharp
 
 				return new SRGB(r, g, b, DataSource ?? this);
 			}
+
+			#endregion
+
+
+			#region Chromatic Adaptation
+
+			public LMS BradfordTransform ()
+			{
+				return new LMS (
+					+0.8951000 * X + 0.2664000 * Y - 0.1614000 * Z,
+					-0.7502000 * X + 1.7135000 * Y + 0.0367000 * Z,
+					+0.0389000 * X - 0.0685000 * Y + 1.0296000 * Z,
+					DataSource ?? this
+				);
+			}
+
+			public LMS VonKriesTransform ()
+			{
+				return new LMS (
+					+0.4002400 * X + 0.7076000 * Y - 0.0808100 * Z,
+					-0.2263000 * X + 1.1653200 * Y + 0.0457000 * Z,
+					+0.0000000     + 0.0000000     + 0.9182200 * Z,
+					DataSource ?? this
+				);
+			}
+
+			// TODO : Add other transforms
 
 			#endregion
 

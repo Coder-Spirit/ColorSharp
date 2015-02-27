@@ -75,14 +75,17 @@
     <Compile Include="src\MatchingFunctions\CIE1964XYZ5Nm10DegX.cs" />
     <Compile Include="src\MatchingFunctions\CIE1964XYZ5Nm10DegY.cs" />
     <Compile Include="src\MatchingFunctions\CIE1964XYZ5Nm10DegZ.cs" />
-    <Compile Include="src\ColorSpaces\ColorStrategy.cs" />
-    <Compile Include="src\LightSpectrums\SpectrumStrategy.cs" />
     <Compile Include="src\Illuminants\CIE_B.cs" />
     <Compile Include="src\Illuminants\CIE_C.cs" />
     <Compile Include="src\Illuminants\CIE_D50.cs" />
     <Compile Include="src\Illuminants\CIE_D55.cs" />
     <Compile Include="src\LightSpectrums\BlackBodySpectrum.cs" />
     <Compile Include="src\MatchingFunctions\AMatchingFunction.cs" />
+    <Compile Include="src\ColorSpaces\LMS.cs" />
+    <Compile Include="src\ColorSpaces\ASimpleColor.cs" />
+    <Compile Include="src\Strategies\Spd2ClrStrategy.cs" />
+    <Compile Include="src\Strategies\ToSmallSpaceStrategy.cs" />
+    <Compile Include="src\Strategies\LMSStrategy.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -92,6 +95,7 @@
     <Folder Include="src\MatchingFunctions\" />
     <Folder Include="src\InternalUtils\" />
     <Folder Include="src\Illuminants\" />
+    <Folder Include="src\Strategies\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ColorSharp.nuspec" />
