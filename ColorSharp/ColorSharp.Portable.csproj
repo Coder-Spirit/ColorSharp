@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{002EE89E-1CCD-4C74-AC72-E096504834B6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ColorSharp</RootNamespace>
+    <AssemblyName>ColorSharp</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile328</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .NET Framework is automatically included -->
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\ColorSpaces\AConvertibleColor.cs" />
+    <Compile Include="src\ColorSpaces\ASimpleColor.cs" />
+    <Compile Include="src\ColorSpaces\CIEUCS.cs" />
+    <Compile Include="src\ColorSpaces\CIExyY.cs" />
+    <Compile Include="src\ColorSpaces\CIEXYZ.cs" />
+    <Compile Include="src\ColorSpaces\LMS.cs" />
+    <Compile Include="src\ColorSpaces\SRGB.cs" />
+    <Compile Include="src\Illuminants\CIE_A.cs" />
+    <Compile Include="src\Illuminants\CIE_B.cs" />
+    <Compile Include="src\Illuminants\CIE_C.cs" />
+    <Compile Include="src\Illuminants\CIE_D50.cs" />
+    <Compile Include="src\Illuminants\CIE_D55.cs" />
+    <Compile Include="src\Illuminants\CIE_D65.cs" />
+    <Compile Include="src\InternalUtils\Comparers.cs" />
+    <Compile Include="src\InternalUtils\IRealFunctionWithFiniteSupport.cs" />
+    <Compile Include="src\InternalUtils\IRealInterpolatedFunctionWithFiniteSupport.cs" />
+    <Compile Include="src\InternalUtils\Structs.cs" />
+    <Compile Include="src\LightSpectrums\AInterpolatedLightSpectrum.cs" />
+    <Compile Include="src\LightSpectrums\ALightSpectrum.cs" />
+    <Compile Include="src\LightSpectrums\BlackBodySpectrum.cs" />
+    <Compile Include="src\LightSpectrums\RegularLightSpectrum.cs" />
+    <Compile Include="src\LightSpectrums\TabularLightSpectrum.cs" />
+    <Compile Include="src\MatchingFunctions\AMatchingFunction.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1931XYZ1Nm2DegX.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1931XYZ1Nm2DegY.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1931XYZ1Nm2DegZ.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1931XYZ5Nm2DegX.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1931XYZ5Nm2DegY.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1931XYZ5Nm2DegZ.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1964XYZ1Nm10DegX.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1964XYZ1Nm10DegY.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1964XYZ1Nm10DegZ.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1964XYZ5Nm10DegX.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1964XYZ5Nm10DegY.cs" />
+    <Compile Include="src\MatchingFunctions\CIE1964XYZ5Nm10DegZ.cs" />
+    <Compile Include="src\MatchingFunctions\RegularMatchingFunction.cs" />
+    <Compile Include="src\MatchingFunctions\TabularMatchingFunction.cs" />
+    <Compile Include="src\Strategies\LMSStrategy.cs" />
+    <Compile Include="src\Strategies\Spd2ClrStrategy.cs" />
+    <Compile Include="src\Strategies\ToSmallSpaceStrategy.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
