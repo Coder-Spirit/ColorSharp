@@ -14,6 +14,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4D3ECC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorSharp.Portable", "ColorSharp\ColorSharp.Portable.csproj", "{002EE89E-1CCD-4C74-AC72-E096504834B6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "meta", "meta", "{01FF41F8-4519-419E-B070-2EDF2504FC33}"
+	ProjectSection(SolutionItems) = preProject
+		ColorSharp\build_nuget_pkg.sh = ColorSharp\build_nuget_pkg.sh
+		ColorSharp\colorsharp.pub = ColorSharp\colorsharp.pub
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
