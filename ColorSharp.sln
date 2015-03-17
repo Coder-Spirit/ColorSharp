@@ -1,15 +1,28 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorSharp", "ColorSharp\ColorSharp.csproj", "{960524F3-F375-4CDE-A82A-609CC32048E4}"
-EndProject
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorSharpTests", "ColorSharpTests\ColorSharpTests.csproj", "{1EC57B2E-C96F-411B-A238-B8E490634009}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4D3ECC83-ED9F-4DF9-BE44-343E431D1066}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorSharp.Portable", "ColorSharp\ColorSharp.Portable.csproj", "{002EE89E-1CCD-4C74-AC72-E096504834B6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "meta", "meta", "{01FF41F8-4519-419E-B070-2EDF2504FC33}"
+	ProjectSection(SolutionItems) = preProject
+		ColorSharp\build_nuget_pkg.sh = ColorSharp\build_nuget_pkg.sh
+		ColorSharp\colorsharp.pub = ColorSharp\colorsharp.pub
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
 		Release_x86_64|Any CPU = Release_x86_64|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{1EC57B2E-C96F-411B-A238-B8E490634009}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -18,12 +31,15 @@ Global
 		{1EC57B2E-C96F-411B-A238-B8E490634009}.Release_x86_64|Any CPU.Build.0 = Release|Any CPU
 		{1EC57B2E-C96F-411B-A238-B8E490634009}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EC57B2E-C96F-411B-A238-B8E490634009}.Release|Any CPU.Build.0 = Release|Any CPU
-		{960524F3-F375-4CDE-A82A-609CC32048E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{960524F3-F375-4CDE-A82A-609CC32048E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{960524F3-F375-4CDE-A82A-609CC32048E4}.Release_x86_64|Any CPU.ActiveCfg = Release_x86_64|Any CPU
-		{960524F3-F375-4CDE-A82A-609CC32048E4}.Release_x86_64|Any CPU.Build.0 = Release_x86_64|Any CPU
-		{960524F3-F375-4CDE-A82A-609CC32048E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{960524F3-F375-4CDE-A82A-609CC32048E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{002EE89E-1CCD-4C74-AC72-E096504834B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{002EE89E-1CCD-4C74-AC72-E096504834B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{002EE89E-1CCD-4C74-AC72-E096504834B6}.Release_x86_64|Any CPU.ActiveCfg = Release|Any CPU
+		{002EE89E-1CCD-4C74-AC72-E096504834B6}.Release_x86_64|Any CPU.Build.0 = Release|Any CPU
+		{002EE89E-1CCD-4C74-AC72-E096504834B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{002EE89E-1CCD-4C74-AC72-E096504834B6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0

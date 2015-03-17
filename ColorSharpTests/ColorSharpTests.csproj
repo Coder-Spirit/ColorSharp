@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -47,13 +47,11 @@
     <None Include="tests\MatchingFunctions\EMPTY" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\ColorSharp\ColorSharp.csproj">
-      <Project>{960524F3-F375-4CDE-A82A-609CC32048E4}</Project>
-      <Name>ColorSharp</Name>
+    <ProjectReference Include="..\ColorSharp\ColorSharp.Portable.csproj">
+      <Project>{002ee89e-1ccd-4c74-ac72-e096504834b6}</Project>
+      <Name>ColorSharp.Portable</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="tests\Illuminants\" />
   </ItemGroup>
 </Project>
