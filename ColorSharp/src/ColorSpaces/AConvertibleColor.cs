@@ -108,7 +108,7 @@ namespace Litipk.ColorSharp
 					return ToCIEXYZ ();
 				if (t == typeof(CIExyY))
 					return ToCIExyY();
-				if (t == typeof(CIEUCS))
+				if (t == typeof(CIE1960))
 					return ToCIEUCS ();
 				if (t == typeof(SRGB))
 					return ToSRGB ();
@@ -183,9 +183,9 @@ namespace Litipk.ColorSharp
 			/**
 			 * <summary>Converts the color sample to a CIE's 1960 UCS color sample.</summary>
 			 */
-			public virtual CIEUCS ToCIEUCS ()
+			public virtual CIE1960 ToCIEUCS ()
 			{
-				return (DataSource as CIEUCS) ?? ToCIEXYZ ().ToCIEUCS ();
+				return (DataSource as CIE1960) ?? ToCIEXYZ ().ToCIEUCS ();
 			}
 
 			/**

@@ -137,9 +137,9 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
-			public override CIEUCS ToCIEUCS ()
+			public override CIE1960 ToCIEUCS ()
 			{
-				return (DataSource as CIEUCS) ?? new CIEUCS (
+				return (DataSource as CIE1960) ?? new CIE1960 (
 					2.0 * X / 3.0,                // U
 					Y,                            // V
 					4 * X / (X + 15 * Y + 3 * Z), // u

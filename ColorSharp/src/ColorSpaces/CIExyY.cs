@@ -193,10 +193,10 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
-			public override CIEUCS ToCIEUCS ()
+			public override CIE1960 ToCIEUCS ()
 			{
-				if (DataSource is CIEUCS) {
-					return DataSource as CIEUCS;
+				if (DataSource is CIE1960) {
+					return DataSource as CIE1960;
 				}
 
 				// Warning, it's not a good idea to do it with other types, we do with CIEXYZ bacause
@@ -208,7 +208,7 @@ namespace Litipk.ColorSharp
 				double div = (12 * y - 2 * x + 3);
 				double yy = Y / y;
 
-				return new CIEUCS (
+				return new CIE1960 (
 					DataSource ?? this,
 					4 * x / div, 6 * y / div, 0.5 * (-x * yy + 3 * Y + yy * (1.0 - x - y))
 				);

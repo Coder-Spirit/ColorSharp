@@ -41,7 +41,7 @@ namespace Litipk.ColorSharp
 		/**
 		 * <summary>CIE's 1960 UCS Color Space. Also named CIE's 1960 Yuv Color Space.</summary>
 		 */
-		public sealed class CIEUCS : AConvertibleColor
+		public sealed class CIE1960 : AConvertibleColor
 		{
 			#region properties
 
@@ -78,7 +78,7 @@ namespace Litipk.ColorSharp
 			 */
 			public double Y { get { return V; } }
 
-			static List<CIEUCS> TemperatureChromaticities = null;
+			static List<CIE1960> TemperatureChromaticities = null;
 
 			double CCT = double.NaN;
 
@@ -96,7 +96,7 @@ namespace Litipk.ColorSharp
 			 * <param name="W">CIE's 1960 UCS W coordinate</param>
 			 * <param name="dataSource">If you aren't working with ColorSharp internals, don't use this parameter</param>
 			 */
-			public CIEUCS (double U, double V, double W, AConvertibleColor dataSource=null) : base(dataSource)
+			public CIE1960 (double U, double V, double W, AConvertibleColor dataSource=null) : base(dataSource)
 			{
 				if (U < 0.0 || V < 0.0 || W < 0.0) {
 					throw new ArgumentException ("Invalid color point");
@@ -120,7 +120,7 @@ namespace Litipk.ColorSharp
 			 * <param name="W">CIE's 1960 UCS W coordinate</param>
 			 * <param name="dataSource">If you aren't working with ColorSharp internals, don't use this parameter</param>
 			 */
-			public CIEUCS (AConvertibleColor dataSource, double u, double v, double W) : base(dataSource)
+			public CIE1960 (AConvertibleColor dataSource, double u, double v, double W) : base(dataSource)
 			{
 				if (u < 0.0 || v < 0.0 || W < 0 || u + v > 1.0) {
 					throw new ArgumentException ("Invalid color point");
@@ -150,7 +150,7 @@ namespace Litipk.ColorSharp
 			 * <param name="W">CIE's 1960 UCS W coordinate</param>
 			 * <param name="dataSource">If you aren't working with ColorSharp internals, don't use this parameter</param>
 			 */
-			public CIEUCS (double U, double V, double u, double v, double W, AConvertibleColor dataSource=null) : base(dataSource)
+			public CIE1960 (double U, double V, double u, double v, double W, AConvertibleColor dataSource=null) : base(dataSource)
 			{
 				if (U < 0.0 || V < 0.0 || W < 0.0 || u < 0.0 || v < 0.0) {
 					throw new ArgumentException ("Invalid color point");
@@ -203,7 +203,7 @@ namespace Litipk.ColorSharp
 				// Precomputing interpolation tables...
 				if (TemperatureChromaticities == null) {
 					// Oversized to improve alignment (needs 302).
-					TemperatureChromaticities = new List<CIEUCS> (512);
+					TemperatureChromaticities = new List<CIE1960> (512);
 
 					// From 1000º K to 20000º K
 					for (double t = 1000.0; t < 20001.0; t *= 1.01) {
@@ -286,7 +286,7 @@ namespace Litipk.ColorSharp
 			/**
 			 * <inheritdoc />
 			 */
-			public override CIEUCS ToCIEUCS ()
+			public override CIE1960 ToCIEUCS ()
 			{
 				return this;
 			}
@@ -301,7 +301,7 @@ namespace Litipk.ColorSharp
 			 */
 			public override bool Equals(Object obj)
 			{
-				CIEUCS ucsObj = obj as CIEUCS; 
+				CIE1960 ucsObj = obj as CIE1960; 
 
 				if (ucsObj == this) {
 					return true;

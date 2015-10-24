@@ -50,13 +50,13 @@ namespace Litipk.ColorSharpTests
 			);
 
 			Assert.AreEqual (
-				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<CIEUCS> (),
-				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<CIExyY> ().ConvertTo<CIEUCS> ()
+				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<CIE1960> (),
+				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<CIExyY> ().ConvertTo<CIE1960> ()
 			);
 
 			Assert.AreEqual (
 				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<CIExyY> (),
-				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<CIEUCS> ().ConvertTo<CIExyY> ()
+				new CIEXYZ (50.0, 60.0, 30.0).ConvertTo<CIE1960> ().ConvertTo<CIExyY> ()
 			);
 
 			// From xyY
